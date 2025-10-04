@@ -14,10 +14,6 @@ class InicioController extends BaseController
             'seccion' => '/inicio'
         );
 
-        $modelo = new InicioModel();
-
-        $data['pedidos'] = $modelo->pruebaModelo();
-
-        $this->view->showViews(array('templates/header.view.php', 'inicio.view.php'), $data);
+        $this->view->showViews(array('templates/header.view.php', 'inicio.view.php','templates/footer.view.php'), $data);
     }
 }
