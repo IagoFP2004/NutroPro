@@ -48,9 +48,10 @@
         <div class="collapse navbar-collapse show">
           <ul class="navbar-nav ms-auto me-4">
             <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Proteina & Creatina</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Sulpementos</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Ropa de Gimnasio</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Suplementos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Salud&Fitness</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Sobre Nosotros</a></li>
           </ul>
         </div>
 
@@ -70,22 +71,15 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto d-lg-none text-center">
           <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Proteina & Creatina</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Ropa de Gimnasio</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Suplementos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Ropa de Gimnasio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Salud&Fitness</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Sobre Nosotros</a></li>
         </ul>
       </div>
 
     </div>
   </nav>
-
-  <div class="bg-light text-center py-5">
-    <div class="container">
-      <h1 class="display-4 fw-bold">Transforma tu cuerpo con NutroPro</h1>
-      <p class="lead mb-4">Suplementos, ropa deportiva y todo lo que necesitas para mejorar tu salud y rendimiento.</p>
-      <a href="#" class="btn btn-success btn-lg">Explora nuestros productos</a>
-    </div>
-  </div>
 </header>
 
 <!-- Bootstrap JS -->

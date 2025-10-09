@@ -22,6 +22,15 @@ class FrontController
             'get'
         );
 
+        Route::add(
+            '/productos',
+            function () {
+                $controlador = new ProductoController();
+                $controlador->showProductsView();
+            },
+            'get'
+        );
+
         Route::pathNotFound(
             function () {
                 $controller = new \Com\Daw2\Controllers\ErroresController();
