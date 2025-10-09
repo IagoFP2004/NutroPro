@@ -4,6 +4,7 @@ namespace Com\Daw2\Controllers;
 
 use Com\Daw2\Core\BaseController;
 use Com\Daw2\Models\InicioModel;
+use Com\Daw2\Models\ProductoModel;
 
 class InicioController extends BaseController
 {
@@ -13,6 +14,9 @@ class InicioController extends BaseController
             'breadcrumb' => ['Inicio'],
             'seccion' => '/inicio'
         );
+
+        $productoModel = new ProductoModel();
+        $data['productos'] = $productoModel->getProductos();
 
         $this->view->showViews(array('templates/header.view.php', 'inicio.view.php','templates/footer.view.php'), $data);
     }

@@ -54,50 +54,21 @@
     <section class="mb-5">
         <h2 class="mb-4 fw-bold text-center">Productos Destacados</h2>
         <div class="row">
-            <!-- Producto 1 -->
+            <?php foreach ($productos as $producto) { ?>
+            <?php if ($producto['destacado']== 1){ ?>
+            <!-- Productos Destacados -->
             <div class="col-md-3 mb-4">
                 <div class="card h-100 border-0 shadow-sm">
-                    <img src="https://via.placeholder.com/300x300?text=Proteína+Whey" class="card-img-top" alt="Proteína Whey">
+                    <img src="<?php echo $producto['imagen_url'] ?>" class="card-img-top" alt="Creatina">
                     <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Proteína Whey</h5>
-                        <p class="card-text text-success fw-bold">$49.99</p>
+                        <h5 class="card-title"><?php echo $producto['nombre'] ?></h5>
+                        <p class="card-text text-success fw-bold"><?php echo $producto['precio'] ?>€</p>
                         <a href="#" class="btn btn-success mt-auto">Añadir al carrito</a>
                     </div>
                 </div>
             </div>
-            <!-- Producto 2 -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <img src="https://via.placeholder.com/300x300?text=Creatina" class="card-img-top" alt="Creatina">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Creatina</h5>
-                        <p class="card-text text-success fw-bold">$29.99</p>
-                        <a href="#" class="btn btn-success mt-auto">Añadir al carrito</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 3 -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <img src="https://via.placeholder.com/300x300?text=Camiseta+Gim" class="card-img-top" alt="Camiseta Gimnasio">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Camiseta Gimnasio</h5>
-                        <p class="card-text text-success fw-bold">$19.99</p>
-                        <a href="#" class="btn btn-success mt-auto">Añadir al carrito</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Producto 4 -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <img src="https://via.placeholder.com/300x300?text=Shaker+NutroPro" class="card-img-top" alt="Shaker NutroPro">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Shaker NutroPro</h5>
-                        <p class="card-text text-success fw-bold">$9.99</p>
-                        <a href="#" class="btn btn-success mt-auto">Añadir al carrito</a>
-                    </div>
-                </div>
-            </div>
+        <?php }?>
+            <?php }?>
         </div>
     </section>
 
