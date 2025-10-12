@@ -18,7 +18,7 @@
       <!-- ====== MÓVIL ====== -->
       <div class="d-flex d-lg-none w-100 align-items-center justify-content-between py-1">
         <!-- Logo a la izquierda -->
-        <a class="navbar-brand fw-bold text-white" href="#">NutroPro</a>
+          <a class="navbar-brand fw-bold text-white" href="/">NutroPro</a>
 
         <!-- Iconos + hamburguesa a la derecha -->
         <div class="d-flex align-items-center ms-auto">
@@ -47,7 +47,7 @@
         <!-- Menú -->
         <div class="collapse navbar-collapse show">
           <ul class="navbar-nav ms-auto me-4">
-            <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Sulpementos</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Ropa de Gimnasio</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Salud&Fitness</a></li>

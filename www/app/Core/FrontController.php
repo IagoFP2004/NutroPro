@@ -2,11 +2,8 @@
 
 namespace Com\Daw2\Core;
 
-use Com\Daw2\Controllers\CategoriaController;
-use Com\Daw2\Controllers\EjerciciosController;
 use Com\Daw2\Controllers\InicioController;
-use Com\Daw2\Controllers\PreferenciasController;
-use Com\Daw2\Controllers\UsuarioSistemaController;
+use Com\Daw2\Controllers\ProductoController;
 use Steampixel\Route;
 
 class FrontController
@@ -25,7 +22,7 @@ class FrontController
         Route::add(
             '/productos',
             function () {
-                $controlador = new ProductoController();
+                $controlador = new productoController();
                 $controlador->showProductsView();
             },
             'get'

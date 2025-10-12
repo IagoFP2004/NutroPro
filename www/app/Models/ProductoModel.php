@@ -13,4 +13,20 @@ class ProductoModel extends BaseDbModel
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getProductosProteinas(): array
+    {
+        $sql = 'SELECT * FROM productos WHERE id_categoria = 1 ';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getProductosRopa(): array
+    {
+        $sql = 'SELECT * FROM productos WHERE id_categoria = 4 ';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

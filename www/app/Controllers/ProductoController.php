@@ -4,10 +4,6 @@ namespace Com\Daw2\Controllers;
 
 use Com\Daw2\Core\BaseController;
 use Com\Daw2\Models\ProductoModel;
-use Com\Daw2\Controllers\ProductoController;
-use use Com\Daw2\Controllers\ProductoController;
-
-
 
 class ProductoController extends BaseController
 {
@@ -19,6 +15,13 @@ class ProductoController extends BaseController
             'seccion' => '/productos'
         );
 
+        $modelo = new ProductoModel();
+
+        $data['proteinas'] = $modelo->getProductosProteinas();
+        $data['ropas'] = $modelo->getProductosRopa();
+
         $this->view->showViews(array('templates/header.view.php', 'productos.view.php','templates/footer.view.php'), $data);
     }
+
+
 }
