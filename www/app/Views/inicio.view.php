@@ -76,7 +76,6 @@
             <?php }?>
         </div>
     </section>
-
     <!-- Sección de beneficios -->
     <section class="py-5 bg-light">
         <div class="container">

@@ -19,8 +19,21 @@ class ProductoController extends BaseController
 
         $data['proteinas'] = $modelo->getProductosProteinas();
         $data['ropas'] = $modelo->getProductosRopa();
+        $data['suplementos'] = $modelo->getProductosSuplementos();
+        $data['accesorios'] = $modelo->getProductosAccesorios();
 
         $this->view->showViews(array('templates/header.view.php', 'productos.view.php','templates/footer.view.php'), $data);
+    }
+
+    public function showAltaProductsView(): void
+    {
+        $data = array(
+            'titulo' => 'Productos Alta',
+            'breadcrumb' => ['Inicio/productos/altas'],
+            'seccion' => '/productos/altas'
+        );
+
+        $this->view->showViews(array('templates/header.view.php', 'productosAlta.view.php','templates/footer.view.php'), $data);
     }
 
 
