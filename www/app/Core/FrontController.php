@@ -46,6 +46,15 @@ class FrontController
             'post'
         );
 
+        Route::add(
+            '/productos/delete/([0-9])',
+            function (int $id) {
+                $controlador = new productoController();
+                $controlador->deleteProducts($id);
+            },
+            'delete'
+        );
+
         Route::pathNotFound(
             function () {
                 $controller = new \Com\Daw2\Controllers\ErroresController();

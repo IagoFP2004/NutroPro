@@ -110,9 +110,10 @@
                                 <button class="btn btn-outline-warning">
                                     <i class="bi bi-star me-1"></i> Destacar producto
                                 </button>
-                                <button class="btn btn-danger">
+                                <a href="<?php echo $_ENV['HOST.FOLDER']?>/delete/<?php echo $suplemento['id_producto'] ?>" class="btn btn-danger">
                                     <i class="bi bi-trash"></i> Eliminar producto
-                                </button>
+                                </a>
+
                             </div>
                         </div>
                     </div>

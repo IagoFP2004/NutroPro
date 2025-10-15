@@ -68,4 +68,12 @@ class ProductoModel extends BaseDbModel
             'imagen_url' => $data['imagen_url']
         ]);
     }
+
+    public function delete(int $id): bool
+    {
+        $sql = "DELETE FROM productos WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->rowCount() > 0;
+    }
 }

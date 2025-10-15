@@ -116,6 +116,23 @@ class   ProductoController extends BaseController
         }
     }
 
+    public function deleteProducts(int $id): void
+    {
+        $modelo = new ProductoModel();
+        $borrado = $modelo->delete($id);
+
+        if ($borrado !== false) {
+            $_SESSION['msjE'] = "Producto eliminado correctamente";
+            header("Location: /productos");
+            unset($_SESSION['msjE']);
+        }else{
+            $_SESSION['msjErr'] = "Error al eliminar el producto";
+            header("Location: /productos");
+            unset($_SESSION['msjE']);
+        }
+
+    }
+
 
 
 
