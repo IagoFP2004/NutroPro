@@ -94,13 +94,13 @@ INSERT INTO categorias (nombre, descripcion) VALUES
 
 -- Productos
 INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, destacado, imagen_url) VALUES
-('Proteína Whey 1kg Vainilla', 'Proteína de suero de leche sabor vainilla.', 29.99, 50, 1, 1, 'assets/img/whey_vainilla.png'),
-('Multivitamínico Daily', 'Complejo vitamínico para uso diario.', 14.99, 100, 2, 0, 'assets/img/multivitamin.jpg'),
-('Barra energética', 'Barras de avena y proteína.', 2.50, 200, 3, 0, 'assets/img/barra_energetica.jpg'),
-('Sudadera Deportiva Gris', 'Sudadera deportiva para entrenar con estilo y comodidad.', 19.99, 75, 4, 0, 'assets/img/sudadera_gris.png'),
-('Creatina', 'Creatina monohidratada de alta pureza.', 15.00, 100, 1, 1, 'assets/img/creatina.png'),
-('Camiseta básica blanca', 'Camiseta deportiva cómoda y ligera.', 11.99, 50, 4, 1, 'assets/img/camiseta_blanca.png'),
-('Shaker', 'Vaso mezclador para proteínas NutroPro.', 6.00, 500, 5, 1, 'assets/img/shaker.png');
+('Proteína Whey 1kg Vainilla', 'Proteína de suero de leche sabor vainilla.', 29.99, 50, 1, 1, 'whey_vainilla.png'),
+('Multivitamínico Daily', 'Complejo vitamínico para uso diario.', 14.99, 100, 2, 0, 'multivitamin.jpg'),
+('Barra energética', 'Barras de avena y proteína.', 2.50, 200, 3, 0, 'barra_energetica.jpg'),
+('Sudadera Deportiva Gris', 'Sudadera deportiva para entrenar con estilo y comodidad.', 19.99, 75, 4, 0, 'sudadera_gris.png'),
+('Creatina', 'Creatina monohidratada de alta pureza.', 15.00, 100, 1, 1, 'creatina.png'),
+('Camiseta básica blanca', 'Camiseta deportiva cómoda y ligera.', 11.99, 50, 4, 1, 'camiseta_blanca.png'),
+('Shaker', 'Vaso mezclador para proteínas NutroPro.', 6.00, 500, 5, 1, 'shaker.png');
 
 -- Usuarios
 INSERT INTO usuarios (nombre, email, password, direccion, telefono) VALUES

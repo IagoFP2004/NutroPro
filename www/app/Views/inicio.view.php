@@ -64,7 +64,7 @@
             <!-- Productos Destacados -->
             <div class="col-md-3 mb-4">
                 <div class="card h-100 border-0 shadow-sm">
-                    <img src="<?php echo $producto['imagen_url'] ?>" class="card-img-top" alt="Creatina">
+                    <img src="<?php echo $_ENV['IMG_BASE'].$producto['imagen_url'] ?>" class="card-img-top" alt="Creatina">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?php echo $producto['nombre'] ?></h5>
                         <p class="card-text text-success fw-bold"><?php echo $producto['precio'] ?>€</p>

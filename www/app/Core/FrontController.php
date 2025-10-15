@@ -10,6 +10,7 @@ class FrontController
 {
     public static function main()
     {
+        session_start();
         Route::add(
             '/',
             function () {
@@ -35,6 +36,14 @@ class FrontController
                 $controlador->showAltaProductsView();
             },
             'get'
+        );
+        Route::add(
+            '/productos/nuevo',
+            function () {
+                $controlador = new productoController();
+                $controlador->insertProducts();
+            },
+            'post'
         );
 
         Route::pathNotFound(

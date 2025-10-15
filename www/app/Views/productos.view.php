@@ -19,6 +19,24 @@
     </a>
 </div>
 
+<?php if (!empty($msjE)) { ?>
+    <div class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <?= htmlspecialchars($msjE) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    </div>
+<?php } elseif (!empty($msjErr)) { ?>
+    <div class="container mt-3">
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <?= htmlspecialchars($msjErr) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    </div>
+<?php } ?>
+
 <!-- Contenido principal -->
 <main class="container mb-5">
 
@@ -29,7 +47,7 @@
             <?php foreach ($proteinas as $proteina) { ?>
                 <div class="col-md-3 col-sm-6">
                     <div class="card border-0 shadow-sm product-card h-100">
-                        <img src="<?php echo $proteina['imagen_url']; ?>" class="card-img-top" alt="Proteína Whey">
+                        <img src="<?php echo $_ENV['IMG_BASE'].$proteina['imagen_url']; ?>" class="card-img-top" alt="Proteína Whey">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?php echo $proteina['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $proteina['precio']; ?>€</p>
@@ -37,6 +55,9 @@
                                 <button class="btn btn-success">Añadir al carrito</button>
                                 <button class="btn btn-outline-warning">
                                     <i class="bi bi-star me-1"></i> Destacar producto
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Eliminar producto
                                 </button>
                             </div>
                         </div>
@@ -53,7 +74,7 @@
             <?php foreach ($ropas as $ropa) { ?>
                 <div class="col-md-3 col-sm-6">
                     <div class="card border-0 shadow-sm product-card h-100">
-                        <img src="<?php echo $ropa['imagen_url']; ?>" class="card-img-top" alt="Ropa de gimnasio">
+                        <img src="<?php echo $_ENV['IMG_BASE'].$ropa['imagen_url']; ?>" class="card-img-top" alt="Ropa de gimnasio">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?php echo $ropa['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $ropa['precio']; ?>€</p>
@@ -61,6 +82,9 @@
                                 <button class="btn btn-success">Añadir al carrito</button>
                                 <button class="btn btn-outline-warning">
                                     <i class="bi bi-star me-1"></i> Destacar producto
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Eliminar producto
                                 </button>
                             </div>
                         </div>
@@ -77,7 +101,7 @@
             <?php foreach ($suplementos as $suplemento) { ?>
                 <div class="col-md-3 col-sm-6">
                     <div class="card border-0 shadow-sm product-card h-100">
-                        <img src="<?php echo $suplemento['imagen_url']; ?>" class="card-img-top" alt="Suplemento">
+                        <img src="<?php echo $_ENV['IMG_BASE'].$suplemento['imagen_url']; ?>" class="card-img-top" alt="Suplemento">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?php echo $suplemento['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $suplemento['precio']; ?>€</p>
@@ -85,6 +109,9 @@
                                 <button class="btn btn-success">Añadir al carrito</button>
                                 <button class="btn btn-outline-warning">
                                     <i class="bi bi-star me-1"></i> Destacar producto
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Eliminar producto
                                 </button>
                             </div>
                         </div>
@@ -101,7 +128,7 @@
             <?php foreach ($accesorios as $accesorio) { ?>
                 <div class="col-md-3 col-sm-6">
                     <div class="card border-0 shadow-sm product-card h-100">
-                        <img src="<?php echo $accesorio['imagen_url']; ?>" class="card-img-top" alt="Accesorio">
+                        <img src="<?php echo $_ENV['IMG_BASE'].$accesorio['imagen_url']; ?>" class="card-img-top" alt="Accesorio">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?php echo $accesorio['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $accesorio['precio']; ?>€</p>
@@ -109,6 +136,35 @@
                                 <button class="btn btn-success">Añadir al carrito</button>
                                 <button class="btn btn-outline-warning">
                                     <i class="bi bi-star me-1"></i> Destacar producto
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Eliminar producto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="fw-bold mb-4 text-success text-center">SNACKS</h2>
+        <div class="row g-4">
+            <?php foreach ($snacks as $snack) { ?>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card border-0 shadow-sm product-card h-100">
+                        <img src="<?php echo $_ENV['IMG_BASE'].$snack['imagen_url']; ?>" class="card-img-top" alt="Accesorio">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title"><?php echo $snack['nombre']; ?></h5>
+                            <p class="text-success fw-bold mb-3"><?php echo $snack['precio']; ?>€</p>
+                            <div class="mt-auto d-flex flex-column gap-2">
+                                <button class="btn btn-success">Añadir al carrito</button>
+                                <button class="btn btn-outline-warning">
+                                    <i class="bi bi-star me-1"></i> Destacar producto
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Eliminar producto
                                 </button>
                             </div>
                         </div>

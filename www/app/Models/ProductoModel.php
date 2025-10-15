@@ -45,4 +45,27 @@ class ProductoModel extends BaseDbModel
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getProductosSnacks(): array
+    {
+        $sql = 'SELECT * FROM productos WHERE id_categoria = 3 ';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function insert(array $data):bool
+    {
+        $sql = "INSERT INTO `productos`(`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`) 
+        VALUES (:nombre, :descripcion, :precio, :stock, :id_categoria, 0, :imagen_url)";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            'nombre' => $data['nombre'],
+            'descripcion' => $data['descripcion'],
+            'precio' => $data['precio'],
+            'stock' => $data['stock'],
+            'id_categoria' => $data['categoria'],
+            'imagen_url' => $data['imagen_url']
+        ]);
+    }
 }

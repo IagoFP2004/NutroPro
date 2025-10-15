@@ -12,13 +12,13 @@
     <!-- FORMULARIO -->
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
-            <form action="#" method="post" enctype="multipart/form-data" class="bg-white border rounded-4 shadow-sm p-4 p-md-5">
+            <form action="/productos/nuevo" method="post" enctype="multipart/form-data" class="bg-white border rounded-4 shadow-sm p-4 p-md-5">
 
                 <div class="row g-4">
                     <!-- Nombre -->
                     <div class="col-md-6">
                         <label for="nombre" class="form-label fw-semibold">Nombre del producto</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Creatina Monohidratada" required>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Creatina Monohidratada" value="<?php echo $input['nombre'] ?? '' ?>" required>
                     </div>
 
                     <!-- Precio -->
@@ -43,11 +43,9 @@
                     <div class="col-md-6">
                         <label for="categoria" class="form-label fw-semibold">Categoría</label>
                         <select class="form-select" id="categoria" name="categoria" required>
-                            <option value="" selected disabled>Selecciona una categoría</option>
-                            <option value="1">Proteína & Creatina</option>
-                            <option value="2">Ropa de Gimnasio</option>
-                            <option value="3">Suplementos</option>
-                            <option value="4">Accesorios</option>
+                            <?php foreach ($categorias as $categoria) { ?>
+                                    <option value="<?php echo $categoria['id_categoria'] ?>"><?php echo $categoria['nombre'] ?></option>
+                            <?php }?>
                         </select>
                     </div>
 
