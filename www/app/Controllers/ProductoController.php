@@ -35,6 +35,17 @@ class   ProductoController extends BaseController
         $this->view->showViews(array('templates/header.view.php', 'productos.view.php','templates/footer.view.php'), $data);
     }
 
+    public function showDetailsView(): void
+    {
+        $data = array(
+            'titulo' => 'Productos Detalles',
+            'breadcrumb' => ['Inicio/productos/Detalle'],
+            'seccion' => '/productos/detalles'
+        );
+
+        $this->view->showViews(array('templates/header.view.php', 'productoDetalle.view.php','templates/footer.view.php'), $data);
+    }
+
     public function showAltaProductsView(): void
     {
         $data = array(

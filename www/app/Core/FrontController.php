@@ -30,6 +30,15 @@ class FrontController
         );
 
         Route::add(
+            '/productos/([0-9]+)',
+            function () {
+                $controlador = new productoController();
+                $controlador->showDetailsView();
+            },
+            'get'
+        );
+
+        Route::add(
             '/productos/nuevo',
             function () {
                 $controlador = new productoController();

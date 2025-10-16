@@ -52,7 +52,7 @@
                             <h5 class="card-title"><?php echo $proteina['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $proteina['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <button class="btn btn-success">Añadir al carrito</button>
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $proteina['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $proteina['id_producto'] ?>" class="btn btn-warning">
                                     <i class="bi bi-star me-1"></i> <?= ($proteina['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
                                 </a>
