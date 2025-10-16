@@ -79,7 +79,7 @@
                             <h5 class="card-title"><?php echo $ropa['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $ropa['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <button class="btn btn-success">Añadir al carrito</button>
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $ropa['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $ropa['id_producto'] ?>" class="btn btn-warning">
                                     <i class="bi bi-star me-1"></i> <?= ($ropa['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
                                 </a>
@@ -106,8 +106,7 @@
                             <h5 class="card-title"><?php echo $suplemento['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $suplemento['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <button class="btn btn-success">Añadir al carrito</button>
-                                <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $suplemento['id_producto'] ?>" class="btn btn-warning">
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $suplemento['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>                                <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $suplemento['id_producto'] ?>" class="btn btn-warning">
                                     <i class="bi bi-star me-1"></i> <?= ($suplemento['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
                                 </a>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/delete/<?php echo $suplemento['id_producto'] ?>" class="btn btn-danger">
@@ -133,8 +132,7 @@
                             <h5 class="card-title"><?php echo $accesorio['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $accesorio['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <button class="btn btn-success">Añadir al carrito</button>
-                                <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $accesorio['id_producto'] ?>" class="btn btn-warning">
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $accesorio['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>                                <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $accesorio['id_producto'] ?>" class="btn btn-warning">
                                     <i class="bi bi-star me-1"></i> <?= ($accesorio['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
                                 </a>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/delete/<?php echo $accesorio['id_producto'] ?>" class="btn btn-danger">
@@ -159,7 +157,7 @@
                             <h5 class="card-title"><?php echo $snack['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $snack['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <button class="btn btn-success">Añadir al carrito</button>
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $snack['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $snack['id_producto'] ?>" class="btn btn-warning">
                                     <i class="bi bi-star me-1"></i> <?= ($snack['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
                                 </a>

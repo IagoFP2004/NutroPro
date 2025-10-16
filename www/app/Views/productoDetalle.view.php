@@ -16,7 +16,7 @@
 
     <!-- Botón Volver -->
     <div class="mb-4">
-        <a href="#" class="text-success text-decoration-none">
+        <a href="<?php echo $_ENV['BASE_URL'] ?>productos" class="text-success text-decoration-none">
             <i class="bi bi-arrow-left"></i> Volver a productos
         </a>
     </div>
@@ -52,35 +52,67 @@
     </div>
 
     <!--  INFORMACIÓN NUTRICIONAL -->
+    <!--  INFORMACIÓN NUTRICIONAL O DATOS DEL PRODUCTO -->
     <section class="mt-5">
-        <h4 class="fw-bold text-center text-success mb-4">
-            </i> Información Nutricional (por 100g)
-        </h4>
+        <?php if (in_array($producto['id_categoria'], [1,2,3])): ?>
+            <!-- Mostrar información nutricional solo para suplementos/alimentos -->
+            <h4 class="fw-bold text-center text-success mb-4">
+                Información Nutricional (por 100g)
+            </h4>
 
-        <div class="row justify-content-center text-center g-4">
-            <div class="col-6 col-md-3">
-                <div class="bg-light p-4 rounded shadow-sm">
-                    <i class="bi bi-egg-fried text-success fs-3 mb-2"></i>
-                    <h5 class="fw-bold mb-0">Proteínas</h5>
-                    <p class="text-muted fs-5 mb-0"><?php echo $producto['proteinas'] ?> g</p>
+            <div class="row justify-content-center text-center g-4">
+                <div class="col-6 col-md-3">
+                    <div class="bg-light p-4 rounded shadow-sm">
+                        <i class="bi bi-egg-fried text-success fs-3 mb-2"></i>
+                        <h5 class="fw-bold mb-0">Proteínas</h5>
+                        <p class="text-muted fs-5 mb-0"><?php echo $producto['proteinas'] ?? '0' ?> g</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="bg-light p-4 rounded shadow-sm">
+                        <i class="bi bi-cookie text-success fs-3 mb-2"></i>
+                        <h5 class="fw-bold mb-0">Carbohidratos</h5>
+                        <p class="text-muted fs-5 mb-0"><?php echo $producto['carbohidratos'] ?? '0' ?> g</p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="bg-light p-4 rounded shadow-sm">
+                        <i class="bi bi-droplet text-success fs-3 mb-2"></i>
+                        <h5 class="fw-bold mb-0">Grasas</h5>
+                        <p class="text-muted fs-5 mb-0"><?php echo $producto['grasas'] ?? '0' ?> g</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
-                <div class="bg-light p-4 rounded shadow-sm">
-                    <i class="bi bi-cookie text-success fs-3 mb-2"></i>
-                    <h5 class="fw-bold mb-0">Carbohidratos</h5>
-                    <p class="text-muted fs-5 mb-0"><?php echo $producto['carbohidratos'] ?> g</p>
+
+        <?php else: ?>
+            <!-- Mostrar información relevante para ropa/accesorios -->
+            <h4 class="fw-bold text-center text-success mb-4">
+                Detalles del producto
+            </h4>
+
+            <div class="row justify-content-center text-center g-4">
+                <div class="col-6 col-md-3">
+                    <div class="bg-light p-4 rounded shadow-sm">
+                        <h5 class="fw-bold mb-1">Talla</h5>
+                        <p class="text-muted fs-5 mb-0"><?php echo $producto['talla'] ?? 'Única' ?></p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="bg-light p-4 rounded shadow-sm">
+                        <h5 class="fw-bold mb-1">Color</h5>
+                        <p class="text-muted fs-5 mb-0"><?php echo $producto['color'] ?? 'Variedad' ?></p>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="bg-light p-4 rounded shadow-sm">
+                        <h5 class="fw-bold mb-1">Material</h5>
+                        <p class="text-muted fs-5 mb-0"><?php echo $producto['material'] ?? 'N/A' ?></p>
+                    </div>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
-                <div class="bg-light p-4 rounded shadow-sm">
-                    <i class="bi bi-droplet text-success fs-3 mb-2"></i>
-                    <h5 class="fw-bold mb-0">Grasas</h5>
-                    <p class="text-muted fs-5 mb-0"><?php echo $producto['grasas'] ?> g</p>
-                </div>
-            </div>
-        </div>
+        <?php endif; ?>
     </section>
+
 
     <!-- Productos relacionados -->
     <!-- Productos más vendidos -->
