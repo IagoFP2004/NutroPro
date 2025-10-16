@@ -38,7 +38,7 @@
 <?php } ?>
 
 <!-- Contenido principal -->
-<main class="container mb-5">
+<main class="container mb-5 align-items-center>
 
     <!-- CATEGORÍA 1: Proteína & Creatina -->
     <section class="mb-5">
@@ -69,7 +69,7 @@
 
     <!-- CATEGORÍA 2: Ropa de Gimnasio -->
     <section class="mb-5">
-        <h2 class="fw-bold mb-4 text-success text-center">Ropa de Gimnasio</h2>
+        <h2 class="fw-bold mb-4 mt-4 text-success text-center">Ropa de Gimnasio</h2>
         <div class="row g-4">
             <?php foreach ($ropas as $ropa) { ?>
                 <div class="col-md-3 col-sm-6">
@@ -96,7 +96,7 @@
 
     <!-- CATEGORÍA 3: Suplementos -->
     <section class="mb-5">
-        <h2 class="fw-bold mb-4 text-success text-center">Suplementos</h2>
+        <h2 class="fw-bold mb-4 mt-4 text-success text-center">Suplementos</h2>
         <div class="row g-4">
             <?php foreach ($suplementos as $suplemento) { ?>
                 <div class="col-md-3 col-sm-6">
@@ -123,7 +123,7 @@
 
     <!-- CATEGORÍA 4: Accesorios -->
     <section>
-        <h2 class="fw-bold mb-4 text-success text-center">Accesorios</h2>
+        <h2 class="fw-bold mb-4 mt-4 text-success text-center">Accesorios</h2>
         <div class="row g-4">
             <?php foreach ($accesorios as $accesorio) { ?>
                 <div class="col-md-3 col-sm-6">
@@ -149,7 +149,7 @@
     </section>
 
     <section>
-        <h2 class="fw-bold mb-4 text-success text-center">SNACKS</h2>
+        <h2 class="fw-bold mb-4 mt-4 text-success text-center">SNACKS</h2>
         <div class="row g-4">
             <?php foreach ($snacks as $snack) { ?>
                 <div class="col-md-3 col-sm-6">

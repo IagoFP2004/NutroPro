@@ -104,7 +104,6 @@ class   ProductoController extends BaseController
 
         } else {
             // ====== Si hay errores, volver a la vista de alta ======
-            var_dump($errors);
             $data['categorias'] = $categoriaModel->getAllCategorias();
             $data['errors']     = $errors;
             $data['input']      = filter_var_array($_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);

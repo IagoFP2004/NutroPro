@@ -19,24 +19,28 @@
                     <div class="col-md-6">
                         <label for="nombre" class="form-label fw-semibold">Nombre del producto</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej: Creatina Monohidratada" value="<?php echo $input['nombre'] ?? '' ?>" required>
+                        <p class="text-danger"><?php echo $errors['nombre'] ?? ''?></p>
                     </div>
 
                     <!-- Precio -->
                     <div class="col-md-3">
                         <label for="precio" class="form-label fw-semibold">Precio (€)</label>
-                        <input type="number" step="0.01" class="form-control" id="precio" name="precio" placeholder="15.99" required>
+                        <input type="number" step="0.01" class="form-control" id="precio" name="precio" placeholder="15.99" value="<?php echo $input['precio'] ?? '' ?>" required>
+                        <p class="text-danger"><?php echo $errors['precio'] ?? ''?></p>
                     </div>
 
                     <!-- Stock -->
                     <div class="col-md-3">
                         <label for="stock" class="form-label fw-semibold">Stock</label>
-                        <input type="number" class="form-control" id="stock" name="stock" min="0" placeholder="100" required>
+                        <input type="number" class="form-control" id="stock" name="stock" min="0" placeholder="100" value="<?php echo $input['stock'] ?? '' ?>" required>
+                        <p class="text-danger"><?php echo $errors['stock'] ?? ''?></p>
                     </div>
 
                     <!-- Descripción -->
                     <div class="col-12">
                         <label for="descripcion" class="form-label fw-semibold">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe brevemente el producto..." required></textarea>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe brevemente el producto..."  required></textarea>
+                        <p class="text-danger"><?php echo $errors['descripcion'] ?? ''?></p>
                     </div>
 
                     <!-- Categoría -->
@@ -44,15 +48,22 @@
                         <label for="categoria" class="form-label fw-semibold">Categoría</label>
                         <select class="form-select" id="categoria" name="categoria" required>
                             <?php foreach ($categorias as $categoria) { ?>
-                                    <option value="<?php echo $categoria['id_categoria'] ?>"><?php echo $categoria['nombre'] ?></option>
+                                <option
+                                        value="<?php echo $categoria['id_categoria']; ?>"
+                                        <?php echo (isset($input['categoria']) && $input['categoria'] == $categoria['id_categoria']) ? 'selected' : ''; ?>>
+                                    <?php echo $categoria['nombre']; ?>
+                                </option>
+
                             <?php }?>
                         </select>
+                        <p class="text-danger"><?php echo $errors['categoria'] ?? ''?></p>
                     </div>
 
                     <!-- Imagen -->
                     <div class="col-md-6">
                         <label for="imagen" class="form-label fw-semibold">Imagen del producto</label>
-                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" value="<?php echo $input['imagen'] ?? '' ?>" required>
+                        <p class="text-danger"><?php echo $errors['imagen'] ?? ''?></p>
                     </div>
                 </div>
 
