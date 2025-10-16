@@ -69,11 +69,27 @@ class ProductoModel extends BaseDbModel
         ]);
     }
 
+    public function getProductoById(int $id): ?array
+    {
+        $sql = "SELECT * FROM productos WHERE id_producto = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $result = $stmt->fetch();
+        return $result ?: null;
+    }
+
     public function delete(int $id): bool
     {
-        $sql = "DELETE FROM productos WHERE id = :id";
+        $sql = "DELETE FROM productos WHERE id_producto = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
         return $stmt->rowCount() > 0;
+    }
+
+    public function destacar(int $id): bool
+    {
+        $sql = "UPDATE productos SET destacado = 1 - destacado WHERE id_producto = :id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['id' => $id]);
     }
 }

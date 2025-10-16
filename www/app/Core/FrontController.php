@@ -47,12 +47,21 @@ class FrontController
         );
 
         Route::add(
-            '/productos/delete/([0-9])',
+            '/productos/delete/([0-9]+)',
             function (int $id) {
                 $controlador = new productoController();
                 $controlador->deleteProducts($id);
             },
-            'delete'
+            'get'
+        );
+
+        Route::add(
+            '/productos/destacar/([0-9]+)',
+            function (int $id) {
+                $controlador = new productoController();
+                $controlador->destacarProductos($id);
+            },
+            'get'
         );
 
         Route::pathNotFound(

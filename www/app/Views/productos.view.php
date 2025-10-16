@@ -53,12 +53,12 @@
                             <p class="text-success fw-bold mb-3"><?php echo $proteina['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
                                 <button class="btn btn-success">Añadir al carrito</button>
-                                <button class="btn btn-outline-warning">
-                                    <i class="bi bi-star me-1"></i> Destacar producto
-                                </button>
-                                <button class="btn btn-danger">
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $proteina['id_producto'] ?>" class="btn btn-warning">
+                                    <i class="bi bi-star me-1"></i> <?= ($proteina['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
+                                </a>
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/delete/<?php echo $proteina['id_producto'] ?>" class="btn btn-danger">
                                     <i class="bi bi-trash"></i> Eliminar producto
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -80,12 +80,12 @@
                             <p class="text-success fw-bold mb-3"><?php echo $ropa['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
                                 <button class="btn btn-success">Añadir al carrito</button>
-                                <button class="btn btn-outline-warning">
-                                    <i class="bi bi-star me-1"></i> Destacar producto
-                                </button>
-                                <button class="btn btn-danger">
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $ropa['id_producto'] ?>" class="btn btn-warning">
+                                    <i class="bi bi-star me-1"></i> <?= ($ropa['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
+                                </a>
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/delete/<?php echo $ropa['id_producto'] ?>" class="btn btn-danger">
                                     <i class="bi bi-trash"></i> Eliminar producto
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -107,13 +107,12 @@
                             <p class="text-success fw-bold mb-3"><?php echo $suplemento['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
                                 <button class="btn btn-success">Añadir al carrito</button>
-                                <button class="btn btn-outline-warning">
-                                    <i class="bi bi-star me-1"></i> Destacar producto
-                                </button>
-                                <a href="<?php echo $_ENV['HOST.FOLDER']?>/delete/<?php echo $suplemento['id_producto'] ?>" class="btn btn-danger">
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $suplemento['id_producto'] ?>" class="btn btn-warning">
+                                    <i class="bi bi-star me-1"></i> <?= ($suplemento['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
+                                </a>
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/delete/<?php echo $suplemento['id_producto'] ?>" class="btn btn-danger">
                                     <i class="bi bi-trash"></i> Eliminar producto
                                 </a>
-
                             </div>
                         </div>
                     </div>
@@ -135,12 +134,12 @@
                             <p class="text-success fw-bold mb-3"><?php echo $accesorio['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
                                 <button class="btn btn-success">Añadir al carrito</button>
-                                <button class="btn btn-outline-warning">
-                                    <i class="bi bi-star me-1"></i> Destacar producto
-                                </button>
-                                <button class="btn btn-danger">
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $accesorio['id_producto'] ?>" class="btn btn-warning">
+                                    <i class="bi bi-star me-1"></i> <?= ($accesorio['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
+                                </a>
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/delete/<?php echo $accesorio['id_producto'] ?>" class="btn btn-danger">
                                     <i class="bi bi-trash"></i> Eliminar producto
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -161,12 +160,12 @@
                             <p class="text-success fw-bold mb-3"><?php echo $snack['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
                                 <button class="btn btn-success">Añadir al carrito</button>
-                                <button class="btn btn-outline-warning">
-                                    <i class="bi bi-star me-1"></i> Destacar producto
-                                </button>
-                                <button class="btn btn-danger">
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $snack['id_producto'] ?>" class="btn btn-warning">
+                                    <i class="bi bi-star me-1"></i> <?= ($snack['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
+                                </a>
+                                <a href="<?php echo $_ENV['BASE_URL']?>productos/delete/<?php echo $snack['id_producto'] ?>" class="btn btn-danger">
                                     <i class="bi bi-trash"></i> Eliminar producto
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

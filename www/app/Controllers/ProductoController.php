@@ -133,6 +133,40 @@ class   ProductoController extends BaseController
 
     }
 
+    public function destacarProductos(int $id): void
+    {
+        $modelo = new ProductoModel();
+        
+        // Obtener el estado actual del producto antes de actualizar
+        $producto = $modelo->getProductoById($id);
+        
+        if (!$producto) {
+            $_SESSION['msjErr'] = "Producto no encontrado";
+            header("Location: /productos");
+            exit;
+        }
+        
+        $estabaDestacado = $producto['destacado'] == 1;
+        
+        // Realizar el toggle
+        $destacar = $modelo->destacar($id);
+
+        if ($destacar !== false) {
+            // Mostrar mensaje según si se destacó o se quitó de destacados
+            if ($estabaDestacado) {
+                $_SESSION['msjE'] = "Producto quitado de destacados correctamente";
+            } else {
+                $_SESSION['msjE'] = "Producto destacado correctamente";
+            }
+            header("Location: /productos");
+            exit;
+        } else {
+            $_SESSION['msjErr'] = "Error al actualizar el producto";
+            header("Location: /productos");
+            exit;
+        }
+    }
+
 
 
 
