@@ -31,9 +31,9 @@ class FrontController
 
         Route::add(
             '/productos/([0-9]+)',
-            function () {
+            function (int $id) {
                 $controlador = new productoController();
-                $controlador->showDetailsView();
+                $controlador->showDetailsView($id);
             },
             'get'
         );

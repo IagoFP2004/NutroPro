@@ -14,6 +14,15 @@ class ProductoModel extends BaseDbModel
         return $stmt->fetchAll();
     }
 
+    public function getProductById(int $id) : array | false
+    {
+        $sql = 'SELECT * FROM productos WHERE id = :id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     public function getProductosProteinas(): array
     {
         $sql = 'SELECT * FROM productos WHERE id_categoria = 1 ';
@@ -54,20 +63,40 @@ class ProductoModel extends BaseDbModel
         return $stmt->fetchAll();
     }
 
-    public function insert(array $data):bool
+    public function insert(array $data): bool
     {
-        $sql = "INSERT INTO `productos`(`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`) 
-        VALUES (:nombre, :descripcion, :precio, :stock, :id_categoria, 0, :imagen_url)";
+        $sql = "INSERT INTO `productos`
+        (`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`, `proteinas`, `carbohidratos`, `grasas`) 
+        VALUES 
+        (:nombre, :descripcion, :precio, :stock, :id_categoria, 0, :imagen_url, :proteinas, :carbohidratos, :grasas)";
+
         $stmt = $this->pdo->prepare($sql);
+
+        // 🔹 Convertimos cadenas vacías en NULL
+        $proteinas = $data['proteinas'] ?? null;
+        $carbohidratos = $data['carbohidratos'] ?? null;
+        $grasas = $data['grasas'] ?? null;
+
+        if ($proteinas === '') $proteinas = null;
+        if ($carbohidratos === '') $carbohidratos = null;
+        if ($grasas === '') $grasas = null;
+
         return $stmt->execute([
-            'nombre' => $data['nombre'],
-            'descripcion' => $data['descripcion'],
-            'precio' => $data['precio'],
-            'stock' => $data['stock'],
-            'id_categoria' => $data['categoria'],
-            'imagen_url' => $data['imagen_url']
+            'nombre'         => $data['nombre'],
+            'descripcion'    => $data['descripcion'],
+            'precio'         => $data['precio'],
+            'stock'          => $data['stock'],
+            'id_categoria'   => $data['categoria'],
+            'imagen_url'     => $data['imagen_url'],
+            'proteinas'      => $proteinas,
+            'carbohidratos'  => $carbohidratos,
+            'grasas'         => $grasas
         ]);
     }
+
+
+
+
 
     public function getProductoById(int $id): ?array
     {

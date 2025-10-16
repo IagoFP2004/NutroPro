@@ -65,6 +65,27 @@
                         <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" value="<?php echo $input['imagen'] ?? '' ?>" required>
                         <p class="text-danger"><?php echo $errors['imagen'] ?? ''?></p>
                     </div>
+
+                    <!-- Nutrientes (solo visibles para categorías 1, 2, 3) -->
+                    <div id="divNutrientes" class="row g-4 mt-3" style="display: none;">
+                        <div class="col-md-4">
+                            <label for="proteinas" class="form-label fw-semibold">Proteínas (g)</label>
+                            <input type="number" class="form-control" id="proteinas" name="proteinas" min="0" placeholder="20" value="<?php echo $input['proteinas'] ?? '' ?>">
+                            <p class="text-danger"><?php echo $errors['proteinas'] ?? ''?></p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="carbohidratos" class="form-label fw-semibold">Carbohidratos (g)</label>
+                            <input type="number" class="form-control" id="carbohidratos" name="carbohidratos" min="0" placeholder="10" value="<?php echo $input['carbohidratos'] ?? '' ?>">
+                            <p class="text-danger"><?php echo $errors['carbohidratos'] ?? ''?></p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="grasas" class="form-label fw-semibold">Grasas (g)</label>
+                            <input type="number" class="form-control" id="grasas" name="grasas" min="0" placeholder="5" value="<?php echo $input['grasas'] ?? '' ?>">
+                            <p class="text-danger"><?php echo $errors['grasas'] ?? ''?></p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- BOTONES -->
@@ -76,6 +97,28 @@
                         <i class="bi bi-check-circle me-1"></i> Guardar producto
                     </button>
                 </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const categoriaSelect = document.getElementById('categoria');
+                        const divNutrientes = document.getElementById('divNutrientes');
+
+                        function toggleNutrientes() {
+                            const categoria = parseInt(categoriaSelect.value);
+                            if ([1, 2, 3].includes(categoria)) {
+                                divNutrientes.style.display = 'flex';
+                            } else {
+                                divNutrientes.style.display = 'none';
+                                document.getElementById('proteinas').value = '';
+                                document.getElementById('carbohidratos').value = '';
+                                document.getElementById('grasas').value = '';
+                            }
+                        }
+                        categoriaSelect.addEventListener('change', toggleNutrientes);
+                        toggleNutrientes();
+                    });
+                </script>
+
             </form>
         </div>
     </div>

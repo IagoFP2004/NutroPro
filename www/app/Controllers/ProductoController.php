@@ -35,13 +35,16 @@ class   ProductoController extends BaseController
         $this->view->showViews(array('templates/header.view.php', 'productos.view.php','templates/footer.view.php'), $data);
     }
 
-    public function showDetailsView(): void
+    public function showDetailsView(int $id): void
     {
         $data = array(
             'titulo' => 'Productos Detalles',
             'breadcrumb' => ['Inicio/productos/Detalle'],
             'seccion' => '/productos/detalles'
         );
+
+        $modelo = new ProductoModel();
+        $data['producto'] = $modelo->getProductoById($id);
 
         $this->view->showViews(array('templates/header.view.php', 'productoDetalle.view.php','templates/footer.view.php'), $data);
     }
@@ -129,19 +132,27 @@ class   ProductoController extends BaseController
     public function deleteProducts(int $id): void
     {
         $modelo = new ProductoModel();
-        $borrado = $modelo->delete($id);
 
-        if ($borrado !== false) {
-            $_SESSION['msjE'] = "Producto eliminado correctamente";
-            header("Location: /productos");
-            unset($_SESSION['msjE']);
-        }else{
-            $_SESSION['msjErr'] = "Error al eliminar el producto";
-            header("Location: /productos");
-            unset($_SESSION['msjE']);
+        try {
+            $borrado = $modelo->delete($id);
+
+            if ($borrado) {
+                $_SESSION['msjE'] = "Producto eliminado correctamente";
+            } else {
+                $_SESSION['msjErr'] = "No se encontró el producto o no se pudo eliminar";
+            }
+        } catch (\PDOException $e) {
+            if ($e->getCode() === '23000') {
+                $_SESSION['msjErr'] = "No se puede eliminar este producto porque está asociado a uno o más pedidos.";
+            } else {
+                $_SESSION['msjErr'] = "Error al eliminar el producto: " . $e->getMessage();
+            }
         }
 
+        header("Location: /productos");
+        exit;
     }
+
 
     public function destacarProductos(int $id): void
     {
@@ -215,10 +226,40 @@ class   ProductoController extends BaseController
             $errors['stock'] = 'El stock no puede ser negativo';
         }
 
-        // categoria
         if (empty($data['categoria'])) {
             $errors['categoria'] = 'La categoría es requerida';
         }
+
+        $categoriasNutricionales = [1, 2, 3]; // Proteínas, suplementos, snacks
+
+        if (in_array((int)$data['categoria'], $categoriasNutricionales, true)) {
+
+            if (!isset($data['proteinas']) || $data['proteinas'] === '') {
+                $errors['proteinas'] = 'Las proteínas son requeridas';
+            } elseif (!ctype_digit((string)$data['proteinas'])) {
+                $errors['proteinas'] = 'Las proteínas deben ser un número entero';
+            } elseif ((int)$data['proteinas'] < 0) {
+                $errors['proteinas'] = 'Las proteínas no pueden ser negativas';
+            }
+
+            if (!isset($data['carbohidratos']) || $data['carbohidratos'] === '') {
+                $errors['carbohidratos'] = 'Los carbohidratos son requeridos';
+            } elseif (!ctype_digit((string)$data['carbohidratos'])) {
+                $errors['carbohidratos'] = 'Los carbohidratos deben ser un número entero';
+            } elseif ((int)$data['carbohidratos'] < 0) {
+                $errors['carbohidratos'] = 'Los carbohidratos no pueden ser negativos';
+            }
+
+            if (!isset($data['grasas']) || $data['grasas'] === '') {
+                $errors['grasas'] = 'Las grasas son requeridas';
+            } elseif (!ctype_digit((string)$data['grasas'])) {
+                $errors['grasas'] = 'Las grasas deben ser un número entero';
+            } elseif ((int)$data['grasas'] < 0) {
+                $errors['grasas'] = 'Las grasas no pueden ser negativas';
+            }
+        }
+
+
 
         // imagen (ahora por $_FILES)
         if (empty($files['imagen']['name'])) {
