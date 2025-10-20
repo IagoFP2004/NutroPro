@@ -30,15 +30,6 @@ class FrontController
         );
 
         Route::add(
-            '/productos/([0-9]+)',
-            function (int $id) {
-                $controlador = new productoController();
-                $controlador->showDetailsView($id);
-            },
-            'get'
-        );
-
-        Route::add(
             '/productos/nuevo',
             function () {
                 $controlador = new productoController();
@@ -53,6 +44,32 @@ class FrontController
                 $controlador->insertProducts();
             },
             'post'
+        );
+
+        Route::add(
+            '/productos/editar/([0-9]+)',
+            function (int $id) {
+                $controlador = new productoController();
+                $controlador->showEditView($id);
+            },
+            'get'
+        );
+        Route::add(
+            '/productos/editar/([0-9]+)',
+            function (int $id) {
+                $controlador = new productoController();
+                $controlador->updateProducts($id);
+            },
+            'post'
+        );
+
+        Route::add(
+            '/productos/([0-9]+)',
+            function (int $id) {
+                $controlador = new productoController();
+                $controlador->showDetailsView($id);
+            },
+            'get'
         );
 
         Route::add(

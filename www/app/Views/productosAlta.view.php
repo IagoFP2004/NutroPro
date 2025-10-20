@@ -5,14 +5,14 @@
         <div class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle mb-3" style="width: 70px; height: 70px;">
             <i class="bi bi-box-seam fs-1"></i>
         </div>
-        <h1 class="fw-bold text-success mb-2">Nuevo producto</h1>
-        <p class="text-muted">Completa los detalles para añadir un nuevo producto a la tienda.</p>
+        <h1 class="fw-bold text-success mb-2"><?php echo ($modo ?? 'crear') === 'editar' ? 'Editar producto' : 'Nuevo producto'; ?></h1>
+        <p class="text-muted"><?php echo ($modo ?? 'crear') === 'editar' ? 'Modifica los detalles del producto.' : 'Completa los detalles para añadir un nuevo producto a la tienda.'; ?></p>
     </div>
 
     <!-- FORMULARIO -->
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
-            <form action="/productos/nuevo" method="post" enctype="multipart/form-data" class="bg-white border rounded-4 shadow-sm p-4 p-md-5">
+            <form action="<?php echo ($modo ?? 'crear') === 'editar' ? '/productos/editar/' . $producto['id_producto'] : '/productos/nuevo'; ?>" method="post" enctype="multipart/form-data" class="bg-white border rounded-4 shadow-sm p-4 p-md-5">
 
                 <div class="row g-4">
                     <!-- Nombre -->
@@ -39,7 +39,7 @@
                     <!-- Descripción -->
                     <div class="col-12">
                         <label for="descripcion" class="form-label fw-semibold">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe brevemente el producto..."  required></textarea>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe brevemente el producto..." required><?php echo $input['descripcion'] ?? '' ?></textarea>
                         <p class="text-danger"><?php echo $errors['descripcion'] ?? ''?></p>
                     </div>
 
@@ -61,8 +61,16 @@
 
                     <!-- Imagen -->
                     <div class="col-md-6">
-                        <label for="imagen" class="form-label fw-semibold">Imagen del producto</label>
-                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" value="<?php echo $input['imagen'] ?? '' ?>" required>
+                        <label for="imagen" class="form-label fw-semibold">
+                            Imagen del producto
+                            <?php if (($modo ?? 'crear') === 'editar'): ?>
+                                <span class="text-muted small">(opcional - dejar vacío para mantener la actual)</span>
+                            <?php endif; ?>
+                        </label>
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" <?php echo (($modo ?? 'crear') === 'crear') ? 'required' : ''; ?>>
+                        <?php if (($modo ?? 'crear') === 'editar' && !empty($producto['imagen_url'])): ?>
+                            <small class="text-muted d-block mt-1">Imagen actual: <?php echo $producto['imagen_url']; ?></small>
+                        <?php endif; ?>
                         <p class="text-danger"><?php echo $errors['imagen'] ?? ''?></p>
                     </div>
 
@@ -115,7 +123,7 @@
                         <i class="bi bi-arrow-left me-1"></i> Volver
                     </a>
                     <button type="submit" class="btn btn-success px-4">
-                        <i class="bi bi-check-circle me-1"></i> Guardar producto
+                        <i class="bi bi-check-circle me-1"></i> <?php echo ($modo ?? 'crear') === 'editar' ? 'Actualizar producto' : 'Guardar producto'; ?>
                     </button>
                 </div>
 

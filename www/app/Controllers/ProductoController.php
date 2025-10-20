@@ -54,10 +54,51 @@ class   ProductoController extends BaseController
         $data = array(
             'titulo' => 'Productos Alta',
             'breadcrumb' => ['Inicio/productos/altas'],
-            'seccion' => '/productos/altas'
+            'seccion' => '/productos/altas',
+            'modo' => 'crear'
         );
         $categoriaModel = new CategoriaModel();
         $data['categorias'] = $categoriaModel->getAllCategorias();
+        $this->view->showViews(array('templates/header.view.php', 'productosAlta.view.php','templates/footer.view.php'), $data);
+    }
+
+    public function showEditView(int $id): void
+    {
+        $data = array(
+            'titulo' => 'Editar Producto',
+            'breadcrumb' => ['Inicio/productos/editar'],
+            'seccion' => '/productos/editar',
+            'modo' => 'editar'
+        );
+        
+        $productoModel = new ProductoModel();
+        $producto = $productoModel->getProductoById($id);
+        
+        if (!$producto) {
+            $_SESSION['msjErr'] = "Producto no encontrado";
+            header("Location: /productos");
+            exit;
+        }
+        
+        // Pasar los datos del producto a la vista
+        $data['producto'] = $producto;
+        $data['input'] = [
+            'nombre' => $producto['nombre'],
+            'descripcion' => $producto['descripcion'],
+            'precio' => $producto['precio'],
+            'stock' => $producto['stock'],
+            'categoria' => $producto['id_categoria'],
+            'proteinas' => $producto['proteinas'] ?? '',
+            'carbohidratos' => $producto['carbohidratos'] ?? '',
+            'grasas' => $producto['grasas'] ?? '',
+            'talla' => $producto['talla'] ?? '',
+            'color' => $producto['color'] ?? '',
+            'material' => $producto['material'] ?? ''
+        ];
+        
+        $categoriaModel = new CategoriaModel();
+        $data['categorias'] = $categoriaModel->getAllCategorias();
+        
         $this->view->showViews(array('templates/header.view.php', 'productosAlta.view.php','templates/footer.view.php'), $data);
     }
 
@@ -66,11 +107,12 @@ class   ProductoController extends BaseController
         $data = array(
             'titulo'     => 'Productos Alta',
             'breadcrumb' => ['Inicio/productos/altas'],
-            'seccion'    => '/productos/altas'
+            'seccion'    => '/productos/altas',
+            'modo'       => 'crear'
         );
 
         $categoriaModel = new CategoriaModel();
-        $errors = $this->checkData($_POST, $_FILES);
+        $errors = $this->checkData($_POST, $_FILES, true); // La imagen es requerida
 
         if (empty($errors)) {
             // ====== Subir imagen ======
@@ -121,6 +163,83 @@ class   ProductoController extends BaseController
             $data['categorias'] = $categoriaModel->getAllCategorias();
             $data['errors']     = $errors;
             $data['input']      = filter_var_array($_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            $this->view->showViews(
+                ['templates/header.view.php', 'productosAlta.view.php', 'templates/footer.view.php'],
+                $data
+            );
+        }
+    }
+
+    public function updateProducts(int $id): void
+    {
+        $data = array(
+            'titulo' => 'Editar Producto',
+            'breadcrumb' => ['Inicio/productos/editar'],
+            'seccion' => '/productos/editar',
+            'modo' => 'editar'
+        );
+
+        $categoriaModel = new CategoriaModel();
+        $productoModel = new ProductoModel();
+        
+        // Obtener el producto actual
+        $producto = $productoModel->getProductoById($id);
+        
+        if (!$producto) {
+            $_SESSION['msjErr'] = "Producto no encontrado";
+            header("Location: /productos");
+            exit;
+        }
+
+        $errors = $this->checkData($_POST, $_FILES, false); // La imagen no es requerida en edición
+
+        if (empty($errors)) {
+            // Verificar si se subió una nueva imagen
+            if (!empty($_FILES['imagen']['name']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+                // Subir nueva imagen
+                $publicPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
+                $uploadDir  = $publicPath . '/assets/img/';
+
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0775, true);
+                }
+
+                $ext = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+                $filename = uniqid('img_', true) . '.' . $ext;
+
+                if (move_uploaded_file($_FILES['imagen']['tmp_name'], $uploadDir . $filename)) {
+                    $_POST['imagen_url'] = $filename;
+                    
+                    // Eliminar imagen antigua (opcional)
+                    if (!empty($producto['imagen_url']) && file_exists($uploadDir . $producto['imagen_url'])) {
+                        @unlink($uploadDir . $producto['imagen_url']);
+                    }
+                } else {
+                    $_SESSION['msjErr'] = "Error al guardar la imagen";
+                    header("Location: /productos");
+                    exit;
+                }
+            }
+
+            // Actualizar producto
+            $update = $productoModel->update($id, $_POST);
+
+            if ($update !== false) {
+                $_SESSION['msjE'] = "Producto actualizado correctamente";
+            } else {
+                $_SESSION['msjErr'] = "Error al actualizar el producto";
+            }
+
+            header("Location: /productos");
+            exit;
+
+        } else {
+            // Si hay errores, volver a la vista de edición
+            $data['categorias'] = $categoriaModel->getAllCategorias();
+            $data['errors']     = $errors;
+            $data['input']      = filter_var_array($_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $data['producto']   = $producto;
 
             $this->view->showViews(
                 ['templates/header.view.php', 'productosAlta.view.php', 'templates/footer.view.php'],
@@ -191,7 +310,7 @@ class   ProductoController extends BaseController
 
 
 
-    public function checkData(array $data, array $files = []): array
+    public function checkData(array $data, array $files = [], bool $imagenRequerida = true): array
     {
         $errors = [];
         // nombre
@@ -282,9 +401,10 @@ class   ProductoController extends BaseController
 
 
         // imagen (ahora por $_FILES)
-        if (empty($files['imagen']['name'])) {
+        // Solo validar si es requerida o si se intentó subir una
+        if ($imagenRequerida && empty($files['imagen']['name'])) {
             $errors['imagen'] = 'La imagen es requerida';
-        } elseif ($files['imagen']['error'] !== UPLOAD_ERR_OK) {
+        } elseif (!empty($files['imagen']['name']) && $files['imagen']['error'] !== UPLOAD_ERR_OK) {
             // Mensajes de error más específicos según el código de error
             switch ($files['imagen']['error']) {
                 case UPLOAD_ERR_INI_SIZE:
@@ -304,7 +424,8 @@ class   ProductoController extends BaseController
                     $errors['imagen'] = 'Error al subir la imagen';
                     break;
             }
-        } else {
+        } elseif (!empty($files['imagen']['name'])) {
+            // Validar formato solo si se subió una imagen
             $extOk = ['jpg','jpeg','png','gif','webp'];
             $ext = strtolower(pathinfo($files['imagen']['name'], PATHINFO_EXTENSION));
             if (!in_array($ext, $extOk, true)) {

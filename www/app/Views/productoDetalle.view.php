@@ -51,8 +51,8 @@
         </div>
     </div>
 
-    <!--  INFORMACIÓN NUTRICIONAL -->
     <!--  INFORMACIÓN NUTRICIONAL O DATOS DEL PRODUCTO -->
+    <?php if ($producto['id_categoria'] != 5): ?>
     <section class="mt-5">
         <?php if (in_array($producto['id_categoria'], [1,2,3])): ?>
             <!-- Mostrar información nutricional solo para suplementos/alimentos -->
@@ -84,8 +84,8 @@
                 </div>
             </div>
 
-        <?php else: ?>
-            <!-- Mostrar información relevante para ropa/accesorios -->
+        <?php elseif ($producto['id_categoria'] == 4): // Solo para Ropa (categoría 4) ?>
+            <!-- Mostrar información relevante para ropa -->
             <h4 class="fw-bold text-center text-success mb-4">
                 Detalles del producto
             </h4>
@@ -93,25 +93,29 @@
             <div class="row justify-content-center text-center g-4">
                 <div class="col-6 col-md-3">
                     <div class="bg-light p-4 rounded shadow-sm">
-                        <h5 class="fw-bold mb-1">Talla</h5>
+                        <i class="bi bi-rulers text-success fs-3 mb-2"></i>
+                        <h5 class="fw-bold mb-0">Talla</h5>
                         <p class="text-muted fs-5 mb-0"><?php echo $producto['talla'] ?? 'Única' ?></p>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
                     <div class="bg-light p-4 rounded shadow-sm">
-                        <h5 class="fw-bold mb-1">Color</h5>
+                        <i class="bi bi-palette text-success fs-3 mb-2"></i>
+                        <h5 class="fw-bold mb-0">Color</h5>
                         <p class="text-muted fs-5 mb-0"><?php echo $producto['color'] ?? 'Variedad' ?></p>
                     </div>
                 </div>
                 <div class="col-6 col-md-3">
                     <div class="bg-light p-4 rounded shadow-sm">
-                        <h5 class="fw-bold mb-1">Material</h5>
+                        <i class="bi bi-box-seam text-success fs-3 mb-2"></i>
+                        <h5 class="fw-bold mb-0">Material</h5>
                         <p class="text-muted fs-5 mb-0"><?php echo $producto['material'] ?? 'N/A' ?></p>
                     </div>
                 </div>
             </div>
         <?php endif; ?>
     </section>
+    <?php endif; ?>
 
 
     <!-- Productos relacionados -->

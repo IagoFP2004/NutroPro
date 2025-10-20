@@ -14,15 +14,6 @@ class ProductoModel extends BaseDbModel
         return $stmt->fetchAll();
     }
 
-    public function getProductById(int $id) : array | false
-    {
-        $sql = 'SELECT * FROM productos WHERE id = :id';
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch();
-    }
-
     public function getProductosProteinas(): array
     {
         $sql = 'SELECT * FROM productos WHERE id_categoria = 1 ';
@@ -132,5 +123,70 @@ class ProductoModel extends BaseDbModel
         $sql = "UPDATE productos SET destacado = 1 - destacado WHERE id_producto = :id";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute(['id' => $id]);
+    }
+
+    public function update(int $id, array $data): bool
+    {
+        $sql = "UPDATE `productos` SET
+            `nombre` = :nombre,
+            `descripcion` = :descripcion,
+            `precio` = :precio,
+            `stock` = :stock,
+            `id_categoria` = :id_categoria,
+            `proteinas` = :proteinas,
+            `carbohidratos` = :carbohidratos,
+            `grasas` = :grasas,
+            `talla` = :talla,
+            `color` = :color,
+            `material` = :material";
+        
+        // Si se proporciona una nueva imagen, actualizarla también
+        if (isset($data['imagen_url'])) {
+            $sql .= ", `imagen_url` = :imagen_url";
+        }
+        
+        $sql .= " WHERE `id_producto` = :id";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        // Convertimos cadenas vacías en NULL para campos nutricionales
+        $proteinas = $data['proteinas'] ?? null;
+        $carbohidratos = $data['carbohidratos'] ?? null;
+        $grasas = $data['grasas'] ?? null;
+
+        if ($proteinas === '') $proteinas = null;
+        if ($carbohidratos === '') $carbohidratos = null;
+        if ($grasas === '') $grasas = null;
+
+        // Convertimos cadenas vacías en NULL para campos de ropa
+        $talla = $data['talla'] ?? null;
+        $color = $data['color'] ?? null;
+        $material = $data['material'] ?? null;
+
+        if ($talla === '') $talla = null;
+        if ($color === '') $color = null;
+        if ($material === '') $material = null;
+
+        $params = [
+            'id'             => $id,
+            'nombre'         => $data['nombre'],
+            'descripcion'    => $data['descripcion'],
+            'precio'         => $data['precio'],
+            'stock'          => $data['stock'],
+            'id_categoria'   => $data['categoria'],
+            'proteinas'      => $proteinas,
+            'carbohidratos'  => $carbohidratos,
+            'grasas'         => $grasas,
+            'talla'          => $talla,
+            'color'          => $color,
+            'material'       => $material
+        ];
+
+        // Si hay imagen nueva, agregarla a los parámetros
+        if (isset($data['imagen_url'])) {
+            $params['imagen_url'] = $data['imagen_url'];
+        }
+
+        return $stmt->execute($params);
     }
 }
