@@ -86,6 +86,27 @@
                             <p class="text-danger"><?php echo $errors['grasas'] ?? ''?></p>
                         </div>
                     </div>
+
+                    <!-- Atributos de Ropa (solo visibles para categoría 4) -->
+                    <div id="divRopa" class="row g-4 mt-3" style="display: none;">
+                        <div class="col-md-4">
+                            <label for="talla" class="form-label fw-semibold">Talla</label>
+                            <input type="text" class="form-control" id="talla" name="talla" placeholder="Ej: M, L, XL" value="<?php echo $input['talla'] ?? '' ?>">
+                            <p class="text-danger"><?php echo $errors['talla'] ?? ''?></p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="color" class="form-label fw-semibold">Color</label>
+                            <input type="text" class="form-control" id="color" name="color" placeholder="Ej: Negro, Azul" value="<?php echo $input['color'] ?? '' ?>">
+                            <p class="text-danger"><?php echo $errors['color'] ?? ''?></p>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="material" class="form-label fw-semibold">Material</label>
+                            <input type="text" class="form-control" id="material" name="material" placeholder="Ej: Algodón, Poliéster" value="<?php echo $input['material'] ?? '' ?>">
+                            <p class="text-danger"><?php echo $errors['material'] ?? ''?></p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- BOTONES -->
@@ -102,20 +123,44 @@
                     document.addEventListener('DOMContentLoaded', function() {
                         const categoriaSelect = document.getElementById('categoria');
                         const divNutrientes = document.getElementById('divNutrientes');
+                        const divRopa = document.getElementById('divRopa');
 
-                        function toggleNutrientes() {
+                        function toggleCampos() {
                             const categoria = parseInt(categoriaSelect.value);
+                            
+                            // Mostrar/ocultar nutrientes (categorías 1, 2, 3)
                             if ([1, 2, 3].includes(categoria)) {
                                 divNutrientes.style.display = 'flex';
-                            } else {
+                                divRopa.style.display = 'none';
+                                // Limpiar campos de ropa
+                                document.getElementById('talla').value = '';
+                                document.getElementById('color').value = '';
+                                document.getElementById('material').value = '';
+                            } 
+                            // Mostrar/ocultar campos de ropa (categoría 4)
+                            else if (categoria === 4) {
                                 divNutrientes.style.display = 'none';
+                                divRopa.style.display = 'flex';
+                                // Limpiar campos de nutrientes
                                 document.getElementById('proteinas').value = '';
                                 document.getElementById('carbohidratos').value = '';
                                 document.getElementById('grasas').value = '';
+                            } 
+                            // Ocultar ambos para otras categorías
+                            else {
+                                divNutrientes.style.display = 'none';
+                                divRopa.style.display = 'none';
+                                // Limpiar todos los campos
+                                document.getElementById('proteinas').value = '';
+                                document.getElementById('carbohidratos').value = '';
+                                document.getElementById('grasas').value = '';
+                                document.getElementById('talla').value = '';
+                                document.getElementById('color').value = '';
+                                document.getElementById('material').value = '';
                             }
                         }
-                        categoriaSelect.addEventListener('change', toggleNutrientes);
-                        toggleNutrientes();
+                        categoriaSelect.addEventListener('change', toggleCampos);
+                        toggleCampos();
                     });
                 </script>
 

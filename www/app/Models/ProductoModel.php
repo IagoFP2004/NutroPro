@@ -66,13 +66,13 @@ class ProductoModel extends BaseDbModel
     public function insert(array $data): bool
     {
         $sql = "INSERT INTO `productos`
-        (`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`, `proteinas`, `carbohidratos`, `grasas`) 
+        (`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`, `proteinas`, `carbohidratos`, `grasas`, `talla`, `color`, `material`) 
         VALUES 
-        (:nombre, :descripcion, :precio, :stock, :id_categoria, 0, :imagen_url, :proteinas, :carbohidratos, :grasas)";
+        (:nombre, :descripcion, :precio, :stock, :id_categoria, 0, :imagen_url, :proteinas, :carbohidratos, :grasas, :talla, :color, :material)";
 
         $stmt = $this->pdo->prepare($sql);
 
-        // 🔹 Convertimos cadenas vacías en NULL
+        // 🔹 Convertimos cadenas vacías en NULL para campos nutricionales
         $proteinas = $data['proteinas'] ?? null;
         $carbohidratos = $data['carbohidratos'] ?? null;
         $grasas = $data['grasas'] ?? null;
@@ -80,6 +80,15 @@ class ProductoModel extends BaseDbModel
         if ($proteinas === '') $proteinas = null;
         if ($carbohidratos === '') $carbohidratos = null;
         if ($grasas === '') $grasas = null;
+
+        // 🔹 Convertimos cadenas vacías en NULL para campos de ropa
+        $talla = $data['talla'] ?? null;
+        $color = $data['color'] ?? null;
+        $material = $data['material'] ?? null;
+
+        if ($talla === '') $talla = null;
+        if ($color === '') $color = null;
+        if ($material === '') $material = null;
 
         return $stmt->execute([
             'nombre'         => $data['nombre'],
@@ -90,7 +99,10 @@ class ProductoModel extends BaseDbModel
             'imagen_url'     => $data['imagen_url'],
             'proteinas'      => $proteinas,
             'carbohidratos'  => $carbohidratos,
-            'grasas'         => $grasas
+            'grasas'         => $grasas,
+            'talla'          => $talla,
+            'color'          => $color,
+            'material'       => $material
         ]);
     }
 

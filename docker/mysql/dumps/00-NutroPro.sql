@@ -46,24 +46,13 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `carbohidratos` INT DEFAULT 0,
   `grasas`        INT DEFAULT 0,
   -- atributos de ropa
+  `talla`         VARCHAR(20)  DEFAULT NULL,
   `color`         VARCHAR(50)  DEFAULT NULL,
   `material`      VARCHAR(100) DEFAULT NULL,
   PRIMARY KEY (`id_producto`),
   KEY `idx_productos_categoria` (`id_categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Asegurar columnas si la tabla ya existía
-ALTER TABLE `productos`
-  ADD COLUMN IF NOT EXISTS `proteinas`     INT DEFAULT 0 AFTER `imagen_url`,
-  ADD COLUMN IF NOT EXISTS `carbohidratos` INT DEFAULT 0 AFTER `proteinas`,
-  ADD COLUMN IF NOT EXISTS `grasas`        INT DEFAULT 0 AFTER `carbohidratos`,
-  ADD COLUMN IF NOT EXISTS `color`         VARCHAR(50)  DEFAULT NULL AFTER `grasas`,
-  ADD COLUMN IF NOT EXISTS `material`      VARCHAR(100) DEFAULT NULL AFTER `color`,
-  MODIFY `destacado` INT NOT NULL DEFAULT 0;
-
--- (Opcional) Índices útiles para filtros en tienda
-CREATE INDEX IF NOT EXISTS `idx_productos_color`   ON `productos`(`color`);
-CREATE INDEX IF NOT EXISTS `idx_productos_material` ON `productos`(`material`);
 
 CREATE TABLE IF NOT EXISTS `pedidos` (
   `id_pedido`   INT NOT NULL AUTO_INCREMENT,
@@ -156,4 +145,67 @@ SET @sql := IF(@missing_fk,
 
 -- =========================
 -- Datos semilla (idempotentes)
--- ============
+-- =========================
+
+-- Insertar usuarios de ejemplo
+INSERT INTO `usuarios` (`nombre`, `email`, `password`, `direccion`, `telefono`) VALUES
+('Admin Usuario', 'admin@nutropro.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Calle Principal 123, Madrid', '600123456'),
+('Juan Pérez', 'juan.perez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Avenida Libertad 45, Barcelona', '611234567'),
+('María García', 'maria.garcia@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Plaza Mayor 8, Valencia', '622345678'),
+('Carlos López', 'carlos.lopez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Calle Nueva 67, Sevilla', '633456789')
+ON DUPLICATE KEY UPDATE nombre=nombre;
+
+-- Insertar categorías
+INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`) VALUES
+(1, 'Proteínas', 'Suplementos de proteína para el desarrollo muscular'),
+(2, 'Suplementos', 'Vitaminas, minerales y otros suplementos nutricionales'),
+(3, 'Snacks', 'Snacks saludables y barritas energéticas'),
+(4, 'Ropa', 'Ropa deportiva y de entrenamiento'),
+(5, 'Accesorios', 'Accesorios para el gimnasio y entrenamiento')
+ON DUPLICATE KEY UPDATE nombre=VALUES(nombre), descripcion=VALUES(descripcion);
+
+-- Insertar productos de PROTEÍNAS (categoría 1)
+INSERT INTO `productos` (`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`, `proteinas`, `carbohidratos`, `grasas`) VALUES
+('Whey Protein Isolate', 'Proteína de suero aislada de alta calidad, perfecta para aumentar masa muscular. 90% de proteína pura.', 45.99, 150, 1, 1, 'ChatGPT Image 9 oct 2025, 13_50_44.png', 90, 3, 2),
+('Whey Protein Concentrate', 'Proteína de suero concentrada con excelente sabor a chocolate. Ideal post-entrenamiento.', 35.99, 200, 1, 1, 'ChatGPT Image 9 oct 2025, 15_02_05.png', 80, 8, 5),
+('Caseína Micelar', 'Proteína de absorción lenta, ideal para tomar antes de dormir. Mantiene los músculos nutridos toda la noche.', 42.50, 100, 1, 0, 'ChatGPT Image 9 oct 2025, 15_16_14.png', 85, 4, 1),
+('Proteína Vegana', 'Mezcla de proteínas vegetales (guisante, arroz, hemp). 100% vegano y sin lactosa.', 38.99, 120, 1, 1, 'ChatGPT Image 9 oct 2025, 15_49_15.png', 75, 12, 6)
+ON DUPLICATE KEY UPDATE nombre=VALUES(nombre);
+
+-- Insertar productos de SUPLEMENTOS (categoría 2)
+INSERT INTO `productos` (`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`, `proteinas`, `carbohidratos`, `grasas`) VALUES
+('Creatina Monohidratada', 'Creatina pura micronizada para aumentar fuerza y potencia. 5g por porción.', 19.99, 300, 2, 1, 'ChatGPT Image 9 oct 2025, 16_31_30.png', 0, 0, 0),
+('Pre-Workout Extreme', 'Pre-entreno con cafeína, beta-alanina y citrulina para máxima energía y bombeo muscular.', 29.99, 180, 2, 1, 'ChatGPT Image 9 oct 2025, 16_43_32.png', 2, 15, 0),
+('BCAA 2:1:1', 'Aminoácidos ramificados para recuperación muscular. Sabor limón refrescante.', 24.99, 220, 2, 0, 'ChatGPT Image 9 oct 2025, 16_52_32.png', 8, 2, 0),
+('Multivitamínico Completo', 'Complejo vitamínico con 25 vitaminas y minerales esenciales. Una cápsula al día.', 15.99, 250, 2, 0, 'ChatGPT Image 13 oct 2025, 16_50_23.png', 0, 5, 0)
+ON DUPLICATE KEY UPDATE nombre=VALUES(nombre);
+
+-- Insertar productos de SNACKS (categoría 3)
+INSERT INTO `productos` (`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`, `proteinas`, `carbohidratos`, `grasas`) VALUES
+('Barritas Proteicas Chocolate', 'Pack de 12 barritas con 20g de proteína cada una. Sabor chocolate intenso.', 24.99, 150, 3, 1, 'ChatGPT Image 13 oct 2025, 17_01_29.png', 20, 25, 8),
+('Galletas Proteicas', 'Galletas crujientes con 15g de proteína. Perfectas para un snack entre comidas.', 12.99, 200, 3, 0, 'ChatGPT Image 15 oct 2025, 17_16_43.png', 15, 30, 10),
+('Mantequilla de Cacahuete', 'Mantequilla 100% natural sin azúcares añadidos. Rica en proteínas y grasas saludables.', 8.99, 180, 3, 1, 'img_68ef4b9c90a1c8.30665722.png', 25, 15, 50),
+('Chips de Proteína BBQ', 'Chips crujientes altos en proteína y bajos en carbohidratos. Sabor BBQ ahumado.', 3.99, 300, 3, 0, 'img_68efad827ef610.06845329.jpeg', 18, 12, 5)
+ON DUPLICATE KEY UPDATE nombre=VALUES(nombre);
+
+-- Insertar productos de ROPA (categoría 4) - CON TALLA, COLOR Y MATERIAL
+INSERT INTO `productos` (`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`, `talla`, `color`, `material`) VALUES
+('Camiseta Técnica Transpirable', 'Camiseta deportiva de alto rendimiento con tecnología anti-sudor. Perfecta para entrenamientos intensos.', 24.99, 100, 4, 1, 'img_68efb97600f074.28991256.jpeg', 'M', 'Negro', 'Poliéster 92% Elastano 8%'),
+('Mallas Deportivas Mujer', 'Mallas de compresión con cintura alta. Diseño ergonómico y gran comodidad.', 34.99, 80, 4, 1, 'img_68efbd6b0bca56.85626268.png', 'L', 'Azul Marino', 'Nylon 80% Spandex 20%'),
+('Pantalón Jogger Hombre', 'Pantalón deportivo con ajuste cómodo y bolsillos. Ideal para gimnasio o casual.', 39.99, 60, 4, 0, 'nano-banana-2025-10-13T14-46-54.png', 'XL', 'Gris', 'Algodón 70% Poliéster 30%'),
+('Sudadera con Capucha', 'Sudadera térmica perfecta para calentamiento. Con capucha ajustable y bolsillo canguro.', 44.99, 50, 4, 1, 'ChatGPT Image 9 oct 2025, 13_50_44.png', 'L', 'Negro', 'Algodón 80% Poliéster 20%'),
+('Top Deportivo Mujer', 'Sujetador deportivo de alto impacto con soporte reforzado. Transpirable y cómodo.', 29.99, 70, 4, 0, 'ChatGPT Image 9 oct 2025, 15_02_05.png', 'M', 'Rosa', 'Poliamida 85% Elastano 15%'),
+('Shorts Running Hombre', 'Pantalón corto ultra ligero con tecnología quick-dry. Perfecto para running.', 22.99, 90, 4, 0, 'ChatGPT Image 9 oct 2025, 15_16_14.png', 'L', 'Azul', 'Poliéster 100%')
+ON DUPLICATE KEY UPDATE nombre=VALUES(nombre);
+
+-- Insertar productos de ACCESORIOS (categoría 5)
+INSERT INTO `productos` (`nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`) VALUES
+('Shaker Profesional 700ml', 'Mezclador de proteínas con bola mezcladora y compartimento para suplementos. Libre de BPA.', 9.99, 250, 5, 0, 'ChatGPT Image 9 oct 2025, 15_49_15.png'),
+('Guantes de Entrenamiento', 'Guantes acolchados para levantamiento de pesas. Protección y agarre mejorado.', 14.99, 120, 5, 0, 'ChatGPT Image 9 oct 2025, 16_31_30.png'),
+('Banda Elástica Resistencia', 'Set de 5 bandas de resistencia con diferentes niveles. Incluye anclajes y bolsa de transporte.', 19.99, 150, 5, 1, 'ChatGPT Image 9 oct 2025, 16_43_32.png'),
+('Botella de Agua 1L', 'Botella deportiva con marcador de hidratación. Aislada térmicamente, mantiene frío 24h.', 16.99, 200, 5, 0, 'ChatGPT Image 9 oct 2025, 16_52_32.png'),
+('Toalla Microfibra', 'Toalla ultra absorbente y de secado rápido. Perfecta para el gimnasio. 80x40cm.', 12.99, 180, 5, 0, 'ChatGPT Image 13 oct 2025, 16_50_23.png'),
+('Cinturón Lumbar', 'Cinturón de soporte lumbar para levantamiento pesado. Ajustable y ergonómico.', 29.99, 80, 5, 1, 'ChatGPT Image 13 oct 2025, 17_01_29.png')
+ON DUPLICATE KEY UPDATE nombre=VALUES(nombre);
+
+COMMIT;

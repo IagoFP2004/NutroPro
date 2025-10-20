@@ -231,6 +231,7 @@ class   ProductoController extends BaseController
         }
 
         $categoriasNutricionales = [1, 2, 3]; // Proteínas, suplementos, snacks
+        $categoriaRopa = 4; // Ropa
 
         if (in_array((int)$data['categoria'], $categoriasNutricionales, true)) {
 
@@ -256,6 +257,25 @@ class   ProductoController extends BaseController
                 $errors['grasas'] = 'Las grasas deben ser un número entero';
             } elseif ((int)$data['grasas'] < 0) {
                 $errors['grasas'] = 'Las grasas no pueden ser negativas';
+            }
+        } elseif ((int)$data['categoria'] === $categoriaRopa) {
+            // Validación de campos de ropa
+            if (empty($data['talla'])) {
+                $errors['talla'] = 'La talla es requerida';
+            } elseif (strlen($data['talla']) > 20) {
+                $errors['talla'] = 'La talla no puede exceder 20 caracteres';
+            }
+
+            if (empty($data['color'])) {
+                $errors['color'] = 'El color es requerido';
+            } elseif (strlen($data['color']) < 2 || strlen($data['color']) > 50) {
+                $errors['color'] = 'El color debe tener entre 2 y 50 caracteres';
+            }
+
+            if (empty($data['material'])) {
+                $errors['material'] = 'El material es requerido';
+            } elseif (strlen($data['material']) < 2 || strlen($data['material']) > 100) {
+                $errors['material'] = 'El material debe tener entre 2 y 100 caracteres';
             }
         }
 
