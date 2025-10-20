@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `direccion`  VARCHAR(255) DEFAULT NULL,
   `telefono`   VARCHAR(20)  DEFAULT NULL,
   `fecha_registro` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_rol`     INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `uq_usuarios_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -148,11 +149,12 @@ SET @sql := IF(@missing_fk,
 -- =========================
 
 -- Insertar usuarios de ejemplo
-INSERT INTO `usuarios` (`nombre`, `email`, `password`, `direccion`, `telefono`) VALUES
-('Admin Usuario', 'admin@nutropro.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Calle Principal 123, Madrid', '600123456'),
-('Juan Pérez', 'juan.perez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Avenida Libertad 45, Barcelona', '611234567'),
-('María García', 'maria.garcia@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Plaza Mayor 8, Valencia', '622345678'),
-('Carlos López', 'carlos.lopez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Calle Nueva 67, Sevilla', '633456789')
+-- Nota: Contraseña del admin: 'abc123.' | Contraseña de otros usuarios: 'password'
+INSERT INTO `usuarios` (`nombre`, `email`, `password`, `direccion`, `telefono`, `id_rol`) VALUES
+('Admin Usuario', 'admin@nutropro.com', '$2y$10$Fb8zTfCpd2PevmiMcN2SuOkkTpg3j9AonfQ./.hppH1a0T6.WtjYC', 'Calle Principal 123, Madrid', '600123456', 1),
+('Juan Pérez', 'juan.perez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Avenida Libertad 45, Barcelona', '611234567', 0),
+('María García', 'maria.garcia@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Plaza Mayor 8, Valencia', '622345678', 0),
+('Carlos López', 'carlos.lopez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Calle Nueva 67, Sevilla', '633456789', 0)
 ON DUPLICATE KEY UPDATE nombre=nombre;
 
 -- Insertar categorías

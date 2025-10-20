@@ -31,6 +31,33 @@ class FrontController
         );
 
         Route::add(
+            '/login',
+            function () {
+                $controlador = new UserController();
+                $controlador->doLogin();
+            },
+            'post'
+        );
+
+        Route::add(
+            '/register',
+            function () {
+                $controlador = new UserController();
+                $controlador->register();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/register',
+            function () {
+                $controlador = new UserController();
+                $controlador->doRegister();
+            },
+            'post'
+        );
+
+        Route::add(
             '/productos',
             function () {
                 $controlador = new productoController();
