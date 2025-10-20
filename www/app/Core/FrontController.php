@@ -4,6 +4,7 @@ namespace Com\Daw2\Core;
 
 use Com\Daw2\Controllers\InicioController;
 use Com\Daw2\Controllers\ProductoController;
+use Com\Daw2\Controllers\UserController;
 use Steampixel\Route;
 
 class FrontController
@@ -16,6 +17,15 @@ class FrontController
             function () {
                 $controlador = new InicioController();
                 $controlador->index();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/login',
+            function () {
+                $controlador = new UserController();
+                $controlador->showLoginForm();
             },
             'get'
         );

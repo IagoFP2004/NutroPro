@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <div class="card border-0 shadow-sm">
-                    <img src="assets/img/ChatGPT Image 9 oct 2025, 15_16_14.png" class="card-img-top" alt="Salud y Fitness">
+                    <img src="assets/img/ChatGPT Image 20 oct 2025, 16_28_16.png" class="card-img-top" alt="Salud y Fitness">
                     <div class="card-body">
                         <h5 class="card-title">Salud & Fitness</h5>
                         <p class="card-text">Accesorios y productos para mejorar tu bienestar integral.</p>
@@ -105,7 +105,7 @@
         <div class="container">
             <h2 class="fw-bold mb-4">¿Listo para transformar tu cuerpo?</h2>
             <p class="lead mb-4">Únete a miles de personas que confían en NutroPro para alcanzar sus metas.</p>
-            <a href="#" class="btn btn-light btn-lg">Comienza hoy</a>
+            <a href="/login" class="btn btn-light btn-lg">Comienza hoy</a>
         </div>
     </section>
 
