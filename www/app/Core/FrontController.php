@@ -20,41 +20,52 @@ class FrontController
             },
             'get'
         );
+        if (!isset($_SESSION['usuario'])){
+            Route::add(
+                '/login',
+                function () {
+                    $controlador = new UserController();
+                    $controlador->showLoginForm();
+                },
+                'get'
+            );
+
+
+            Route::add(
+                '/login',
+                function () {
+                    $controlador = new UserController();
+                    $controlador->doLogin();
+                },
+                'post'
+            );
+
+            Route::add(
+                '/register',
+                function () {
+                    $controlador = new UserController();
+                    $controlador->register();
+                },
+                'get'
+            );
+
+            Route::add(
+                '/register',
+                function () {
+                    $controlador = new UserController();
+                    $controlador->doRegister();
+                },
+                'post'
+            );
+        }
 
         Route::add(
-            '/login',
+            '/logout',
             function () {
-                $controlador = new UserController();
-                $controlador->showLoginForm();
+                session_destroy();
+                header('Location: /');
             },
             'get'
-        );
-
-        Route::add(
-            '/login',
-            function () {
-                $controlador = new UserController();
-                $controlador->doLogin();
-            },
-            'post'
-        );
-
-        Route::add(
-            '/register',
-            function () {
-                $controlador = new UserController();
-                $controlador->register();
-            },
-            'get'
-        );
-
-        Route::add(
-            '/register',
-            function () {
-                $controlador = new UserController();
-                $controlador->doRegister();
-            },
-            'post'
         );
 
         Route::add(
@@ -65,41 +76,58 @@ class FrontController
             },
             'get'
         );
+        if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd') {
+            Route::add(
+                '/productos/nuevo',
+                function () {
+                    $controlador = new productoController();
+                    $controlador->showAltaProductsView();
+                },
+                'get'
+            );
+            Route::add(
+                '/productos/nuevo',
+                function () {
+                    $controlador = new productoController();
+                    $controlador->insertProducts();
+                },
+                'post'
+            );
 
-        Route::add(
-            '/productos/nuevo',
-            function () {
-                $controlador = new productoController();
-                $controlador->showAltaProductsView();
-            },
-            'get'
-        );
-        Route::add(
-            '/productos/nuevo',
-            function () {
-                $controlador = new productoController();
-                $controlador->insertProducts();
-            },
-            'post'
-        );
+            Route::add(
+                '/productos/editar/([0-9]+)',
+                function (int $id) {
+                    $controlador = new productoController();
+                    $controlador->showEditView($id);
+                },
+                'get'
+            );
+            Route::add(
+                '/productos/editar/([0-9]+)',
+                function (int $id) {
+                    $controlador = new productoController();
+                    $controlador->updateProducts($id);
+                },
+                'post'
+            );
+            Route::add(
+                '/productos/delete/([0-9]+)',
+                function (int $id) {
+                    $controlador = new productoController();
+                    $controlador->deleteProducts($id);
+                },
+                'get'
+            );
 
-        Route::add(
-            '/productos/editar/([0-9]+)',
-            function (int $id) {
-                $controlador = new productoController();
-                $controlador->showEditView($id);
-            },
-            'get'
-        );
-        Route::add(
-            '/productos/editar/([0-9]+)',
-            function (int $id) {
-                $controlador = new productoController();
-                $controlador->updateProducts($id);
-            },
-            'post'
-        );
-
+            Route::add(
+                '/productos/destacar/([0-9]+)',
+                function (int $id) {
+                    $controlador = new productoController();
+                    $controlador->destacarProductos($id);
+                },
+                'get'
+            );
+        }
         Route::add(
             '/productos/([0-9]+)',
             function (int $id) {
@@ -109,34 +137,14 @@ class FrontController
             'get'
         );
 
-        Route::add(
-            '/productos/delete/([0-9]+)',
-            function (int $id) {
-                $controlador = new productoController();
-                $controlador->deleteProducts($id);
-            },
-            'get'
-        );
-
-        Route::add(
-            '/productos/destacar/([0-9]+)',
-            function (int $id) {
-                $controlador = new productoController();
-                $controlador->destacarProductos($id);
-            },
-            'get'
-        );
-
         Route::pathNotFound(
             function () {
-                $controller = new \Com\Daw2\Controllers\ErroresController();
-                $controller->error404();
+                header('Location: /');
             }
         );
         Route::methodNotAllowed(
             function () {
-                $controller = new \Com\Daw2\Controllers\ErroresController();
-                $controller->error405();
+                header('Location: /');
             }
         );
         Route::run();

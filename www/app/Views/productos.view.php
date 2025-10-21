@@ -11,14 +11,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-
+<?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd') { ?>
 <!-- ====== Botón añadir producto ====== -->
 <div class="container mt-4 d-flex justify-content-end">
     <a href="/productos/nuevo" class="btn btn-success">
         <i class="bi bi-plus-circle me-1"></i> Añadir producto
     </a>
 </div>
-
+<?php }?>
 <?php if (!empty($msjE)) { ?>
     <div class="container mt-3">
         <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">

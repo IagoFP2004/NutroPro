@@ -29,7 +29,11 @@
           </a>
           <!-- Usuario -->
           <a class="nav-link text-white me-2" href="#login" title="Iniciar sesión">
+              <?php if (isset($_SESSION['usuario'])) { ?>
+                  <i class="bi bi-box-arrow-right"></i>
+              <?php }else{?>
             <i class="bi bi-person-circle fs-5"></i>
+              <?php }?>
           </a>
           <!-- Hamburguesa -->
           <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -61,9 +65,13 @@
             <i class="bi bi-cart3 fs-5"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
           </a>
-          <a class="nav-link text-white" href="#login">
-            <i class="bi bi-person-circle fs-5"></i>
-          </a>
+            <a class="nav-link text-white me-2" href="<?php echo isset($_SESSION['usuario']) ? '/logout' : '/login'; ?>" title="Iniciar sesión">
+                <?php if (isset($_SESSION['usuario'])) { ?>
+                    <i class="bi bi-box-arrow-right"></i>
+                <?php }else{?>
+                    <i class="bi bi-person-circle fs-5"></i>
+                <?php }?>
+            </a>
         </div>
       </div>
 
