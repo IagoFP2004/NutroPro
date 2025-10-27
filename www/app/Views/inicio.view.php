@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <div class="card border-0 shadow-sm">
-                    <img src="assets/img/ChatGPT Image 9 oct 2025, 15_02_05.png" class="card-img-top" alt="Ropa de Gimnasio">
+                    <img src="assets/img/nano-banana-2025-10-03T23-20-21.png" class="card-img-top" alt="Ropa de Gimnasio">
                     <div class="card-body">
                         <h5 class="card-title">Ropa de Gimnasio</h5>
                         <p class="card-text">Ropa cómoda y resistente para tus entrenamientos diarios.</p>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <div class="card border-0 shadow-sm">
-                    <img src="assets/img/ChatGPT Image 20 oct 2025, 16_28_16.png" class="card-img-top" alt="Salud y Fitness">
+                    <img src="assets/img/generated-image-4ffa8d95-1f50-4feb-b41e-5e6bf0a1d9d6.png" class="card-img-top" alt="Salud y Fitness">
                     <div class="card-body">
                         <h5 class="card-title">Salud & Fitness</h5>
                         <p class="card-text">Accesorios y productos para mejorar tu bienestar integral.</p>

@@ -30,7 +30,7 @@
             </span>
           </a>
           <!-- Usuario -->
-          <a class="nav-link text-white me-2" href="#login" title="Iniciar sesión">
+          <a class="nav-link text-white me-2" href="/login" title="Iniciar sesión">
               <?php if (isset($_SESSION['usuario'])) { ?>
                   <i class="bi bi-box-arrow-right"></i>
               <?php }else{?>
@@ -54,14 +54,12 @@
         <div class="collapse navbar-collapse show">
           <ul class="navbar-nav ms-auto me-4">
             <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Sulpementos</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Ropa de Gimnasio</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Salud&Fitness</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Sobre Nosotros</a></li>
+            <li class="nav-item"><a class="nav-link" href="/suplementos">Sulpementos</a></li>
+            <li class="nav-item"><a class="nav-link" href="/ropa">Ropa de Gimnasio</a></li>
+            <li class="nav-item"><a class="nav-link" href="/salud">Salud&Fitness</a></li>
           </ul>
         </div>
-
-        <!-- Iconos separados del borde derecho -->
+        <?php if (isset($_SESSION['usuario'])){ ?>
         <div class="d-flex align-items-center gap-3 me-4">
           <a class="nav-link position-relative text-white" href="/carrito">
             <i class="bi bi-cart3 fs-5"></i>
@@ -69,6 +67,7 @@
               <?php echo isset($_SESSION['carrito_count']) ? $_SESSION['carrito_count'] : 0; ?>
             </span>
           </a>
+            <?php }?>
             <a class="nav-link text-white me-2" href="<?php echo isset($_SESSION['usuario']) ? '/logout' : '/login'; ?>" title="Iniciar sesión">
                 <?php if (isset($_SESSION['usuario'])) { ?>
                     <i class="bi bi-box-arrow-right"></i>

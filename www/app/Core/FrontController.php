@@ -80,11 +80,21 @@ class FrontController
         Route::add(
             '/productos',
             function () {
-                $controlador = new productoController();
+                $controlador = new ProductoController();
                 $controlador->showProductsView();
             },
             'get'
         );
+
+        Route::add(
+            '/suplementos',
+            function () {
+                $controlador = new ProductoController();
+                $controlador->showSuplements();
+            },
+            'get'
+        );
+
         if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd') {
             Route::add(
                 '/productos/nuevo',

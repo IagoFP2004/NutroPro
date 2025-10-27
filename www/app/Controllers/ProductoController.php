@@ -102,6 +102,26 @@ class   ProductoController extends BaseController
         $this->view->showViews(array('templates/header.view.php', 'productosAlta.view.php','templates/footer.view.php'), $data);
     }
 
+    public function showSuplements(): void
+    {
+        $modelo = new ProductoModel();
+
+        $data['proteinas'] = $modelo->getProductosProteinas();
+
+        if (isset($_SESSION['msjE'])) {
+            $data['msjE'] = $_SESSION['msjE'];
+            unset($_SESSION['msjE']);
+        }
+        if (isset($_SESSION['msjErr'])) {
+            $data['msjErr'] = $_SESSION['msjErr'];
+            unset($_SESSION['msjErr']);
+        }
+        $this->view->showViews(array('templates/header.view.php', 'suplementos.view.php','templates/footer.view.php'), $data);
+    }
+
+
+
+
     public function insertProducts(): void
     {
         $data = array(
