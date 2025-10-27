@@ -52,7 +52,7 @@
                             <h5 class="card-title"><?php echo $proteina['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $proteina['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $proteina['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $proteina['id_producto'] ?>" class="btn btn-success">Ver producto</a>
                                 <?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] === 'rwd'){ ?>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/editar/<?php echo $proteina['id_producto'] ?>" class="btn btn-primary">
                                     <i class="bi bi-pencil me-1"></i> Editar
@@ -84,7 +84,7 @@
                             <h5 class="card-title"><?php echo $ropa['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $ropa['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $ropa['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $ropa['id_producto'] ?>" class="btn btn-success">Ver producto</a>
                                 <?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] === 'rwd'){ ?>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/editar/<?php echo $ropa['id_producto'] ?>" class="btn btn-primary">
                                     <i class="bi bi-pencil me-1"></i> Editar
@@ -116,7 +116,7 @@
                             <h5 class="card-title"><?php echo $suplemento['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $suplemento['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $suplemento['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $suplemento['id_producto'] ?>" class="btn btn-success">Ver producto</a>
                                 <?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] === 'rwd'){ ?>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/editar/<?php echo $suplemento['id_producto'] ?>" class="btn btn-primary">
                                     <i class="bi bi-pencil me-1"></i> Editar
@@ -148,7 +148,7 @@
                             <h5 class="card-title"><?php echo $accesorio['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $accesorio['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $accesorio['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $accesorio['id_producto'] ?>" class="btn btn-success">Ver Producto</a>
                                 <?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] === 'rwd'){ ?>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/editar/<?php echo $accesorio['id_producto'] ?>" class="btn btn-primary">
                                     <i class="bi bi-pencil me-1"></i> Editar
@@ -179,7 +179,7 @@
                             <h5 class="card-title"><?php echo $snack['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $snack['precio']; ?>€</p>
                             <div class="mt-auto d-flex flex-column gap-2">
-                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $snack['id_producto'] ?>" class="btn btn-success">Añadir al carrito</a>
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $snack['id_producto'] ?>" class="btn btn-success">Ver Producto</a>
                                 <?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] === 'rwd'){ ?>
                                 <a href="<?php echo $_ENV['BASE_URL']?>productos/editar/<?php echo $snack['id_producto'] ?>" class="btn btn-primary">
                                     <i class="bi bi-pencil me-1"></i> Editar

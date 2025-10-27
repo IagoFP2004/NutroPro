@@ -23,9 +23,11 @@
         <!-- Iconos + hamburguesa a la derecha -->
         <div class="d-flex align-items-center ms-auto">
           <!-- Carrito -->
-          <a class="nav-link text-white position-relative me-2" href="#carrito" aria-label="Carrito">
+          <a class="nav-link text-white position-relative me-2" href="/carrito" aria-label="Carrito">
             <i class="bi bi-cart3 fs-5"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              <?php echo isset($_SESSION['carrito_count']) ? $_SESSION['carrito_count'] : 0; ?>
+            </span>
           </a>
           <!-- Usuario -->
           <a class="nav-link text-white me-2" href="#login" title="Iniciar sesión">
@@ -61,9 +63,11 @@
 
         <!-- Iconos separados del borde derecho -->
         <div class="d-flex align-items-center gap-3 me-4">
-          <a class="nav-link position-relative text-white" href="#carrito">
+          <a class="nav-link position-relative text-white" href="/carrito">
             <i class="bi bi-cart3 fs-5"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              <?php echo isset($_SESSION['carrito_count']) ? $_SESSION['carrito_count'] : 0; ?>
+            </span>
           </a>
             <a class="nav-link text-white me-2" href="<?php echo isset($_SESSION['usuario']) ? '/logout' : '/login'; ?>" title="Iniciar sesión">
                 <?php if (isset($_SESSION['usuario'])) { ?>
@@ -104,6 +108,3 @@
     });
   });
 </script>
-
-</body>
-</html>

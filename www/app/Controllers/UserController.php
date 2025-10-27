@@ -66,6 +66,11 @@ class UserController extends BaseController
         if(password_verify($_POST['password'], $login['password'])) {
             $_SESSION['usuario'] = $login;
             $_SESSION['usuario']['permisos'] = $this->getPermisos($login['id_rol']);
+            
+            // Inicializar contador del carrito
+            $carritoModel = new \Com\Daw2\Models\CarritoModel();
+            $_SESSION['carrito_count'] = $carritoModel->contarProductosCarrito($login['id_usuario']);
+            
             header('Location: /productos');
             exit;
         }else{

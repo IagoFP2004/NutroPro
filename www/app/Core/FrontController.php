@@ -2,6 +2,7 @@
 
 namespace Com\Daw2\Core;
 
+use Com\Daw2\Controllers\CarritoController;
 use Com\Daw2\Controllers\InicioController;
 use Com\Daw2\Controllers\ProductoController;
 use Com\Daw2\Controllers\UserController;
@@ -12,6 +13,12 @@ class FrontController
     public static function main()
     {
         session_start();
+        
+        // Inicializar contador del carrito si el usuario está logueado
+        if (isset($_SESSION['usuario']) && !isset($_SESSION['carrito_count'])) {
+            $carritoModel = new \Com\Daw2\Models\CarritoModel();
+            $_SESSION['carrito_count'] = $carritoModel->contarProductosCarrito($_SESSION['usuario']['id_usuario']);
+        }
         Route::add(
             '/',
             function () {
@@ -62,8 +69,10 @@ class FrontController
         Route::add(
             '/logout',
             function () {
+                $_SESSION = array();
                 session_destroy();
                 header('Location: /');
+                exit;
             },
             'get'
         );
@@ -137,11 +146,42 @@ class FrontController
             'get'
         );
 
-        Route::pathNotFound(
+        Route::add(
+            '/carrito',
             function () {
+                if (!isset($_SESSION['usuario'])) {
+                    $_SESSION['error'] = 'Debes iniciar sesión para ver el carrito';
+                    header('Location: /login');
+                    exit;
+                }
+                $controlador = new CarritoController();
+                $controlador->showCarrito();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/carrito/add',
+            function ():void {
+                if (!isset($_SESSION['usuario'])) {
+                    $_SESSION['error'] = 'Debes iniciar sesión para agregar al carrito';
+                    header('Location: /login');
+                    exit;
+                }
+                $controlador = new CarritoController();
+                $controlador->addCarrito();
+            },
+            'post'
+        );
+
+        Route::pathNotFound(function () {
+            if (!isset($_SESSION['usuario'])) {
+                header('Location: /login');
+            } else {
                 header('Location: /');
             }
-        );
+        });
+
         Route::methodNotAllowed(
             function () {
                 header('Location: /');
