@@ -15,7 +15,6 @@ class UserController extends BaseController
  public function register():void
  {
      $this->view->show('register.view.php');
-     var_dump($_SESSION);
  }
 
  public function doRegister():void

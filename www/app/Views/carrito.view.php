@@ -8,7 +8,7 @@
                     <h1 class="h2 fw-bold text-success mb-0">
                         <i class="bi bi-cart-fill me-2"></i> Tu carrito
                     </h1>
-                    <span class="badge bg-success fs-6"><?php echo $numeroItems ?> artículos</span>
+                    <span class="badge bg-success fs-6"><?php echo isset($_SESSION['carrito_count']) ? $_SESSION['carrito_count'] : 0; ?> artículos</span>
                 </div>
 
                 <?php if (!empty($productos)): ?>

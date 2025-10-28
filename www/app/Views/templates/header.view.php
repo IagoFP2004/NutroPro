@@ -55,7 +55,7 @@
           <ul class="navbar-nav ms-auto me-4">
             <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
               <li class="nav-item"><a class="nav-link " href="/productos">Productos</a></li>
-            <li class="nav-item"><a class="nav-link " href="/proteina&creatina">Sulpementos</a></li>
+            <li class="nav-item"><a class="nav-link " href="/proteina&creatina">Proteina & Creatina</a></li>
             <li class="nav-item"><a class="nav-link" href="/ropa">Ropa</a></li>
             <li class="nav-item"><a class="nav-link" href="/salud&fitness">Salud & Fitness</a></li>
           </ul>
@@ -84,7 +84,7 @@
         <ul class="navbar-nav ms-auto d-lg-none text-center">
           <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
             <li class="nav-item"><a class="nav-link " href="/productos">Productos</a></li>
-            <li class="nav-item"><a class="nav-link" href="/proteina&creatina">Suplementos</a></li>
+            <li class="nav-item"><a class="nav-link" href="/proteina&creatina">Proteina & Creatina</a></li>
           <li class="nav-item"><a class="nav-link" href="/ropa">Ropa</a></li>
           <li class="nav-item"><a class="nav-link" href="/salud&fitness">Salud & Fitness</a></li>
         </ul>
