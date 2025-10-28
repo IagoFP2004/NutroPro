@@ -54,18 +54,18 @@
 
                     <div class="d-flex justify-content-between mb-2">
                         <span>Subtotal</span>
-                        <span class="fw-semibold fs-5">75,97 €</span>
+                        <span class="fw-semibold fs-5"><?php echo $sumaTotal ?>€</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Envío</span>
-                        <span class="fw-semibold fs-5">4,50 €</span>
+                        <span class="fw-semibold fs-5"><?php echo $gastosEnvio ?> €</span>
                     </div>
 
                     <hr>
 
                     <div class="d-flex justify-content-between align-items-center fs-4 mb-4">
                         <span class="fw-bold">Total</span>
-                        <span class="fw-bold text-success">75,47 €</span>
+                        <span class="fw-bold text-success"><?php echo $total ?> €</span>
                     </div>
 
                     <div class="d-grid mb-3">

@@ -28,7 +28,10 @@ class CarritoController extends BaseController
         try {
             $data['numeroItems'] = $modelo->getAll();
             $data['productos'] = $modelo->getProductosCarrito($idUsuario);
-            
+            $data['sumaTotal'] = array_sum(array_column($data['productos'], 'precio'));
+            $data['gastosEnvio'] =4.50;
+            $data['total'] = $data['sumaTotal'] + $data['gastosEnvio'];
+
             error_log("Número de items: " . $data['numeroItems']);
             error_log("Productos encontrados: " . count($data['productos']));
             error_log("Mostrando vistas...");
