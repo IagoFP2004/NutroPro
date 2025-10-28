@@ -26,9 +26,9 @@
                 <div class="card border-0 shadow-sm">
                     <img src="assets/img/ChatGPT Image 9 oct 2025, 13_50_44.png" class="card-img-top" alt="Suplementos">
                     <div class="card-body">
-                        <h5 class="card-title">Suplementos</h5>
+                        <h5 class="card-title">Proteina y creatina</h5>
                         <p class="card-text">Proteínas, creatina y todo lo que necesitas para mejorar tu rendimiento.</p>
-                        <a href="#" class="btn btn-success">Ver productos</a>
+                        <a href="/proteina&creatina" class="btn btn-success">Ver productos</a>
                     </div>
                 </div>
             </div>
@@ -38,17 +38,17 @@
                     <div class="card-body">
                         <h5 class="card-title">Ropa de Gimnasio</h5>
                         <p class="card-text">Ropa cómoda y resistente para tus entrenamientos diarios.</p>
-                        <a href="#" class="btn btn-success">Ver productos</a>
+                        <a href="/ropa" class="btn btn-success">Ver productos</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
                 <div class="card border-0 shadow-sm">
-                    <img src="assets/img/generated-image-4ffa8d95-1f50-4feb-b41e-5e6bf0a1d9d6.png" class="card-img-top" alt="Salud y Fitness">
+                    <img src="assets/img/ChatGPT Image 20 oct 2025, 16_28_16.png" class="card-img-top" alt="Salud y Fitness">
                     <div class="card-body">
                         <h5 class="card-title">Salud & Fitness</h5>
                         <p class="card-text">Accesorios y productos para mejorar tu bienestar integral.</p>
-                        <a href="#" class="btn btn-success">Ver productos</a>
+                        <a href="/salud&fitness" class="btn btn-success">Ver productos</a>
                     </div>
                 </div>
             </div>

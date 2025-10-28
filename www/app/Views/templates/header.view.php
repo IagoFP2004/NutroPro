@@ -48,15 +48,16 @@
       <!-- ====== ESCRITORIO ====== -->
       <div class="d-none d-lg-flex w-100 align-items-center justify-content-between">
         <!-- Logo separado del borde -->
-        <a class="navbar-brand fw-bold text-white ms-4" href="#">NutroPro</a>
+        <a class="navbar-brand fw-bold text-white ms-4" href="/">NutroPro</a>
 
         <!-- Menú -->
         <div class="collapse navbar-collapse show">
           <ul class="navbar-nav ms-auto me-4">
             <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" href="/suplementos">Sulpementos</a></li>
-            <li class="nav-item"><a class="nav-link" href="/ropa">Ropa de Gimnasio</a></li>
-            <li class="nav-item"><a class="nav-link" href="/salud">Salud&Fitness</a></li>
+              <li class="nav-item"><a class="nav-link " href="/productos">Productos</a></li>
+            <li class="nav-item"><a class="nav-link " href="/proteina&creatina">Sulpementos</a></li>
+            <li class="nav-item"><a class="nav-link" href="/ropa">Ropa</a></li>
+            <li class="nav-item"><a class="nav-link" href="/salud&fitness">Salud & Fitness</a></li>
           </ul>
         </div>
         <?php if (isset($_SESSION['usuario'])){ ?>
@@ -81,11 +82,11 @@
       <!-- ====== MENÚ COLAPSABLE (solo móvil) ====== -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto d-lg-none text-center">
-          <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Suplementos</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Ropa de Gimnasio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Salud&Fitness</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Sobre Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link " href="/productos">Productos</a></li>
+            <li class="nav-item"><a class="nav-link" href="/proteina&creatina">Suplementos</a></li>
+          <li class="nav-item"><a class="nav-link" href="/ropa">Ropa</a></li>
+          <li class="nav-item"><a class="nav-link" href="/salud&fitness">Salud & Fitness</a></li>
         </ul>
       </div>
 

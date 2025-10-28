@@ -87,10 +87,28 @@ class FrontController
         );
 
         Route::add(
-            '/suplementos',
+            '/proteina&creatina',
             function () {
                 $controlador = new ProductoController();
                 $controlador->showSuplements();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/ropa',
+            function () {
+                $controlador = new ProductoController();
+                $controlador->showClothes();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/salud&fitness',
+            function () {
+                $controlador = new ProductoController();
+                $controlador->showSaludFitness();
             },
             'get'
         );

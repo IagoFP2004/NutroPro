@@ -74,6 +74,36 @@
             <?php } ?>
         </div>
     </section>
+    <section class="mb-5">
+        <h2 class="fw-bold mb-4 text-success text-center">Creatinas</h2>
+        <div class="row g-4">
+            <?php foreach ($creatinas as $creatina) { ?>
+                <div class="col-md-3 col-sm-6">
+                    <div class="card border-0 shadow-sm product-card h-100">
+                        <img src="<?php echo $_ENV['IMG_BASE'].$creatina['imagen_url']; ?>" class="card-img-top" alt="Proteína Whey">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title"><?php echo $creatina['nombre']; ?></h5>
+                            <p class="text-success fw-bold mb-3"><?php echo $creatina['precio']; ?>€</p>
+                            <div class="mt-auto d-flex flex-column gap-2">
+                                <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $creatina['id_producto'] ?>" class="btn btn-success">Ver producto</a>
+                                <?php if(isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] === 'rwd'){ ?>
+                                    <a href="<?php echo $_ENV['BASE_URL']?>productos/editar/<?php echo $creatina['id_producto'] ?>" class="btn btn-primary">
+                                        <i class="bi bi-pencil me-1"></i> Editar
+                                    </a>
+                                    <a href="<?php echo $_ENV['BASE_URL']?>productos/destacar/<?php echo $creatina['id_producto'] ?>" class="btn btn-warning">
+                                        <i class="bi bi-star me-1"></i> <?= ($creatina['destacado'] == 1) ? 'Quitar de destacados' : 'Destacar producto' ?>
+                                    </a>
+                                    <a href="<?php echo $_ENV['BASE_URL']?>productos/delete/<?php echo $creatina['id_producto'] ?>" class="btn btn-danger">
+                                        <i class="bi bi-trash"></i> Eliminar producto
+                                    </a>
+                                <?php }?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </section>
 </main>
 
 <!-- Bootstrap JS -->

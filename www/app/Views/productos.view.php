@@ -38,10 +38,10 @@
 <?php } ?>
 
 <!-- Contenido principal -->
-<main class="container mb-5 align-items-center pb-5>
+<main class="container mb-5 align-items-center pb-5">
 
     <!-- CATEGORÍA 1: Proteína & Creatina -->
-    <section class="mb-5">
+    <section class="mb-5 mt-4">
         <h2 class="fw-bold mb-4 text-success text-center">Proteína & Creatina</h2>
         <div class="row g-4">
             <?php foreach ($proteinas as $proteina) { ?>

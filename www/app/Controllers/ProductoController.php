@@ -18,7 +18,7 @@ class   ProductoController extends BaseController
 
         $modelo = new ProductoModel();
 
-        $data['proteinas'] = $modelo->getProductosProteinas();
+        $data['proteinas'] = $modelo->getProductosProteinasCreatina();
         $data['ropas'] = $modelo->getProductosRopa();
         $data['suplementos'] = $modelo->getProductosSuplementos();
         $data['accesorios'] = $modelo->getProductosAccesorios();
@@ -107,6 +107,7 @@ class   ProductoController extends BaseController
         $modelo = new ProductoModel();
 
         $data['proteinas'] = $modelo->getProductosProteinas();
+        $data['creatinas'] = $modelo->getProductosCreatina();
 
         if (isset($_SESSION['msjE'])) {
             $data['msjE'] = $_SESSION['msjE'];
@@ -119,8 +120,41 @@ class   ProductoController extends BaseController
         $this->view->showViews(array('templates/header.view.php', 'suplementos.view.php','templates/footer.view.php'), $data);
     }
 
+    public function showClothes(): void
+    {
+        $modelo = new ProductoModel();
 
+        $data['ropas'] = $modelo->getProductosRopa();
 
+        if (isset($_SESSION['msjE'])) {
+            $data['msjE'] = $_SESSION['msjE'];
+            unset($_SESSION['msjE']);
+        }
+        if (isset($_SESSION['msjErr'])) {
+            $data['msjErr'] = $_SESSION['msjErr'];
+            unset($_SESSION['msjErr']);
+        }
+        $this->view->showViews(array('templates/header.view.php', 'ropa.view.php','templates/footer.view.php'), $data);
+    }
+
+    public function showSaludFitness(): void
+    {
+        $modelo = new ProductoModel();
+
+        $data['suplementos'] = $modelo->getProductosSuplementos();
+        $data['accesorios'] = $modelo->getProductosAccesorios();
+        $data['snacks'] = $modelo->getProductosSnacks();
+
+        if (isset($_SESSION['msjE'])) {
+            $data['msjE'] = $_SESSION['msjE'];
+            unset($_SESSION['msjE']);
+        }
+        if (isset($_SESSION['msjErr'])) {
+            $data['msjErr'] = $_SESSION['msjErr'];
+            unset($_SESSION['msjErr']);
+        }
+        $this->view->showViews(array('templates/header.view.php', 'saludFitness.view.php','templates/footer.view.php'), $data);
+    }
 
     public function insertProducts(): void
     {
