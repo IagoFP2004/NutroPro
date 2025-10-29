@@ -1,3 +1,8 @@
+# Primeros pasos
+Una vez que el repositorio es clonado
+```zsh
+sudo chmod -R 777 NutroPro
+```
 # Docker: PHP & MySQL
 
 ## php
@@ -102,7 +107,6 @@ La instalación se hace en línea de comandos:
 docker-compose up -d
 ```
 Puedes verificar la instalación accediendo a: [http://localhost/info.php](http://localhost/info.php)
-
 ## Comandos disponibles
 
 Una vez instalado, se pueden utilizar los siguiente comandos:

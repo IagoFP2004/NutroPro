@@ -82,6 +82,7 @@ CREATE TABLE IF NOT EXISTS `carrito` (
   `id_producto`   INT DEFAULT NULL,
   `cantidad`      INT NOT NULL DEFAULT 1,
   `fecha_agregado` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `imagen_url`    VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`id_carrito`),
   KEY `idx_carrito_usuario` (`id_usuario`),
   KEY `idx_carrito_producto` (`id_producto`)
