@@ -53,11 +53,11 @@
         <!-- Menú -->
         <div class="collapse navbar-collapse show">
           <ul class="navbar-nav ms-auto me-4">
-            <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
-              <li class="nav-item"><a class="nav-link " href="/productos">Productos</a></li>
-            <li class="nav-item"><a class="nav-link " href="/proteina&creatina">Proteina & Creatina</a></li>
-            <li class="nav-item"><a class="nav-link" href="/ropa">Ropa</a></li>
-            <li class="nav-item"><a class="nav-link" href="/salud&fitness">Salud & Fitness</a></li>
+              <li class="nav-item"><a class="nav-link <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] ? 'active' : ''; ?>" href="/">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'productos' ? 'active' : ''; ?>" href="/productos">Productos</a></li>
+            <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'proteina&creatina' ? 'active' : ''; ?> " href="/proteina&creatina">Proteina & Creatina</a></li>
+            <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'ropa' ? 'active' : ''; ?>" href="/ropa">Ropa</a></li>
+            <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'salud&fitness' ? 'active' : ''; ?>" href="/salud&fitness">Salud & Fitness</a></li>
           </ul>
         </div>
         <?php if (isset($_SESSION['usuario'])){ ?>
