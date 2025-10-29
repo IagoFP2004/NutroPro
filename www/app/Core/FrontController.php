@@ -13,12 +13,7 @@ class FrontController
     public static function main()
     {
         session_start();
-        
-        // Inicializar contador del carrito si el usuario está logueado
-        if (isset($_SESSION['usuario']) && !isset($_SESSION['carrito_count'])) {
-            $carritoModel = new \Com\Daw2\Models\CarritoModel();
-            $_SESSION['carrito_count'] = $carritoModel->contarProductosCarrito($_SESSION['usuario']['id_usuario']);
-        }
+
         Route::add(
             '/',
             function () {
@@ -27,6 +22,8 @@ class FrontController
             },
             'get'
         );
+
+        //Rutas solo para cuando el usuario esta sin loguear
         if (!isset($_SESSION['usuario'])){
             Route::add(
                 '/login',
@@ -66,53 +63,7 @@ class FrontController
             );
         }
 
-        Route::add(
-            '/logout',
-            function () {
-                $_SESSION = array();
-                session_destroy();
-                header('Location: /');
-                exit;
-            },
-            'get'
-        );
-
-        Route::add(
-            '/productos',
-            function () {
-                $controlador = new ProductoController();
-                $controlador->showProductsView();
-            },
-            'get'
-        );
-
-        Route::add(
-            '/proteina&creatina',
-            function () {
-                $controlador = new ProductoController();
-                $controlador->showSuplements();
-            },
-            'get'
-        );
-
-        Route::add(
-            '/ropa',
-            function () {
-                $controlador = new ProductoController();
-                $controlador->showClothes();
-            },
-            'get'
-        );
-
-        Route::add(
-            '/salud&fitness',
-            function () {
-                $controlador = new ProductoController();
-                $controlador->showSaludFitness();
-            },
-            'get'
-        );
-
+        //Rutas para el administrador
         if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd') {
             Route::add(
                 '/productos/nuevo',
@@ -165,6 +116,84 @@ class FrontController
                 'get'
             );
         }
+        //Rutas que necesitan que el usuario este logueado
+        if (isset($_SESSION['usuario'])) {
+            Route::add(
+                '/carrito',
+                function () {
+                    if (!isset($_SESSION['usuario'])) {
+                        $_SESSION['error'] = 'Debes iniciar sesión para ver el carrito';
+                        header('Location: /login');
+                        exit;
+                    }
+                    $controlador = new CarritoController();
+                    $controlador->showCarrito();
+                },
+                'get'
+            );
+
+            Route::add(
+                '/carrito/add',
+                function ():void {
+                    if (!isset($_SESSION['usuario'])) {
+                        $_SESSION['error'] = 'Debes iniciar sesión para agregar al carrito';
+                        header('Location: /login');
+                        exit;
+                    }
+                    $controlador = new CarritoController();
+                    $controlador->addCarrito();
+                },
+                'post'
+            );
+        }
+
+        Route::add(
+            '/logout',
+            function () {
+                $_SESSION = array();
+                session_destroy();
+                header('Location: /');
+                exit;
+            },
+            'get'
+        );
+
+        Route::add(
+            '/productos',
+            function () {
+                $controlador = new ProductoController();
+                $controlador->showProductsView();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/proteina&creatina',
+            function () {
+                $controlador = new ProductoController();
+                $controlador->showSuplements();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/ropa',
+            function () {
+                $controlador = new ProductoController();
+                $controlador->showClothes();
+            },
+            'get'
+        );
+
+        Route::add(
+            '/salud&fitness',
+            function () {
+                $controlador = new ProductoController();
+                $controlador->showSaludFitness();
+            },
+            'get'
+        );
+
         Route::add(
             '/productos/([0-9]+)',
             function (int $id) {
@@ -174,33 +203,11 @@ class FrontController
             'get'
         );
 
-        Route::add(
-            '/carrito',
-            function () {
-                if (!isset($_SESSION['usuario'])) {
-                    $_SESSION['error'] = 'Debes iniciar sesión para ver el carrito';
-                    header('Location: /login');
-                    exit;
-                }
-                $controlador = new CarritoController();
-                $controlador->showCarrito();
-            },
-            'get'
-        );
-
-        Route::add(
-            '/carrito/add',
-            function ():void {
-                if (!isset($_SESSION['usuario'])) {
-                    $_SESSION['error'] = 'Debes iniciar sesión para agregar al carrito';
-                    header('Location: /login');
-                    exit;
-                }
-                $controlador = new CarritoController();
-                $controlador->addCarrito();
-            },
-            'post'
-        );
+        // Inicializar contador del carrito si el usuario está logueado
+        if (isset($_SESSION['usuario']) && !isset($_SESSION['carrito_count'])) {
+            $carritoModel = new \Com\Daw2\Models\CarritoModel();
+            $_SESSION['carrito_count'] = $carritoModel->contarProductosCarrito($_SESSION['usuario']['id_usuario']);
+        }
 
         Route::pathNotFound(function () {
             if (!isset($_SESSION['usuario'])) {
