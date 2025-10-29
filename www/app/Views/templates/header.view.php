@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NutroPro</title>
+    <title>NutroPro</title>
+    <link rel="icon" type="image" href="<?php echo $_ENV['IMG_BASE'] ?>logo.png">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <!-- Bootstrap Icons -->
@@ -18,9 +19,13 @@
       <!-- ====== MÓVIL ====== -->
       <div class="d-flex d-lg-none w-100 align-items-center justify-content-between py-1">
         <!-- Logo a la izquierda -->
-          <a class="navbar-brand fw-bold text-white" href="/">NutroPro</a>
+          <div class="d-flex align-items-center">
+              <img src="<?php echo $_ENV['IMG_BASE']?>logo.png" alt="Logo" style="height: 40px; width: auto;">
+              <a class="navbar-brand fw-bold text-white ms-2" href="/">NutroPro</a>
+          </div>
 
-        <!-- Iconos + hamburguesa a la derecha -->
+
+          <!-- Iconos + hamburguesa a la derecha -->
         <div class="d-flex align-items-center ms-auto">
           <!-- Carrito -->
           <a class="nav-link text-white position-relative me-2" href="/carrito" aria-label="Carrito">
@@ -48,9 +53,13 @@
       <!-- ====== ESCRITORIO ====== -->
       <div class="d-none d-lg-flex w-100 align-items-center justify-content-between">
         <!-- Logo separado del borde -->
-        <a class="navbar-brand fw-bold text-white ms-4" href="/">NutroPro</a>
+          <div class="d-flex align-items-center">
+              <img src="<?php echo $_ENV['IMG_BASE']?>logo.png" alt="Logo" style="height: 40px; width: auto;">
+              <a class="navbar-brand fw-bold text-white ms-2" href="/">NutroPro</a>
+          </div>
 
-        <!-- Menú -->
+
+          <!-- Menú -->
         <div class="collapse navbar-collapse show">
           <ul class="navbar-nav ms-auto me-4">
               <li class="nav-item"><a class="nav-link <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] ? 'active' : ''; ?>" href="/">Inicio</a></li>
