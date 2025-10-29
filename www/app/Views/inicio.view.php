@@ -68,7 +68,7 @@
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title"><?php echo $producto['nombre'] ?></h5>
                         <p class="card-text text-success fw-bold"><?php echo $producto['precio'] ?>€</p>
-                        <a href="/productos/<?php echo $producto['id_producto'] ?>" class="btn btn-success mt-auto">ver producto</a>
+                        <a href="/productos/<?php echo $producto['id_producto'] ?>" class="btn btn-success mt-auto">Ver producto</a>
                     </div>
                 </div>
             </div>
