@@ -133,6 +133,20 @@ class FrontController
             );
 
             Route::add(
+                '/carrito',
+                function () {
+                    if (!isset($_SESSION['usuario'])) {
+                        $_SESSION['error'] = 'Debes iniciar sesión para ver el carrito';
+                        header('Location: /login');
+                        exit;
+                    }
+                    $controlador = new CarritoController();
+                    $controlador->pay();
+                },
+                'post'
+            );
+
+            Route::add(
                 '/carrito/add',
                 function ():void {
                     if (!isset($_SESSION['usuario'])) {

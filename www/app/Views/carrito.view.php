@@ -94,9 +94,11 @@
                     </form>
 
                     <div class="d-grid mb-3">
-                        <button class="btn btn-success btn-lg py-3">
-                            <i class="bi bi-lock-fill me-2"></i> Finalizar compra
-                        </button>
+                        <form action="/carrito" method="post">
+                            <button type="submit" class="btn btn-success btn-lg py-3">
+                                <i class="bi bi-lock-fill me-2"></i>Finalizar compra
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

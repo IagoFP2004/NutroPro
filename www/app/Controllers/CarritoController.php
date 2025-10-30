@@ -77,4 +77,9 @@ class CarritoController extends BaseController
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     }
+
+    public function pay():void
+    {
+        var_dump($_POST);
+    }
 }
