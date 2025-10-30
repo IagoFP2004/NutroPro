@@ -34,4 +34,11 @@ class UserModel extends BaseDbModel
             'id_rol' => $data['id_rol']
         ]);
     }
+    public function getByPhone(string $phone): array | false
+    {
+        $sql = "SELECT * FROM usuarios WHERE telefono = :phone";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['phone' => $phone]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 }

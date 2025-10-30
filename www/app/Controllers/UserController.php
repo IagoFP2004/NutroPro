@@ -104,6 +104,7 @@ class UserController extends BaseController
     public function checkErrors(array $data):array
     {
         $errores = [];
+        $modelo = new UserModel();
 
         if (empty($data['nombre'])) {
             $errores['nombre'] = 'El nombre es requerido';
@@ -113,6 +114,8 @@ class UserController extends BaseController
             $errores['email'] = 'El email es requerido';
         }else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errores['email'] = 'El email no es valido';
+        }else if ($modelo->getByEmail($data['email']) !== false) {
+            $errores['email'] = 'El email ya existe';
         }
 
         if (empty($data['direccion'])){
@@ -121,6 +124,8 @@ class UserController extends BaseController
 
         if (empty($data['telefono'])){
             $errores['telefono'] = 'El telefono es requerido';
+        }else if ($modelo->getByPhone($data['telefono']) !== false) {
+            $errores['telefono'] = 'El telefono ya existe';
         }
 
         if (empty($data['password'])) {
