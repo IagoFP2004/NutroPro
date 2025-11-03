@@ -11,14 +11,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-<?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd') { ?>
 <!-- ====== Botón añadir producto ====== -->
 <div class="container mt-4 d-flex justify-content-end">
+    <button class="btn btn-success" id="filtros" >
+        <i class="bi bi-filter"></i>Filtros
+    </button>
+    <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd') { ?>
     <a href="/productos/nuevo" class="btn btn-success">
         <i class="bi bi-plus-circle me-1"></i> Añadir producto
     </a>
+    <?php }?>
 </div>
-<?php }?>
 <?php if (!empty($msjE)) { ?>
     <div class="container mt-3">
         <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
@@ -38,7 +41,7 @@
 <?php } ?>
 
 <!-- Contenido principal -->
-<main class="container mb-5 align-items-center pb-5">
+<main class="container mb-5 align-items-center pb-5" id="contenedorMain" >
 
     <!-- CATEGORÍA 1: Proteína & Creatina -->
     <section class="mb-5 mt-4">
@@ -203,5 +206,6 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src='/assets/js/filtros.js'></script>
 </body>
 </html>
