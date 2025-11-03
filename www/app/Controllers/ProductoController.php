@@ -18,11 +18,31 @@ class   ProductoController extends BaseController
 
         $modelo = new ProductoModel();
 
-        $data['proteinas'] = $modelo->getProductosProteinasCreatina();
-        $data['ropas'] = $modelo->getProductosRopa();
-        $data['suplementos'] = $modelo->getProductosSuplementos();
-        $data['accesorios'] = $modelo->getProductosAccesorios();
-        $data['snacks'] = $modelo->getProductosSnacks();
+        $filtros = [
+            'categoria' => filter_input(INPUT_GET, 'categoria', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? '',
+            'precio' => filter_input(INPUT_GET, 'precio', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? '',
+            'busqueda' => filter_input(INPUT_GET, 'busqueda', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? ''
+        ];
+
+        $hayFiltros = !empty($filtros['categoria']) || !empty($filtros['precio']) || !empty($filtros['busqueda']);
+
+        if ($hayFiltros) {
+            $productosFiltrados = $modelo->getProductosFiltrados($filtros);
+            $data['proteinas'] = $productosFiltrados['proteinas'];
+            $data['ropas'] = $productosFiltrados['ropas'];
+            $data['suplementos'] = $productosFiltrados['suplementos'];
+            $data['accesorios'] = $productosFiltrados['accesorios'];
+            $data['snacks'] = $productosFiltrados['snacks'];
+        } else {
+            $data['proteinas'] = $modelo->getProductosProteinasCreatina();
+            $data['ropas'] = $modelo->getProductosRopa();
+            $data['suplementos'] = $modelo->getProductosSuplementos();
+            $data['accesorios'] = $modelo->getProductosAccesorios();
+            $data['snacks'] = $modelo->getProductosSnacks();
+        }
+
+        $data['filtros'] = $filtros;
+        $data['hayFiltros'] = $hayFiltros;
 
         if (isset($_SESSION['msjE'])) {
             $data['msjE'] = $_SESSION['msjE'];

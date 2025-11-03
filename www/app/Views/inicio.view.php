@@ -58,24 +58,51 @@
     <!-- Sección de productos destacados -->
     <section class="mb-5">
         <h2 class="mb-4 fw-bold text-center">Productos Destacados</h2>
+
         <div class="row">
-            <?php foreach ($productos as $producto) { ?>
-            <?php if ($producto['destacado']== 1){ ?>
-            <!-- Productos Destacados -->
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <img src="<?php echo $_ENV['IMG_BASE'].$producto['imagen_url'] ?>" class="card-img-top" alt="Creatina">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title"><?php echo $producto['nombre'] ?></h5>
-                        <p class="card-text text-success fw-bold"><?php echo $producto['precio'] ?>€</p>
-                        <a href="/productos/<?php echo $producto['id_producto'] ?>" class="btn btn-success mt-auto">Ver producto</a>
+            <?php $hayDestacados = false; ?>
+
+            <?php foreach ($productos as $producto): ?>
+                <?php if (!empty($producto['destacado']) && (int)$producto['destacado'] === 1): ?>
+                    <?php $hayDestacados = true; ?>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <img
+                                    src="<?php echo ($_ENV['IMG_BASE'] ?? '').($producto['imagen_url'] ?? ''); ?>"
+                                    class="card-img-top"
+                                    alt="<?php echo htmlspecialchars($producto['nombre'] ?? 'Producto'); ?>"
+                            >
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title mb-2"><?php echo htmlspecialchars($producto['nombre'] ?? ''); ?></h5>
+                                <p class="card-text text-success fw-bold mb-3">
+                                    <?php echo htmlspecialchars($producto['precio'] ?? ''); ?>€
+                                </p>
+                                <a href="/productos/<?php echo urlencode($producto['id_producto'] ?? ''); ?>"
+                                   class="btn btn-success mt-auto">Ver producto</a>
+
+                                <?php if (!empty($_SESSION['usuario']) && ($_SESSION['usuario']['permisos'] ?? '') === 'rwd'): ?>
+                                    <a href="<?php echo ($_ENV['BASE_URL'] ?? ''); ?>productos/destacar/<?php echo urlencode($producto['id_producto'] ?? ''); ?>"
+                                       class="btn btn-warning mt-2">
+                                        <i class="bi bi-star me-1"></i> Quitar de destacado
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php if (!$hayDestacados): ?>
+                <div class="col-12">
+                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+                        <i class="bi bi-info-circle me-2"></i>
+                        No hay productos destacados
                     </div>
                 </div>
-            </div>
-        <?php }?>
-            <?php }?>
+            <?php endif; ?>
         </div>
     </section>
+
     <!-- Sección de beneficios -->
     <section class="py-5 bg-light">
         <div class="container">

@@ -46,6 +46,7 @@
     <!-- CATEGORÍA 1: Proteína & Creatina -->
     <section class="mb-5 mt-4">
         <h2 class="fw-bold mb-4 text-success text-center">Proteína & Creatina</h2>
+        <?php if (!empty($proteinas)){ ?>
         <div class="row g-4">
             <?php foreach ($proteinas as $proteina) { ?>
                 <div class="col-md-3 col-sm-6">
@@ -73,11 +74,18 @@
                 </div>
             <?php } ?>
         </div>
+        <?php }else{ ?>
+            <div class="alert alert-warning">
+                <i class="bi bi-info-circle me-2"></i>
+                No existen productos con estas caracteristicas en esta categoria
+            </div>
+        <?php }?>
     </section>
 
     <!-- CATEGORÍA 2: Ropa de Gimnasio -->
     <section class="mb-5">
         <h2 class="fw-bold mb-4 mt-4 text-success text-center">Ropa de Gimnasio</h2>
+        <?php if(!empty($ropas)) { ?>
         <div class="row g-4">
             <?php foreach ($ropas as $ropa) { ?>
                 <div class="col-md-3 col-sm-6">
@@ -105,11 +113,19 @@
                 </div>
             <?php } ?>
         </div>
+        <?php }else{ ?>
+        <div class="alert alert-warning">
+            <i class="bi bi-info-circle me-2"></i>
+            No existen productos con estas caracteristicas en esta categoria
+        </div>
+        <?php }?>
     </section>
 
     <!-- CATEGORÍA 3: Suplementos -->
     <section class="mb-5">
         <h2 class="fw-bold mb-4 mt-4 text-success text-center">Suplementos</h2>
+        <?php if(!empty($suplementos)) { ?>
+
         <div class="row g-4">
             <?php foreach ($suplementos as $suplemento) { ?>
                 <div class="col-md-3 col-sm-6">
@@ -137,11 +153,18 @@
                 </div>
             <?php } ?>
         </div>
+        <?php }else{ ?>
+            <div class="alert alert-warning">
+                <i class="bi bi-info-circle me-2"></i>
+                No existen productos con estas caracteristicas en esta categoria
+            </div>
+        <?php }?>
     </section>
 
     <!-- CATEGORÍA 4: Accesorios -->
     <section>
         <h2 class="fw-bold mb-4 mt-4 text-success text-center">Accesorios</h2>
+        <?php if(!empty($accesorios)) { ?>
         <div class="row g-4">
             <?php foreach ($accesorios as $accesorio) { ?>
                 <div class="col-md-3 col-sm-6">
@@ -169,10 +192,17 @@
                 </div>
             <?php } ?>
         </div>
+        <?php }else{ ?>
+            <div class="alert alert-warning">
+                <i class="bi bi-info-circle me-2"></i>
+                No existen productos con estas caracteristicas en esta categoria
+            </div>
+        <?php }?>
     </section>
 
     <section class="mb-5">
         <h2 class="fw-bold mb-4 mt-4 text-success text-center">SNACKS</h2>
+        <?php if(!empty($snacks)) { ?>
         <div class="row g-4">
             <?php foreach ($snacks as $snack) { ?>
                 <div class="col-md-3 col-sm-6">
@@ -200,6 +230,12 @@
                 </div>
             <?php } ?>
         </div>
+        <?php }else{ ?>
+            <div class="alert alert-warning">
+                <i class="bi bi-info-circle me-2"></i>
+                No existen productos con estas caracteristicas en esta categoria
+            </div>
+        <?php }?>
     </section>
 
 </main>

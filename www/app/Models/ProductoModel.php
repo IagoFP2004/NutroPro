@@ -14,15 +14,81 @@ class ProductoModel extends BaseDbModel
         return $stmt->fetchAll();
     }
 
+    public function getProductosFiltrados(array $filtros): array
+    {
+        $sql = "SELECT * FROM productos WHERE 1=1";
+        $params = [];
+
+        if (!empty($filtros['categoria'])) {
+            $sql .= " AND id_categoria = :categoria";
+            $params['categoria'] = (int)$filtros['categoria'];
+        }
+
+        if (!empty($filtros['busqueda'])) {
+            $sql .= " AND (nombre LIKE :busqueda OR descripcion LIKE :busqueda)";
+            $params['busqueda'] = '%' . $filtros['busqueda'] . '%';
+        }
+
+        if (!empty($filtros['precio'])) {
+            switch ($filtros['precio']) {
+                case '0-20':
+                    $sql .= " AND precio BETWEEN 0 AND 20";
+                    break;
+                case '20-40':
+                    $sql .= " AND precio BETWEEN 20 AND 40";
+                    break;
+                case '40+':
+                    $sql .= " AND precio > 40";
+                    break;
+            }
+        }
+
+        $sql .= " ORDER BY id_categoria, nombre";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+        $productos = $stmt->fetchAll();
+
+        $resultado = [
+            'proteinas' => [],
+            'ropas' => [],
+            'suplementos' => [],
+            'accesorios' => [],
+            'snacks' => []
+        ];
+
+        foreach ($productos as $producto) {
+            switch ($producto['id_categoria']) {
+                case 1:
+                    $resultado['proteinas'][] = $producto;
+                    break;
+                case 2:
+                    $resultado['suplementos'][] = $producto;
+                    break;
+                case 3:
+                    $resultado['snacks'][] = $producto;
+                    break;
+                case 4:
+                    $resultado['ropas'][] = $producto;
+                    break;
+                case 5:
+                    $resultado['accesorios'][] = $producto;
+                    break;
+            }
+        }
+
+        return $resultado;
+    }
+
     public function getProductosProteinasCreatina(): array
     {
-        $sql = "SELECT * FROM productos WHERE id_categoria = 1";
+        $sql = "SELECT * FROM productos WHERE id_categoria = 1 AND nombre LIKE '%protein%' ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function getProductosProteinas(): array
+    public function getProductosProteinas(array $data): array
     {
         $sql = "SELECT * FROM productos WHERE id_categoria = 1 AND nombre LIKE '%protein%'";
         $stmt = $this->pdo->prepare($sql);
