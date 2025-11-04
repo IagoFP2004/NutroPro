@@ -4,6 +4,7 @@ namespace Com\Daw2\Controllers;
 
 use Com\Daw2\Core\BaseController;
 use Com\Daw2\Models\CarritoModel;
+use Com\Daw2\Models\DetallePedidoModel;
 use Com\Daw2\Models\PedidoModel;
 
 class CarritoController extends BaseController
@@ -95,6 +96,7 @@ class CarritoController extends BaseController
         $modelo = new CarritoModel();
         $pedidoController = new PedidosController();
         $mailController = new MailController();
+        $detallePedidoModel = new DetallePedidoModel();
 
         $idUsuario = $_SESSION['usuario']['id_usuario'];
 
@@ -118,18 +120,11 @@ class CarritoController extends BaseController
             }
             
             if ($mailController->enviarCorreo($email, 'Confirmación de pedido - NutroPro', 'Gracias por su compra en NutroPro, su pedido está en marcha!')) {
-                // 1. Crear el pedido y obtener su ID
                 $idPedido = $pedidoController->nuevoPedido($idUsuario, $data['total']);
-                
                 if ($idPedido !== false) {
-                    // 2. Crear los detalles del pedido desde el carrito
-                    $detallePedidoModel = new \Com\Daw2\Models\DetallePedidoModel();
                     $detallePedidoModel->insertDetallePedido($idPedido, $idUsuario);
-                    
-                    // 3. Vaciar el carrito
                     $this->deleteAllItemsUser($idUsuario);
                     $_SESSION['carrito_count'] = 0;
-                    
                     $_SESSION['msjE'] = 'Compra realizada con éxito. Recibirás un correo de confirmación.';
                 } else {
                     $_SESSION['msjErr'] = 'Error al crear el pedido';
@@ -138,7 +133,7 @@ class CarritoController extends BaseController
                 header('Location: /carrito');
                 exit;
             } else {
-                $_SESSION['msjErr'] = 'Error al enviar el correo. Revisa la configuración SMTP en el .env';
+                $_SESSION['msjErr'] = 'Error al enviar el correo. No fue posible hacer el envio';
                 header('Location: /carrito');
                 exit;
             }

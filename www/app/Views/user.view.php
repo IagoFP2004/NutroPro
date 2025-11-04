@@ -74,7 +74,7 @@
                     <tr>
                         <td>NP-<?php echo $pedido['id_pedido'] ?></td>
                         <td><?php echo $pedido['fecha_pedido'] ?>></td>
-                        <td><span class="badge text-bg-warning"><?php echo $pedido['estado'] ?>></span></td>
+                        <td><span class="badge text-bg-<?php echo  ($pedido['estado'] == 'cancelado') ? 'danger' : (($pedido['estado'] == 'pendiente') ? 'warning' : (($pedido['estado'] == 'entregado') ? 'success' : 'secondary'));?>"><?php echo $pedido['estado'] ?></span></td>
                         <td><strong><?php echo $pedido['total'] ?> €</strong></td>
                         <td><a href="/detalle-pedido/<?php echo $pedido['id_pedido'] ?>" class="btn btn-outline-success btn-sm">Ver</a></td>
                     </tr>

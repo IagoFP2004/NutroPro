@@ -170,7 +170,7 @@ class UserController extends BaseController
                 'password' => $usuarioActual['password']
             ];
 
-            $editado = $modelo->editInfoUser($datosUpdate);
+            $editado = $modelo->editInfoUser($datosUpdate, $idUsuario);
 
             if ($editado !== false) {
                 // Actualizar datos en sesión
