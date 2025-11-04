@@ -139,10 +139,13 @@ class UserController extends BaseController
     public function showUserData(int $idUsuario):void
     {
         $modelo = new UserModel();
+        $pedidoModel = new \Com\Daw2\Models\PedidoModel();
 
         $user = $modelo->getById($idUsuario);
+        $pedidos = $pedidoModel->getPedidosByIdUsuario($idUsuario);
 
         $data['usuario'] = $user;
+        $data['pedidos'] = is_array($pedidos) ? $pedidos : [];
 
         $this->view->showViews(array('templates/header.view.php', 'user.view.php','templates/footer.view.php'), $data);
     }
@@ -150,14 +153,33 @@ class UserController extends BaseController
     public function editUSer(int $idUsuario):void
     {
         $modelo = new UserModel();
-
+        $usuarioActual = $modelo->getById($idUsuario);
+        
+        // Validar errores
         $errores = $this->checkEditErrors($_POST, $idUsuario);
+
         if (empty($errores)) {
-            $editado = $modelo->editInfoUser($_POST, $idUsuario);
+            // Preparar datos para actualizar
+            $datosUpdate = [
+                'idUsuario' => $idUsuario,
+                'nombre' => $_POST['nombre'],
+                'email' => $_POST['email'],
+                'direccion' => $_POST['direccion'],
+                'telefono' => $_POST['telefono'],
+                'id_rol' => $usuarioActual['id_rol'],
+                'password' => $usuarioActual['password']
+            ];
+
+            $editado = $modelo->editInfoUser($datosUpdate);
+
             if ($editado !== false) {
-                if ($modelo->getById($idUsuario) !== $_POST) {
-                    $_SESSION['msjE'] = 'Tu información ha sido actualizada correctamente';
-                }
+                // Actualizar datos en sesión
+                $_SESSION['usuario']['nombre'] = $datosUpdate['nombre'];
+                $_SESSION['usuario']['email'] = $datosUpdate['email'];
+                $_SESSION['usuario']['direccion'] = $datosUpdate['direccion'];
+                $_SESSION['usuario']['telefono'] = $datosUpdate['telefono'];
+                
+                $_SESSION['msjE'] = 'Tu información ha sido actualizada correctamente';
                 header('Location: /micuenta/' . $idUsuario);
                 exit;
             } else {
@@ -167,9 +189,14 @@ class UserController extends BaseController
             }
 
         } else {
+            // Hay errores - mostrar formulario con errores
+            $pedidoModel = new \Com\Daw2\Models\PedidoModel();
+            
             $data['errores'] = $errores;
             $data['input'] = $_POST;
-            $data['usuario'] = $modelo->getById($idUsuario);
+            $data['usuario'] = $usuarioActual;
+            $data['pedidos'] = $pedidoModel->getPedidosByIdUsuario($idUsuario);
+            
             $this->view->showViews(array('templates/header.view.php', 'user.view.php','templates/footer.view.php'), $data);
         }
     }
@@ -191,7 +218,7 @@ class UserController extends BaseController
             // Verificar si el email ya existe para OTRO usuario
             $existeEmail = $modelo->getByEmail($data['email']);
             if ($existeEmail !== false && $existeEmail['id_usuario'] != $idUsuario) {
-                $errores['email'] = 'Este email ya está en uso por otro usuario';
+                $errores['email'] = 'Este email ya está en uso';
             }
         }
 
@@ -202,10 +229,10 @@ class UserController extends BaseController
         if (empty($data['telefono'])){
             $errores['telefono'] = 'El teléfono es requerido';
         } else {
-            $telefonoLimpio = str_replace('+34 ', '', $data['telefono']);
-            $existeTelefono = $modelo->getByPhone($telefonoLimpio);
+            // Verificar si el teléfono ya existe para OTRO usuario
+            $existeTelefono = $modelo->getByPhone($data['telefono']);
             if ($existeTelefono !== false && $existeTelefono['id_usuario'] != $idUsuario) {
-                $errores['telefono'] = 'Este teléfono ya está en uso por otro usuario';
+                $errores['telefono'] = 'Este teléfono ya está en uso';
             }
         }
 

@@ -118,10 +118,23 @@ class CarritoController extends BaseController
             }
             
             if ($mailController->enviarCorreo($email, 'Confirmación de pedido - NutroPro', 'Gracias por su compra en NutroPro, su pedido está en marcha!')) {
-                $pedidoController->nuevoPedido($idUsuario, $data['total']);
-                $this->deleteAllItemsUser($idUsuario);
-                $_SESSION['carrito_count'] = 0;
-                $_SESSION['msjE'] = 'Compra realizada con éxito. Recibirás un correo de confirmación.';
+                // 1. Crear el pedido y obtener su ID
+                $idPedido = $pedidoController->nuevoPedido($idUsuario, $data['total']);
+                
+                if ($idPedido !== false) {
+                    // 2. Crear los detalles del pedido desde el carrito
+                    $detallePedidoModel = new \Com\Daw2\Models\DetallePedidoModel();
+                    $detallePedidoModel->insertDetallePedido($idPedido, $idUsuario);
+                    
+                    // 3. Vaciar el carrito
+                    $this->deleteAllItemsUser($idUsuario);
+                    $_SESSION['carrito_count'] = 0;
+                    
+                    $_SESSION['msjE'] = 'Compra realizada con éxito. Recibirás un correo de confirmación.';
+                } else {
+                    $_SESSION['msjErr'] = 'Error al crear el pedido';
+                }
+                
                 header('Location: /carrito');
                 exit;
             } else {

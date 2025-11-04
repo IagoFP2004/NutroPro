@@ -3,6 +3,7 @@
 namespace Com\Daw2\Core;
 
 use Com\Daw2\Controllers\CarritoController;
+use Com\Daw2\Controllers\DetallePedidoController;
 use Com\Daw2\Controllers\InicioController;
 use Com\Daw2\Controllers\ProductoController;
 use Com\Daw2\Controllers\UserController;
@@ -212,6 +213,34 @@ class FrontController
                     }
                     $controlador = new UserController();
                     $controlador->editUSer($idUsuario);
+                },
+                'post'
+            );
+
+            Route::add(
+                '/detalle-pedido/([0-9]+)',
+                function (int $idPedido) {
+                    if (!isset($_SESSION['usuario'])) {
+                        $_SESSION['error'] = 'Debes iniciar sesión para editar tu perfil';
+                        header('Location: /login');
+                        exit;
+                    }
+                    $controlador = new DetallePedidoController();
+                    $controlador->verPedido($idPedido);
+                },
+                'get'
+            );
+
+            Route::add(
+                '/pedido/cambiar-estado/([0-9]+)',
+                function (int $idPedido) {
+                    if (!isset($_SESSION['usuario'])) {
+                        $_SESSION['error'] = 'Debes iniciar sesión';
+                        header('Location: /login');
+                        exit;
+                    }
+                    $controlador = new \Com\Daw2\Controllers\PedidosController();
+                    $controlador->cambiarEstado($idPedido);
                 },
                 'post'
             );

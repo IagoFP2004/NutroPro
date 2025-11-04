@@ -58,6 +58,7 @@
 
             <h4 class="text-success mb-4"><i class="bi bi-bag-check me-2"></i> Últimos pedidos</h4>
             <div class="table-responsive">
+                <?php if (!empty($pedidos)) { ?>
                 <table class="table align-middle">
                     <thead>
                     <tr>
@@ -69,22 +70,25 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <?php foreach ($pedidos as $pedido) { ?>
                     <tr>
-                        <td>NP-2025-00123</td>
-                        <td>09/10/2025</td>
-                        <td><span class="badge text-bg-warning">En preparación</span></td>
-                        <td><strong>45,98 €</strong></td>
-                        <td><a href="#" class="btn btn-outline-success btn-sm">Ver</a></td>
+                        <td>NP-<?php echo $pedido['id_pedido'] ?></td>
+                        <td><?php echo $pedido['fecha_pedido'] ?>></td>
+                        <td><span class="badge text-bg-warning"><?php echo $pedido['estado'] ?>></span></td>
+                        <td><strong><?php echo $pedido['total'] ?> €</strong></td>
+                        <td><a href="/detalle-pedido/<?php echo $pedido['id_pedido'] ?>" class="btn btn-outline-success btn-sm">Ver</a></td>
                     </tr>
-                    <tr>
-                        <td>NP-2025-00077</td>
-                        <td>25/09/2025</td>
-                        <td><span class="badge text-bg-success">Entregado</span></td>
-                        <td><strong>75,47 €</strong></td>
-                        <td><a href="#" class="btn btn-outline-success btn-sm">Ver</a></td>
-                    </tr>
+                    <?php }?>
                     </tbody>
                 </table>
+                <?php }else{?>
+                    <div class="col-12">
+                        <div class="alert alert-warning">
+                            <i class="bi bi-info-circle me-2"></i>
+                            No hay pedidos para mostrar. <a href="/productos" class="alert-link">¡Empieza a comprar!</a>
+                        </div>
+                    </div>
+                <?php }?>
             </div>
         </div>
     </div>
