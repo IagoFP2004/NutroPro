@@ -135,4 +135,80 @@ class UserController extends BaseController
 
         return $errores;
     }
+
+    public function showUserData(int $idUsuario):void
+    {
+        $modelo = new UserModel();
+
+        $user = $modelo->getById($idUsuario);
+
+        $data['usuario'] = $user;
+
+        $this->view->showViews(array('templates/header.view.php', 'user.view.php','templates/footer.view.php'), $data);
+    }
+
+    public function editUSer(int $idUsuario):void
+    {
+        $modelo = new UserModel();
+
+        $errores = $this->checkEditErrors($_POST, $idUsuario);
+        if (empty($errores)) {
+            $editado = $modelo->editInfoUser($_POST, $idUsuario);
+            if ($editado !== false) {
+                if ($modelo->getById($idUsuario) !== $_POST) {
+                    $_SESSION['msjE'] = 'Tu información ha sido actualizada correctamente';
+                }
+                header('Location: /micuenta/' . $idUsuario);
+                exit;
+            } else {
+                $_SESSION['msjErr'] = 'Error al actualizar la información';
+                header('Location: /micuenta/' . $idUsuario);
+                exit;
+            }
+
+        } else {
+            $data['errores'] = $errores;
+            $data['input'] = $_POST;
+            $data['usuario'] = $modelo->getById($idUsuario);
+            $this->view->showViews(array('templates/header.view.php', 'user.view.php','templates/footer.view.php'), $data);
+        }
+    }
+
+    public function checkEditErrors(array $data, int $idUsuario):array
+    {
+        $errores = [];
+        $modelo = new UserModel();
+
+        if (empty($data['nombre'])) {
+            $errores['nombre'] = 'El nombre es requerido';
+        }
+
+        if (empty($data['email'])) {
+            $errores['email'] = 'El email es requerido';
+        } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            $errores['email'] = 'El email no es válido';
+        } else {
+            // Verificar si el email ya existe para OTRO usuario
+            $existeEmail = $modelo->getByEmail($data['email']);
+            if ($existeEmail !== false && $existeEmail['id_usuario'] != $idUsuario) {
+                $errores['email'] = 'Este email ya está en uso por otro usuario';
+            }
+        }
+
+        if (empty($data['direccion'])){
+            $errores['direccion'] = 'La dirección es requerida';
+        }
+
+        if (empty($data['telefono'])){
+            $errores['telefono'] = 'El teléfono es requerido';
+        } else {
+            $telefonoLimpio = str_replace('+34 ', '', $data['telefono']);
+            $existeTelefono = $modelo->getByPhone($telefonoLimpio);
+            if ($existeTelefono !== false && $existeTelefono['id_usuario'] != $idUsuario) {
+                $errores['telefono'] = 'Este teléfono ya está en uso por otro usuario';
+            }
+        }
+
+        return $errores;
+    }
 }

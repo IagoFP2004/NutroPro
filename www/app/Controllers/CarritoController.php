@@ -5,8 +5,6 @@ namespace Com\Daw2\Controllers;
 use Com\Daw2\Core\BaseController;
 use Com\Daw2\Models\CarritoModel;
 use Com\Daw2\Models\PedidoModel;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 class CarritoController extends BaseController
 {
@@ -96,6 +94,7 @@ class CarritoController extends BaseController
     {
         $modelo = new CarritoModel();
         $pedidoController = new PedidosController();
+        $mailController = new MailController();
 
         $idUsuario = $_SESSION['usuario']['id_usuario'];
 
@@ -118,19 +117,12 @@ class CarritoController extends BaseController
                 exit;
             }
             
-            if ($this->enviarCorreo($email, 'Confirmación de pedido - NutroPro', 'Gracias por su compra en NutroPro, su pedido está en marcha!')) {
-                // 1. Crear el pedido
+            if ($mailController->enviarCorreo($email, 'Confirmación de pedido - NutroPro', 'Gracias por su compra en NutroPro, su pedido está en marcha!')) {
                 $pedidoController->nuevoPedido($idUsuario, $data['total']);
-                
-                // 2. Vaciar el carrito
                 $this->deleteAllItemsUser($idUsuario);
-                
-                // 3. Actualizar contador del carrito
                 $_SESSION['carrito_count'] = 0;
-                
-                // 4. Mensaje de éxito y redirección
                 $_SESSION['msjE'] = 'Compra realizada con éxito. Recibirás un correo de confirmación.';
-                header('Location: /');
+                header('Location: /carrito');
                 exit;
             } else {
                 $_SESSION['msjErr'] = 'Error al enviar el correo. Revisa la configuración SMTP en el .env';
@@ -184,46 +176,6 @@ class CarritoController extends BaseController
         }
 
         return $errores;
-    }
-
-    function enviarCorreo($para, $asunto, $mensaje) {
-        $mail = new PHPMailer(true);
-
-        try {
-            // Configuración del servidor SMTP desde .env
-            $mail->isSMTP();
-            $mail->Host       = $_ENV['MAIL_HOST'] ?? 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = $_ENV['MAIL_USERNAME'] ?? '';
-            $mail->Password   = $_ENV['MAIL_PASSWORD'] ?? '';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = $_ENV['MAIL_PORT'] ?? 587;
-            $mail->CharSet    = 'UTF-8';
-            
-            // Debug desactivado
-            $mail->SMTPDebug  = 0;
-
-            // Remitente y destinatario
-            $mail->setFrom(
-                $_ENV['MAIL_FROM_ADDRESS'] ?? $_ENV['MAIL_USERNAME'], 
-                $_ENV['MAIL_FROM_NAME'] ?? 'NutroPro'
-            );
-            $mail->addAddress($para);
-
-            // Contenido
-            $mail->isHTML(true);
-            $mail->Subject = $asunto;
-            $mail->Body    = $mensaje;
-            $mail->AltBody = strip_tags($mensaje);
-
-            // Enviar
-            $mail->send();
-            return true;
-
-        } catch (Exception $e) {
-            error_log("Error al enviar correo: " . $e->getMessage());
-            return false;
-        }
     }
 
     private function deleteAllItemsUser(int $idUsuario):bool

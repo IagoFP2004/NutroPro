@@ -174,6 +174,47 @@ class FrontController
                 'get'
             );
 
+            Route::add(
+                '/micuenta/([0-9]+)',
+                function (int $idUsuario) {
+                    if (!isset($_SESSION['usuario'])) {
+                        $_SESSION['error'] = 'Debes iniciar sesión para ver el carrito';
+                        header('Location: /login');
+                        exit;
+                    }
+                    $controlador = new UserController();
+                    $controlador->showUserData($idUsuario);
+                },
+                'get'
+            );
+
+            Route::add(
+                '/micuenta/edit/([0-9]+)',
+                function (int $idUsuario) {
+                    if (!isset($_SESSION['usuario'])) {
+                        $_SESSION['error'] = 'Debes iniciar sesión para ver el carrito';
+                        header('Location: /login');
+                        exit;
+                    }
+                    $controlador = new UserController();
+                    $controlador->editUSer($idUsuario);
+                },
+                'get'
+            );
+
+            Route::add(
+                '/micuenta/edit/([0-9]+)',
+                function (int $idUsuario) {
+                    if (!isset($_SESSION['usuario'])) {
+                        $_SESSION['error'] = 'Debes iniciar sesión para editar tu perfil';
+                        header('Location: /login');
+                        exit;
+                    }
+                    $controlador = new UserController();
+                    $controlador->editUSer($idUsuario);
+                },
+                'post'
+            );
         }
 
         Route::add(

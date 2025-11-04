@@ -41,4 +41,30 @@ class UserModel extends BaseDbModel
         $stmt->execute(['phone' => $phone]);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function getById(int $idUsuario): array | false
+    {
+        $sql = "SELECT * FROM usuarios WHERE id_usuario = :idUsuario";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['idUsuario' => $idUsuario]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function editInfoUser(array $data, int $idUsuario): bool
+    {
+        $sql = "UPDATE usuarios SET
+        nombre = :nombre,
+        email = :email,
+        direccion = :direccion,
+        telefono = :telefono
+        WHERE id_usuario = :idUsuario ";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            'nombre' => $data['nombre'],
+            'email' => $data['email'],
+            'direccion' => $data['direccion'],
+            'telefono' => $data['telefono'],
+            'idUsuario' => $idUsuario
+        ]);
+    }
 }
