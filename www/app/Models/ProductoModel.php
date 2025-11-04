@@ -88,7 +88,7 @@ class ProductoModel extends BaseDbModel
         return $stmt->fetchAll();
     }
 
-    public function getProductosProteinas(array $data): array
+    public function getProductosProteinas(): array
     {
         $sql = "SELECT * FROM productos WHERE id_categoria = 1 AND nombre LIKE '%protein%'";
         $stmt = $this->pdo->prepare($sql);

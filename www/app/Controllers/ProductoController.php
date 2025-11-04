@@ -186,11 +186,11 @@ class   ProductoController extends BaseController
         );
 
         $categoriaModel = new CategoriaModel();
-        $errors = $this->checkData($_POST, $_FILES, true); // La imagen es requerida
+        $errors = $this->checkData($_POST, $_FILES, true);
 
         if (empty($errors)) {
             // ====== Subir imagen ======
-            $publicPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/');        // Ruta base del servidor (ej: /var/www/html/public)
+            $publicPath = rtrim($_SERVER['DOCUMENT_ROOT'], '/');
             $uploadDir  = $publicPath . '/assets/img/';
 
             // Crear la carpeta si no existe

@@ -9,10 +9,6 @@ class CarritoController extends BaseController
 {
     public function showCarrito():void
     {
-        // Debug temporal
-        error_log("=== ENTRANDO A showCarrito ===");
-        error_log("Usuario en sesión: " . (isset($_SESSION['usuario']) ? 'SI' : 'NO'));
-        
         if (!isset($_SESSION['usuario']) || !isset($_SESSION['usuario']['id_usuario'])) {
             error_log("Usuario no logueado, redirigiendo a login");
             $_SESSION['error'] = 'Debes iniciar sesión para ver el carrito';
@@ -21,23 +17,26 @@ class CarritoController extends BaseController
         }
 
         $idUsuario = $_SESSION['usuario']['id_usuario'];
-        error_log("ID Usuario: " . $idUsuario);
         
         $modelo = new CarritoModel();
         
         try {
             $data['numeroItems'] = $modelo->getAll();
             $data['productos'] = $modelo->getProductosCarrito($idUsuario);
-            $data['sumaTotal'] = array_sum(array_column($data['productos'], 'precio'));
+            $data['sumaTotal'] = array_reduce($data['productos'], function ($total, $producto) {
+                return $total + ($producto['precio'] * $producto['cantidad']);
+            }, 0);
             $data['gastosEnvio'] =4.50;
             $data['total'] = $data['sumaTotal'] + $data['gastosEnvio'];
 
-            error_log("Número de items: " . $data['numeroItems']);
-            error_log("Productos encontrados: " . count($data['productos']));
-            error_log("Mostrando vistas...");
+            // Pasar mensajes de sesión a la vista
+            $data['msjE'] = $_SESSION['msjE'] ?? null;
+            $data['msjErr'] = $_SESSION['msjErr'] ?? null;
+
+            unset($_SESSION['msjE']);
+            unset($_SESSION['msjErr']);
 
             $this->view->showViews(array('templates/header.view.php', 'carrito.view.php','templates/footer.view.php'), $data);
-            error_log("=== VISTAS MOSTRADAS ===");
         } catch (\Exception $e) {
             error_log("ERROR: " . $e->getMessage());
             error_log("Trace: " . $e->getTraceAsString());
@@ -76,6 +75,21 @@ class CarritoController extends BaseController
             }
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
+    }
+
+    public function deleteItemCarrito(int $idProducto):void
+    {
+        $modelo = new CarritoModel();
+        $idUsuario = $_SESSION['usuario']['id_usuario'];
+        $borrado = $modelo->deleteItemCarrito($idProducto);
+        if ($borrado !== false) {
+            $_SESSION['msjE'] = 'Producto eliminado del carrito correctamente';
+            $_SESSION['carrito_count'] = $modelo->contarProductosCarrito($idUsuario);
+            header('Location: /carrito');
+        }else{
+            $_SESSION['msjErr'] = 'Error al eliminar el producto del carrito';
+            header('Location: /carrito');
+        }
     }
 
     public function pay():void

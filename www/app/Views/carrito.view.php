@@ -1,3 +1,21 @@
+<?php if (!empty($msjE)) { ?>
+    <div class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            <?= htmlspecialchars($msjE) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    </div>
+<?php } elseif (!empty($msjErr)) { ?>
+    <div class="container mt-3">
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <?= htmlspecialchars($msjErr) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    </div>
+<?php } ?>
+
 <main class="flex-grow-1 d-flex align-items-center py-5 bg-light vh-100">
     <div class="container py-4">
         <div class="row g-5">
@@ -23,11 +41,11 @@
                                     <small class="text-muted"><?php echo htmlspecialchars($producto['descripcion']) ?></small>
                                 </div>
                                 <div class="col-6 col-md-2">
-                                    <input type="number" class="form-control form-control-lg" min="1" value="<?php echo $producto['cantidad'] ?>">
+                                    <input type="text" class="form-control form-control-lg" value="<?php echo $producto['cantidad'] ?>" readonly>
                                 </div>
                                 <div class="col-6 col-md-2 text-end">
                                     <div class="fw-bold text-success fs-5"><?php echo number_format($producto['precio'], 2) ?> €</div>
-                                    <a href="#" class="text-danger small d-inline-block mt-1"><i class="bi bi-x-circle me-1"></i>Quitar</a>
+                                    <a href="<?php echo $_ENV['host.folder'].'carrito/remove/'.$producto['id_producto'] ?>" class="text-danger small d-inline-block mt-1"><i class="bi bi-x-circle me-1"></i>Quitar</a>
                                 </div>
                             </div>
                         </div>

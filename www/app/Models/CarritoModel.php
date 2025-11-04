@@ -74,4 +74,11 @@ class CarritoModel extends BaseDbModel
         $stmt->execute(['id_usuario' => $idUsuario]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function deleteItemCarrito(int $idProducto):bool
+    {
+        $sql = "DELETE FROM carrito WHERE id_producto = :id_producto";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['id_producto' => $idProducto]);
+    }
 }
