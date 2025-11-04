@@ -4,6 +4,8 @@ namespace Com\Daw2\Controllers;
 
 use Com\Daw2\Core\BaseController;
 use Com\Daw2\Models\CarritoModel;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class CarritoController extends BaseController
 {
@@ -99,7 +101,23 @@ class CarritoController extends BaseController
         $errores = $this->checkPayCard($_POST);
 
         if (empty($errores)) {
-
+            $email = $_SESSION['usuario']['email'] ?? null;
+            
+            if (!$email) {
+                $_SESSION['msjErr'] = 'No se encontró el email del usuario';
+                header('Location: /carrito');
+                exit;
+            }
+            
+            if ($this->enviarCorreo($email, 'Confirmación de pedido - NutroPro', 'Gracias por su compra en NutroPro, su pedido está en marcha!')) {
+                $_SESSION['msjE'] = 'Compra realizada con éxito. Recibirás un correo de confirmación.';
+                header('Location: /carrito');
+                exit;
+            } else {
+                $_SESSION['msjErr'] = 'Error al enviar el correo. Revisa la configuración SMTP en el .env';
+                header('Location: /carrito');
+                exit;
+            }
         }else{
 
             $idUsuario = $_SESSION['usuario']['id_usuario'];
@@ -114,8 +132,8 @@ class CarritoController extends BaseController
 
             $data['errores'] = $errores;
             $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $this->view->showViews(array('templates/header.view.php', 'carrito.view.php', 'templates/footer.view.php'), $data);
         }
-        $this->view->showViews(array('templates/header.view.php', 'carrito.view.php'), $data);
     }
 
     public function checkPayCard(array $data):array
@@ -147,5 +165,45 @@ class CarritoController extends BaseController
         }
 
         return $errores;
+    }
+
+    function enviarCorreo($para, $asunto, $mensaje) {
+        $mail = new PHPMailer(true);
+
+        try {
+            // Configuración del servidor SMTP desde .env
+            $mail->isSMTP();
+            $mail->Host       = $_ENV['MAIL_HOST'] ?? 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $_ENV['MAIL_USERNAME'] ?? '';
+            $mail->Password   = $_ENV['MAIL_PASSWORD'] ?? '';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = $_ENV['MAIL_PORT'] ?? 587;
+            $mail->CharSet    = 'UTF-8';
+            
+            // Debug desactivado
+            $mail->SMTPDebug  = 0;
+
+            // Remitente y destinatario
+            $mail->setFrom(
+                $_ENV['MAIL_FROM_ADDRESS'] ?? $_ENV['MAIL_USERNAME'], 
+                $_ENV['MAIL_FROM_NAME'] ?? 'NutroPro'
+            );
+            $mail->addAddress($para);
+
+            // Contenido
+            $mail->isHTML(true);
+            $mail->Subject = $asunto;
+            $mail->Body    = $mensaje;
+            $mail->AltBody = strip_tags($mensaje);
+
+            // Enviar
+            $mail->send();
+            return true;
+
+        } catch (Exception $e) {
+            error_log("Error al enviar correo: " . $e->getMessage());
+            return false;
+        }
     }
 }
