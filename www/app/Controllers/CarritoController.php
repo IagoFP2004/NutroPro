@@ -94,6 +94,58 @@ class CarritoController extends BaseController
 
     public function pay():void
     {
-        var_dump($_POST);
+        $modelo = new CarritoModel();
+
+        $errores = $this->checkPayCard($_POST);
+
+        if (empty($errores)) {
+
+        }else{
+
+            $idUsuario = $_SESSION['usuario']['id_usuario'];
+
+            $data['numeroItems'] = $modelo->getAll();
+            $data['productos'] = $modelo->getProductosCarrito($idUsuario);
+            $data['sumaTotal'] = array_reduce($data['productos'], function ($total, $producto) {
+                return $total + ($producto['precio'] * $producto['cantidad']);
+            }, 0);
+            $data['gastosEnvio'] =4.50;
+            $data['total'] = $data['sumaTotal'] + $data['gastosEnvio'];
+
+            $data['errores'] = $errores;
+            $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        }
+        $this->view->showViews(array('templates/header.view.php', 'carrito.view.php'), $data);
+    }
+
+    public function checkPayCard(array $data):array
+    {
+        $errores = [];
+
+        if (empty($data['nombreTitular'])) {
+            $errores['nombreTitular'] = 'Nombre del titular es obligatorio';
+        }else if (!is_string($data['nombreTitular'])) {
+            $errores['nombreTitular'] = 'Nombre debe ser un texto';
+        }else if(strlen($data['nombreTitular']) < 3 || strlen($data['nombreTitular']) > 50 ){
+            $errores['nombreTitular'] = 'Nombre debe tener al menos 3 caracteres y no mas de 50';
+        }
+
+        if (empty($data['numeroTarjeta'])) {
+            $errores['numeroTarjeta'] = 'Numero tarjeta es obligatorio';
+        }else if (strlen($data['numeroTarjeta']) < 16 || strlen($data['numeroTarjeta']) > 16 ){
+            $errores['numeroTarjeta'] = 'El numero de la tarjeta tiene que tener 16 numeros';
+        }
+
+        if (empty($data['fechaExp'])) {
+            $errores['fechaExp'] = 'Fecha de expiracion es obligatorio';
+        }
+
+        if (empty($data['cvv'])) {
+            $errores['cvv'] = 'CVV es obligatorio';
+        }else if (strlen($data['cvv']) < 3 || strlen($data['cvv']) > 3 ) {
+            $errores['cvv'] = 'CVV debe tener  3 caracteres';
+        }
+
+        return $errores;
     }
 }

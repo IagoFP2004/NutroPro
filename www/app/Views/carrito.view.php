@@ -84,40 +84,42 @@
 
                     <div class="d-flex justify-content-between align-items-center fs-4 mb-4">
                         <span class="fw-bold">Total</span>
-                        <span class="fw-bold text-success"><?php echo $total ?> €</span>
+                        <span class="fw-bold text-success"><?php echo ($sumaTotal == 0) ? 0 : $total ?> €</span>
                     </div>
 
-                    <form action="/procesar-pago" method="POST" class="mb-4">
+                    <form action="/carrito" method="POST" class="mb-4">
                         <div class="mb-3">
                             <label for="nombreTitular" class="form-label">Nombre del titular</label>
-                            <input type="text" class="form-control" id="nombreTitular" name="nombreTitular" placeholder="Titular" required>
+                            <input type="text" class="form-control" id="nombreTitular" name="nombreTitular" placeholder="Titular" value="<?php echo $input['nombreTitular'] ?? '' ?>" required>
+                            <p class="text-danger"><?php echo $errores['nombreTitular'] ?? '' ?></p>
                         </div>
 
                         <div class="mb-3">
                             <i class="bi bi-credit-card"></i>
                             <label for="numeroTarjeta" class="form-label">Número de tarjeta</label>
-                            <input type="text" class="form-control" id="numeroTarjeta" name="numeroTarjeta" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" required>
+                            <input type="text" class="form-control" id="numeroTarjeta" name="numeroTarjeta" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" value="<?php echo $input['numeroTarjeta'] ?? '' ?>" required>
+                            <p class="text-danger"><?php echo $errores['numeroTarjeta'] ?? '' ?></p>
                         </div>
 
                         <div class="row">
                             <div class="col-6 mb-3">
                                 <label for="fechaExp" class="form-label">Fecha de expiración</label>
-                                <input type="text" class="form-control" id="fechaExp" name="fechaExp" placeholder="MM/AA" required>
+                                <input type="text" class="form-control" id="fechaExp" name="fechaExp" placeholder="MM/AA" value="<?php echo $input['fechaExp'] ?? '' ?>" required>
+                                <p class="text-danger"><?php echo $errores['fechaExp'] ?? '' ?></p>
                             </div>
                             <div class="col-6 mb-3">
                                 <label for="cvv" class="form-label">CVV</label>
-                                <input type="text" class="form-control" id="cvv" name="cvv" maxlength="3" required>
+                                <input type="text" class="form-control" id="cvv" name="cvv" maxlength="3" value="<?php echo $input['cvv'] ?? '' ?>" required>
+                                <p class="text-danger"><?php echo $errores['cvv'] ?? '' ?></p>
                             </div>
                         </div>
-                    </form>
 
-                    <div class="d-grid mb-3">
-                        <form action="/carrito" method="post">
+                        <div class="d-grid mb-3">
                             <button type="submit" class="btn btn-success btn-lg py-3">
                                 <i class="bi bi-lock-fill me-2"></i>Finalizar compra
                             </button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
 

@@ -73,11 +73,11 @@ class UserController extends BaseController
             header('Location: /productos');
             exit;
         }else{
-            $data['errores']['password'] = 'Contraseña incorrecta';
-            $this->view->show('login.view.php',$data);
+            $data['msjErr'] = "Correo o contraseña incorrectos";
+            $this->view->show('login.view.php', $data);
         }
     }else{
-        $data['msjErr'] = "El usuario no existe";
+        $data['msjErr'] = "Correo o contraseña incorrectos";
         $this->view->show('login.view.php', $data);
     }
  }
@@ -89,13 +89,8 @@ class UserController extends BaseController
         if ($idRol === 1)
         {
             $permisos = 'rwd';  // Admin: read, write, delete
-        }else if ($idRol === 2)
-        {
-            $permisos = 'rw';   // Editor: read, write
-        }else if ($idRol === 3){
-            $permisos = 'r';    // Viewer: solo read
         }else{
-            $permisos = 'r';    // Por defecto: solo lectura
+            $permisos = 'r';
         }
 
         return $permisos;
