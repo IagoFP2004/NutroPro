@@ -161,7 +161,7 @@
             <hr class="my-5">
 
             <h4 class="text-success mb-4">
-                <i class="bi bi-geo-alt-fill"></i>Ubicacion de entrega
+                <i class="bi bi-clipboard2-data-fill"></i>Datos de entrega del pedido
             </h4>
             <div class="mb-3">
                 <i class="bi bi-truck me-1"></i>Direccion de envio: <?php echo $_SESSION['usuario']['direccion']?>
