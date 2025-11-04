@@ -174,20 +174,6 @@ class FrontController
                 'get'
             );
 
-            Route::add(
-                '/carrito/remove/([0-9]+)',
-                function (int $idProducto) {
-                    if (!isset($_SESSION['usuario'])) {
-                        $_SESSION['error'] = 'Debes iniciar sesión para ver el carrito';
-                        header('Location: /login');
-                        exit;
-                    }
-                    $controlador = new CarritoController();
-                    $controlador->deleteItemCarrito($idProducto);
-                },
-                'get'
-            );
-
         }
 
         Route::add(

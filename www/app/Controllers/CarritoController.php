@@ -4,6 +4,7 @@ namespace Com\Daw2\Controllers;
 
 use Com\Daw2\Core\BaseController;
 use Com\Daw2\Models\CarritoModel;
+use Com\Daw2\Models\PedidoModel;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -85,7 +86,7 @@ class CarritoController extends BaseController
             $_SESSION['msjE'] = 'Producto eliminado del carrito correctamente';
             $_SESSION['carrito_count'] = $modelo->contarProductosCarrito($idUsuario);
             header('Location: /carrito');
-        }else{
+        } else {
             $_SESSION['msjErr'] = 'Error al eliminar el producto del carrito';
             header('Location: /carrito');
         }
@@ -94,6 +95,17 @@ class CarritoController extends BaseController
     public function pay():void
     {
         $modelo = new CarritoModel();
+        $pedidoController = new PedidosController();
+
+        $idUsuario = $_SESSION['usuario']['id_usuario'];
+
+        $data['numeroItems'] = $modelo->getAll();
+        $data['productos'] = $modelo->getProductosCarrito($idUsuario);
+        $data['sumaTotal'] = array_reduce($data['productos'], function ($total, $producto) {
+            return $total + ($producto['precio'] * $producto['cantidad']);
+        }, 0);
+        $data['gastosEnvio'] =4.50;
+        $data['total'] = $data['sumaTotal'] + $data['gastosEnvio'];
 
         $errores = $this->checkPayCard($_POST);
 
@@ -107,8 +119,18 @@ class CarritoController extends BaseController
             }
             
             if ($this->enviarCorreo($email, 'Confirmación de pedido - NutroPro', 'Gracias por su compra en NutroPro, su pedido está en marcha!')) {
+                // 1. Crear el pedido
+                $pedidoController->nuevoPedido($idUsuario, $data['total']);
+                
+                // 2. Vaciar el carrito
+                $this->deleteAllItemsUser($idUsuario);
+                
+                // 3. Actualizar contador del carrito
+                $_SESSION['carrito_count'] = 0;
+                
+                // 4. Mensaje de éxito y redirección
                 $_SESSION['msjE'] = 'Compra realizada con éxito. Recibirás un correo de confirmación.';
-                header('Location: /carrito');
+                header('Location: /');
                 exit;
             } else {
                 $_SESSION['msjErr'] = 'Error al enviar el correo. Revisa la configuración SMTP en el .env';
@@ -202,5 +224,11 @@ class CarritoController extends BaseController
             error_log("Error al enviar correo: " . $e->getMessage());
             return false;
         }
+    }
+
+    private function deleteAllItemsUser(int $idUsuario):bool
+    {
+        $modelo = new CarritoModel();
+        return $modelo->deleteAllItemsUser($idUsuario);
     }
 }
