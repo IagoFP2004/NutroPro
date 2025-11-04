@@ -12,7 +12,6 @@ class CarritoController extends BaseController
     public function showCarrito():void
     {
         if (!isset($_SESSION['usuario']) || !isset($_SESSION['usuario']['id_usuario'])) {
-            error_log("Usuario no logueado, redirigiendo a login");
             $_SESSION['error'] = 'Debes iniciar sesión para ver el carrito';
             header('Location: /login');
             exit;
@@ -40,8 +39,6 @@ class CarritoController extends BaseController
 
             $this->view->showViews(array('templates/header.view.php', 'carrito.view.php','templates/footer.view.php'), $data);
         } catch (\Exception $e) {
-            error_log("ERROR: " . $e->getMessage());
-            error_log("Trace: " . $e->getTraceAsString());
             $_SESSION['error'] = 'Error al cargar el carrito: ' . $e->getMessage();
             header('Location: /productos');
             exit;
