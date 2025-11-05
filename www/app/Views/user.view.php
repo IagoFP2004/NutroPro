@@ -104,7 +104,7 @@
 <p class="text-center">Tu opinión es muy importante para nosotros!. Por favor, tómate un momento para compartir tu experiencia con NutroPro.</p>
 <p class="text-center">¡Gracias por ayudarnos a mejorar!</p>
 
-    <form action="/micuenta/reseña/<?php echo $usuario['id_usuario'] ?>" method="POST">
+    <form action="/comments/add/<?php echo $usuario['id_usuario'] ?>" method="POST">
         <div class="mb-3">
             <label for="valoracion" class="form-label fw-semibold">Valoración</label>
             <select class="form-select" id="valoracion" name="valoracion" required>

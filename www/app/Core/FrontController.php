@@ -268,8 +268,23 @@ class FrontController
                         header('Location: /login');
                         exit;
                     }
-                    $controlador = new \Com\Daw2\Controllers\PedidosController();
+                    $controlador = new PedidosController();
                     $controlador->cambiarEstado($idPedido);
+                },
+                'post'
+            );
+
+
+            Route::add(
+                '/comments/add/([0-9]+)',  // Añadido patrón para capturar el ID
+                function (int $idUsuario) {
+                    if (!isset($_SESSION['usuario'])) {
+                        $_SESSION['error'] = 'Debes iniciar sesión';
+                        header('Location: /login');
+                        exit;
+                    }
+                    $controlador = new \Com\Daw2\Controllers\ResenasController();
+                    $controlador->insertNewComment($idUsuario);
                 },
                 'post'
             );
