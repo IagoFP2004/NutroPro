@@ -71,7 +71,7 @@
               <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'micuenta' ? 'active' : ''; ?>" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
             <?php } ?>
             <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd' ){ ?>
-              <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'gestionUsuarios' ? 'active' : ''; ?>" href="/gestionUsuarios">Admnistrar usuarios</a></li>
+              <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'gestionUsuarios' ? 'active' : ''; ?>" href="/gestionUsuarios">Administrar usuarios</a></li>
             <?php } ?>
           </ul>
         </div>
@@ -104,7 +104,7 @@
           <li class="nav-item"><a class="nav-link" href="/salud&fitness">Salud & Fitness</a></li>
           <li class="nav-item"><a class="nav-link" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
           <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd' ){ ?>
-            <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'gestionUsuarios' ? 'active' : ''; ?>" href="/gestionUsuarios">Admnistrar usuarios</a></li>
+            <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'gestionUsuarios' ? 'active' : ''; ?>" href="/gestionUsuarios">Administrar usuarios</a></li>
           <?php } ?>
         </ul>
       </div>

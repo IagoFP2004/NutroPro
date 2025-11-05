@@ -52,14 +52,7 @@
                 <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Repite tu contraseña" required>
                 <p class="text-danger"><?php echo $errores['confirm-password'] ?? '' ?></p>
             </div>
-            <?php if((isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] === 'rwd')){?>
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" id="admin" name="admin" value="1" <?php echo (isset($input['admin']) && $input['admin'] == '1') ? 'checked' : ''; ?>>
-                <label class="form-check-label" for="admin">
-                    <i class="bi bi-shield-check text-warning me-1"></i> Registrar como Administrador
-                </label>
-            </div>
-            <?php }?>
+            
             <?php if (!empty($msjErr)): ?>
                 <div class="alert alert-danger" role="alert">
                     <?php echo $msjErr; ?>

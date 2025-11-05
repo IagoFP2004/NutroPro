@@ -237,4 +237,15 @@ class UserController extends BaseController
 
         return $errores;
     }
+
+ //============= ADMIN FUNCTIONS =============//
+    public function showgestionUsuarios():void
+    {
+        $modelo = new UserModel();
+        $usuarios = $modelo->getAllUsers();
+
+        $data['usuarios'] = $usuarios;
+
+        $this->view->showViews(array('templates/header.view.php', 'gestionUsuarios.view.php','templates/footer.view.php'), $data);
+    }
 }

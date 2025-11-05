@@ -120,8 +120,9 @@ class FrontController
 
             Route::add(
                 '/gestionUsuarios',
-                function (int $id) {
+                function () {
                     $controlador = new UserController();
+                    $controlador->showgestionUsuarios();
                 },
                 'get'
             );

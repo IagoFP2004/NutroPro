@@ -6,6 +6,15 @@ use Com\Daw2\Core\BaseDbModel;
 
 class UserModel extends BaseDbModel
 {
+
+    public function getAllUsers(): array
+    {
+        $sql = "SELECT * FROM usuarios";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function getByEmail(string $email): array | false
     {
         $sql = "SELECT * FROM usuarios WHERE email = :email";
