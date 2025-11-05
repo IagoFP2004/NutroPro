@@ -67,9 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-/**
- * Aplica los filtros seleccionados y redirige a la página con los parámetros GET
- */
 function aplicarFiltros() {
     const categoria = document.getElementById('filtroCategoria').value;
     const precio = document.getElementById('filtroPrecio').value;
@@ -93,9 +90,6 @@ function aplicarFiltros() {
     window.location.href = '/productos' + (queryString ? '?' + queryString : '');
 }
 
-/**
- * Limpia todos los filtros y recarga la página sin parámetros
- */
 function limpiarFiltros() {
     window.location.href = '/productos';
 }

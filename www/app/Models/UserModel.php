@@ -76,4 +76,11 @@ class UserModel extends BaseDbModel
             'idUsuario' => $idUsuario
         ]);
     }
+
+    public function deleteUser(int $idUsuario): bool
+    {
+        $sql = "DELETE FROM usuarios WHERE id_usuario = :idUsuario";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['idUsuario' => $idUsuario]);
+    }
 }

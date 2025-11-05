@@ -174,12 +174,14 @@
             </div>
 
 
+            <?php if (isset($_SESSION['usuario']) && (!$_SESSION['usuario']['permisos'] == 'rwd' )){ ?>
             <!-- Botón volver -->
             <div class="text-end mt-3 mb-2">
                 <a href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>" class="btn btn-outline-success px-4">
                     <i class="bi bi-arrow-left me-2"></i>Volver a mi cuenta
                 </a>
             </div>
+            <?php } ?>
         </div>
     </div>
 </main>

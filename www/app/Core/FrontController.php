@@ -126,6 +126,24 @@ class FrontController
                 },
                 'get'
             );
+            
+            Route::add(
+                '/gestionUsuarios',
+                function () {
+                    $controlador = new UserController();
+                    $controlador->createUserByAdmin();
+                },
+                'post'
+            );
+
+             Route::add(
+                '/gestionUsuarios/delete/([0-9]+)',
+                function (int $idUsuario) {
+                    $controlador = new UserController();
+                    $controlador->deleteUserByAdmin($idUsuario);
+                },
+                'get'
+            );
 
         }
         //Rutas que necesitan que el usuario este logueado

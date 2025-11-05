@@ -248,4 +248,49 @@ class UserController extends BaseController
 
         $this->view->showViews(array('templates/header.view.php', 'gestionUsuarios.view.php','templates/footer.view.php'), $data);
     }
+
+    public function createUserByAdmin():void
+    {
+        $errores = $this->checkErrors($_POST);
+        
+        if (empty($errores)) {
+            $userModel = new UserModel();
+                if ($userModel->getByEmail($_POST['email'])) {
+                $data['errores']['email'] = 'Este email ya está registrado';
+                $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $this->view->show('gestionUsuarios.view.php', $data);
+                return;
+            }
+            $_POST['id_rol'] = isset($_POST['admin']) && $_POST['admin'] == '1' ? 1 : 0;
+            $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $inserted = $userModel->insert($_POST);
+
+            if ($inserted !== false) {
+                header('Location: /gestionUsuarios');
+                exit;
+            } else {
+                $data['msjErr'] = 'Error al registrar el usuario. Inténtalo de nuevo.';
+                $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                $this->view->show('gestionUsuarios.view.php', $data);
+            }
+        } else {
+            $data['errores'] = $errores;
+            $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $this->view->show('gestionUsuarios.view.php', $data);
+        }
+    }
+
+    public function deleteUserByAdmin(int $idUsuario):void
+    {
+        $userModel = new UserModel();
+        $deleted = $userModel->deleteUser($idUsuario);
+
+        if ($deleted !== false) {
+            header('Location: /gestionUsuarios');
+            exit;
+        } else {
+            $data['msjErr'] = 'Error al eliminar el usuario. Inténtalo de nuevo.';
+            $this->view->show('gestionUsuarios.view.php', $data);
+        }
+    }
 }
