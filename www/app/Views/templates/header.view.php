@@ -67,9 +67,12 @@
             <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'proteina&creatina' ? 'active' : ''; ?> " href="/proteina&creatina">Proteina & Creatina</a></li>
             <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'ropa' ? 'active' : ''; ?>" href="/ropa">Ropa</a></li>
             <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'salud&fitness' ? 'active' : ''; ?>" href="/salud&fitness">Salud & Fitness</a></li>
-              <?php if (isset($_SESSION['usuario'])) { ?>
-              <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'salud&fitness' ? 'active' : ''; ?>" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
-              <?php } ?>
+            <?php if (isset($_SESSION['usuario'])) { ?>
+              <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'micuenta' ? 'active' : ''; ?>" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
+            <?php } ?>
+            <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd' ){ ?>
+              <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'gestionUsuarios' ? 'active' : ''; ?>" href="/gestionUsuarios">Admnistrar usuarios</a></li>
+            <?php } ?>
           </ul>
         </div>
         <?php if (isset($_SESSION['usuario'])){ ?>
@@ -95,11 +98,14 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto d-lg-none text-center">
           <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" href="/productos">Productos</a></li>
-            <li class="nav-item"><a class="nav-link" href="/proteina&creatina">Proteina & Creatina</a></li>
+          <li class="nav-item"><a class="nav-link" href="/productos">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="/proteina&creatina">Proteina & Creatina</a></li>
           <li class="nav-item"><a class="nav-link" href="/ropa">Ropa</a></li>
           <li class="nav-item"><a class="nav-link" href="/salud&fitness">Salud & Fitness</a></li>
-            <li class="nav-item"><a class="nav-link" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
+          <li class="nav-item"><a class="nav-link" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
+          <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd' ){ ?>
+            <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'gestionUsuarios' ? 'active' : ''; ?>" href="/gestionUsuarios">Admnistrar usuarios</a></li>
+          <?php } ?>
         </ul>
       </div>
 

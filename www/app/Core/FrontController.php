@@ -117,6 +117,15 @@ class FrontController
                 },
                 'get'
             );
+
+            Route::add(
+                '/gestionUsuarios',
+                function (int $id) {
+                    $controlador = new UserController();
+                },
+                'get'
+            );
+
         }
         //Rutas que necesitan que el usuario este logueado
         if (isset($_SESSION['usuario'])) {
