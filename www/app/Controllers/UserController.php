@@ -242,9 +242,18 @@ class UserController extends BaseController
     public function showgestionUsuarios():void
     {
         $modelo = new UserModel();
-        $usuarios = $modelo->getAllUsers();
 
-        $data['usuarios'] = $usuarios;
+        $copia_GET = $_GET;
+        unset($copia_GET['page']);
+        $data['url'] = http_build_query($copia_GET);
+
+        $numeroTotalUsuarios = $modelo->countNumberItems();
+        $numeroPaginas = $this->getNumeroPaginas($numeroTotalUsuarios);
+        $data['page'] = $this->getNumeroPagina($numeroPaginas);
+        $data['max_page'] = $numeroPaginas;
+
+
+        $data['usuarios'] = $modelo->getAllUsersAdmin($data['page']);
 
         $this->view->showViews(array('templates/header.view.php', 'gestionUsuarios.view.php','templates/footer.view.php'), $data);
     }
@@ -293,4 +302,21 @@ class UserController extends BaseController
             $this->view->show('gestionUsuarios.view.php', $data);
         }
     }
+
+    public function getNumeroPaginas(int $numeroTotalItems):int
+    {
+        return (int)ceil($numeroTotalItems / $_ENV['numero.pagina']);
+    }
+
+    public function getNumeroPagina(int $numeroPaginas):int
+    {
+        if (isset($_GET['page'])) {
+            $page = (int)$_GET['page'];
+            if ($page >= 1 && $page <= $numeroPaginas) {
+                return (int) $page;
+            }
+        }
+        return 1;
+    }
+
 }

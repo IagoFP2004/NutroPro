@@ -12,32 +12,32 @@ document.addEventListener('DOMContentLoaded', function() {
                             <h5 class="card-title text-success">
                                 <i class="bi bi-plus-circle me-1"></i>Agregar Nuevo Usuario
                             </h5>
-                            <div class="row g-3 mt-2 d-flex align-items-center"> 
-                                <div class="col-md-4">
+                            <div class="row row-cols-1 row-cols-md-3 g-3 justify-content-center align-items-center"> 
+                                <div class="col">
                                     <label class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Agregar Nombre...">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col">
                                     <label class="form-label">Email</label>
                                     <input type="text" class="form-control" id="email" name="email" placeholder="Agregar Email...">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col">
                                     <label class="form-label">Dirección</label>
                                     <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Agregar Dirección...">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col">
                                     <label class="form-label">Teléfono</label>
                                     <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Agregar Teléfono...">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col">
                                     <label class="form-label">Contraseña</label>
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña...">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col">
                                     <label class="form-label">Confirmar Contraseña</label>
                                     <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Confirmar Contraseña...">
                                 </div>
-                                <div class="col-md-4 form-check form-switch pt-5">
+                                <div class="col form-check form-switch pt-5">
                                     <input class="form-check-input" type="checkbox" id="admin">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">Admin</label>
                                 </div>

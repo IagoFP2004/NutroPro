@@ -39,17 +39,33 @@
             <div class="mb-5 d-flex justify-content-between align-items-center">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
+                        <?php if($page > 1){ ?>
                         <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
+                        <a class="page-link bg-success text-white" href="<?php echo $_ENV['host.folder'].'gestionUsuarios?'.$url.'&page=1' ?>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+
                         <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
+                        <a class="page-link bg-success text-white" href="<?php echo $_ENV['host.folder'].'gestionUsuarios?'.$url.'&page='.($page -1)?>" aria-label="Next">
+                            <span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>
+                        </a>
+                        </li>
+                        <?php }?>
+                        <li class="page-item "><a class="page-link bg-success text-white" href="#"><?php echo $page ?></a></li>
+                        <?php if($page < $max_page){ ?>
+                        <li class="page-item">
+                        <a class="page-link bg-success text-white" href="<?php echo $_ENV['host.folder'].'gestionUsuarios?'.$url.'&page='.($page +1)?>" aria-label="Next">
+                            <span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
+                        </a>
+                        </li>
+                        
+                        <li class="page-item">
+                        <a class="page-link bg-success text-white" href="<?php echo $_ENV['host.folder'].'gestionUsuarios?'.$url.'&page='.$max_page?>" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                         </li>
+                        <?php }?>
                     </ul>
                 </nav>
                 <button class="btn btn-success me-3" id="agregarUsuario">

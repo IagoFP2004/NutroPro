@@ -77,10 +77,30 @@ class UserModel extends BaseDbModel
         ]);
     }
 
+    public function getAllUsersAdmin(int $page): array
+    {
+        $limite = $_ENV['numero.pagina'];
+
+        $sql = "SELECT * FROM usuarios";
+        $sql.= " LIMIT ".($page - 1) * $limite .", $limite";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function deleteUser(int $idUsuario): bool
     {
         $sql = "DELETE FROM usuarios WHERE id_usuario = :idUsuario";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute(['idUsuario' => $idUsuario]);
     }
+
+    public function countNumberItems(): int
+    {
+        $sql = "SELECT COUNT(*) FROM usuarios";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return  $stmt->fetchColumn();
+    }
+
 }
