@@ -97,6 +97,37 @@
                     </div>
                 <?php }?>
             </div>
+            <hr class="my-5">
+
+<?php if (!empty($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] !== 'rwd' ) { ?>
+<h4 class="text-success mb-4"><i class="bi bi-chat-dots me-2"></i> Deja tu reseña de nuestro servicio</h4>
+<p class="text-center">Tu opinión es muy importante para nosotros!. Por favor, tómate un momento para compartir tu experiencia con NutroPro.</p>
+<p class="text-center">¡Gracias por ayudarnos a mejorar!</p>
+
+    <form action="/micuenta/reseña/<?php echo $usuario['id_usuario'] ?>" method="POST">
+        <div class="mb-3">
+            <label for="valoracion" class="form-label fw-semibold">Valoración</label>
+            <select class="form-select" id="valoracion" name="valoracion" required>
+                <option value="5">⭐⭐⭐⭐⭐ - Excelente</option>
+                <option value="4">⭐⭐⭐⭐ - Muy bueno</option>
+                <option value="3">⭐⭐⭐ - Normal</option>
+                <option value="2">⭐⭐ - Regular</option>
+                <option value="1">⭐ - Malo</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="comentario" class="form-label fw-semibold">Tu comentario</label>
+            <textarea class="form-control" id="comentario" name="comentario" rows="3" placeholder="Cuéntanos tu experiencia..." required></textarea>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-send me-1"></i> Enviar reseña
+            </button>
+        </div>
+    </form>
+<?php }?>
         </div>
     </div>
 </main>

@@ -127,6 +127,9 @@
         </div>
     </section>
 
+
+
+
     <!-- Sección CTA -->
     <section class="py-5 text-center bg-success text-white">
         <div class="container">
@@ -135,6 +138,7 @@
             <a href="<?php echo $_ENV['host.folder'].(isset($_SESSION['usuario']) ? 'productos' : 'login' ) ?>" class="btn btn-light btn-lg">Comienza hoy</a>
         </div>
     </section>
+    
 
 </main>
 
