@@ -81,7 +81,14 @@
                     <?php }?>
                     </tbody>
                 </table>
-                <?php }else{?>
+                <?php }else if(isset($_SESSION['usuario'])&& $_SESSION['usuario']['permisos'] == 'rwd'){?>
+                    <div class="col-12">
+                        <div class="alert alert-primary">
+                            <i class="bi bi-info-circle me-2"></i>
+                            El cliente no tiene pedidos asociados
+                        </div>
+                    </div>
+                <?php }else {?>
                     <div class="col-12">
                         <div class="alert alert-warning">
                             <i class="bi bi-info-circle me-2"></i>

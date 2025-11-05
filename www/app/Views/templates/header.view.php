@@ -68,7 +68,7 @@
             <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'ropa' ? 'active' : ''; ?>" href="/ropa">Ropa</a></li>
             <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'salud&fitness' ? 'active' : ''; ?>" href="/salud&fitness">Salud & Fitness</a></li>
             <?php if (isset($_SESSION['usuario'])) { ?>
-              <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'micuenta' ? 'active' : ''; ?>" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
+              <li class="nav-item"><a class="nav-link <?php echo strpos($_SERVER['REQUEST_URI'], $_ENV['host.folder'] . 'micuenta') === 0 ? 'active' : ''; ?>" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
             <?php } ?>
             <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd' ){ ?>
               <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'gestionUsuarios' ? 'active' : ''; ?>" href="/gestionUsuarios">Administrar usuarios</a></li>
@@ -102,7 +102,7 @@
           <li class="nav-item"><a class="nav-link" href="/proteina&creatina">Proteina & Creatina</a></li>
           <li class="nav-item"><a class="nav-link" href="/ropa">Ropa</a></li>
           <li class="nav-item"><a class="nav-link" href="/salud&fitness">Salud & Fitness</a></li>
-          <li class="nav-item"><a class="nav-link" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
+          <li class="nav-item"><a class="nav-link <?php echo strpos($_SERVER['REQUEST_URI'], $_ENV['host.folder'] . 'micuenta') === 0 ? 'active' : ''; ?>" href="/micuenta/<?php echo $_SESSION['usuario']['id_usuario'] ?>">Mi cuenta</a></li>
           <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd' ){ ?>
             <li class="nav-item"><a class="nav-link   <?php echo $_SERVER['REQUEST_URI'] === $_ENV['host.folder'] . 'gestionUsuarios' ? 'active' : ''; ?>" href="/gestionUsuarios">Administrar usuarios</a></li>
           <?php } ?>

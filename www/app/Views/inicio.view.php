@@ -132,7 +132,7 @@
         <div class="container">
             <h2 class="fw-bold mb-4">¿Listo para transformar tu cuerpo?</h2>
             <p class="lead mb-4">Únete a miles de personas que confían en NutroPro para alcanzar sus metas.</p>
-            <a href="/login" class="btn btn-light btn-lg">Comienza hoy</a>
+            <a href="<?php echo $_ENV['host.folder'].(isset($_SESSION['usuario']) ? 'productos' : 'login' ) ?>" class="btn btn-light btn-lg">Comienza hoy</a>
         </div>
     </section>
 

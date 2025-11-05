@@ -252,7 +252,7 @@ class UserController extends BaseController
         $data['page'] = $this->getNumeroPagina($numeroPaginas);
         $data['max_page'] = $numeroPaginas;
 
-
+        $data['usersNum'] = $modelo->getAllUsers();
         $data['usuarios'] = $modelo->getAllUsersAdmin($data['page']);
 
         $this->view->showViews(array('templates/header.view.php', 'gestionUsuarios.view.php','templates/footer.view.php'), $data);

@@ -78,14 +78,22 @@
             <div class="row text-center g-3 justify-content-center">
                 <div class="col-6 col-md-3">
                 <div class="bg-white border rounded p-3 shadow-sm">
-                    <div class="fs-4 fw-bold text-success"><?= count($usuarios) ?></div>
+                    <div class="fs-4 fw-bold text-success"><?= count($usersNum) ?></div>
                     <div class="small text-muted">Total registrados</div>
                 </div>
                 </div>
                 <div class="col-6 col-md-3">
                 <div class="bg-white border rounded p-3 shadow-sm">
                     <div class="fs-4 fw-bold text-primary">
-                    <?= $totalAdmins ?? 5 ?> <!-- ejemplo, reemplázalo -->
+                    <?php 
+                    $adminCount = 0; 
+                    foreach($usersNum as $user){
+                        if($user['id_rol'] == 1){
+                            $adminCount++;
+                        }
+                    }
+                    echo $adminCount;
+                    ?>
                     </div>
                     <div class="small text-muted">Administradores</div>
                 </div>
@@ -93,7 +101,15 @@
                 <div class="col-6 col-md-3">
                 <div class="bg-white border rounded p-3 shadow-sm">
                     <div class="fs-4 fw-bold text-warning">
-                        <?php echo 8 ?>
+                        <?php 
+                        $normalUsersCount = 0; 
+                        foreach($usersNum as $user){
+                            if($user['id_rol'] == 0){
+                                $normalUsersCount++;
+                            }
+                        }
+                        echo $normalUsersCount;
+                        ?>
                     </div>
                     <div class="small text-muted">Usuarios estándar</div>
                 </div>
