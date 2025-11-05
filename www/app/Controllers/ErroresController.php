@@ -11,7 +11,7 @@ class ErroresController extends \Com\Daw2\Core\BaseController
         http_response_code(404);
         $data = ['titulo' => 'Error 404'];
         $data['texto'] = '404. File not found';
-        $this->view->showViews(array('templates/header.view.php', 'error.php', 'templates/footer.view.php'), $data);
+        $this->view->showViews(array('templates/header.view.php', 'error404.view.php', 'templates/footer.view.php'), $data);
     }
 
     public function error405(): void

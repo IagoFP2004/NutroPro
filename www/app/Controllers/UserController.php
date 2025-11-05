@@ -169,13 +169,8 @@ class UserController extends BaseController
                 'id_rol' => $usuarioActual['id_rol'],
                 'password' => $usuarioActual['password']
             ];
-
-<<<<<<< HEAD
             $editado = $modelo->editInfoUser($datosUpdate, $idUsuario);
-=======
             $editado = $modelo->editInfoUser($datosUpdate,$idUsuario);
->>>>>>> 80d6a01 (Realizados ajustes)
-
             if ($editado !== false) {
                 // Actualizar datos en sesión
                 $_SESSION['usuario']['nombre'] = $datosUpdate['nombre'];

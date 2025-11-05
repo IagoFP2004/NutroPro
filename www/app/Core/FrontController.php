@@ -7,6 +7,7 @@ use Com\Daw2\Controllers\DetallePedidoController;
 use Com\Daw2\Controllers\InicioController;
 use Com\Daw2\Controllers\ProductoController;
 use Com\Daw2\Controllers\UserController;
+use Com\Daw2\Controllers\ErroresController;
 use Steampixel\Route;
 
 class FrontController
@@ -308,13 +309,12 @@ class FrontController
             $_SESSION['carrito_count'] = $carritoModel->contarProductosCarrito($_SESSION['usuario']['id_usuario']);
         }
 
-        Route::pathNotFound(function () {
-            if (!isset($_SESSION['usuario'])) {
-                header('Location: /login');
-            } else {
-                header('Location: /');
+        Route::pathNotFound(
+            function () {
+                $controlador = new ErroresController();
+                $controlador->error404();
             }
-        });
+        );
 
         Route::methodNotAllowed(
             function () {

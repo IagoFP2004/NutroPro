@@ -120,16 +120,9 @@ class CarritoController extends BaseController
             }
             
             if ($mailController->enviarCorreo($email, 'Confirmación de pedido - NutroPro', 'Gracias por su compra en NutroPro, su pedido está en marcha!')) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 80d6a01 (Realizados ajustes)
                 $idPedido = $pedidoController->nuevoPedido($idUsuario, $data['total']);
                 if ($idPedido !== false) {
-<<<<<<< HEAD
-=======
-                    $detallePedidoModel = new \Com\Daw2\Models\DetallePedidoModel();
->>>>>>> 80d6a01 (Realizados ajustes)
+                    $detallePedidoModel = new DetallePedidoModel();
                     $detallePedidoModel->insertDetallePedido($idPedido, $idUsuario);
                     $this->deleteAllItemsUser($idUsuario);
                     $_SESSION['carrito_count'] = 0;
