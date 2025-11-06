@@ -119,7 +119,7 @@ class CarritoController extends BaseController
                 exit;
             }
             
-            if ($mailController->enviarCorreo($email, 'Confirmación de pedido - NutroPro', 'Gracias por su compra en NutroPro, su pedido está en marcha!')) {
+            if ($mailController->enviarCorreo($email)) {
                 $idPedido = $pedidoController->nuevoPedido($idUsuario, $data['total']);
                 if ($idPedido !== false) {
                     $detallePedidoModel = new DetallePedidoModel();

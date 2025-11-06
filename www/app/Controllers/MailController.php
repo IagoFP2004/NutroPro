@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 
 class MailController extends BaseController
 {
-    public function enviarCorreo($para, $asunto, $mensaje) {
+    public function enviarCorreo($para) {
         $mail = new PHPMailer(true);
 
         try {
@@ -34,9 +34,8 @@ class MailController extends BaseController
 
             // Contenido
             $mail->isHTML(true);
-            $mail->Subject = $asunto;
-            $mail->Body    = $mensaje;
-            $mail->AltBody = strip_tags($mensaje);
+            $mail->Subject = 'Tu pedido en NutroPro está en marcha!';
+            $mail->Body    = '<h1>Gracias por su compra en NutroPro!</h1><p>Su pedido está siendo procesado y pronto será enviado.</p>';
 
             // Enviar
             $mail->send();
