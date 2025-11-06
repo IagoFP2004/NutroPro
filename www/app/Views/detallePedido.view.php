@@ -87,11 +87,11 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <div class="bg-light rounded p-2 me-3">
-                                                <i class="bi bi-box-seam text-success fs-4"></i>
+                                            <div class="me-3" style="flex: 0 0 auto;">
+                                                <img src="<?php echo $_ENV['IMG_BASE'].$item['imagen_url']?>" class="img-fluid rounded" alt="<?php echo htmlspecialchars($item['nombre_producto']) ?>" style="width:64px; height:64px; object-fit:cover;">
                                             </div>
                                             <div>
-                                                <h6 class="mb-0">Producto ID: <?php echo $item['id_producto'] ?></h6>
+                                                <h6 class="mb-0"><?php echo htmlspecialchars($item['nombre_producto']) ?></h6>
                                             </div>
                                         </div>
                                     </td>

@@ -8,7 +8,10 @@ class DetallePedidoModel extends BaseDbModel
 {
     public function getPedido(int $idPedido): array | false
     {
-        $sql = "SELECT * FROM detalle_pedido WHERE id_pedido = :idPedido";
+        $sql = "SELECT  dp.*, p.nombre as nombre_producto,  p.imagen_url
+                FROM detalle_pedido dp 
+                LEFT JOIN productos p ON p.id_producto = dp.id_producto 
+                WHERE dp.id_pedido = :idPedido";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([":idPedido" => $idPedido]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
