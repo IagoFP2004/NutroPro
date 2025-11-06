@@ -80,6 +80,7 @@ class   ProductoController extends BaseController
         
         // Pasar los datos del producto a la vista
         $data['producto'] = $producto;
+        $data['modo'] = 'editar'; // Indicar que estamos en modo edición
         $data['input'] = [
             'nombre' => $producto['nombre'],
             'descripcion' => $producto['descripcion'],
