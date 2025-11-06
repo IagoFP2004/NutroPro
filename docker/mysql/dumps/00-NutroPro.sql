@@ -92,19 +92,16 @@ CREATE TABLE IF NOT EXISTS `carrito` (
   CONSTRAINT `fk_carrito_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE IF NOT EXISTS `reseñas` (
+CREATE TABLE IF NOT EXISTS `resenas` (
   `id_reseña` INT NOT NULL AUTO_INCREMENT,
-  `id_producto` INT DEFAULT NULL,
-  `id_usuario` INT DEFAULT NULL,
-  `calificacion` INT NOT NULL,
-  `comentario` TEXT,
-  `fecha_reseña` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_usuario` INT NOT NULL,
+  `valoracion` INT NOT NULL,
+  `comentario` VARCHAR(255) NOT NULL,
+  `fecha_coment` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_reseña`),
-  KEY `idx_reseñas_producto` (`id_producto`),
-  KEY `idx_reseñas_usuario` (`id_usuario`),
-  CONSTRAINT `fk_reseñas_producto` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE,
-  CONSTRAINT `fk_reseñas_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE,
-  CONSTRAINT `chk_calificacion` CHECK ((`calificacion` >= 1) AND (`calificacion` <= 5))
+  KEY `idx_resenas_usuario` (`id_usuario`),
+  CONSTRAINT `fk_resenas_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE,
+  CONSTRAINT `chk_valoracion` CHECK ((`valoracion` >= 1) AND (`valoracion` <= 5))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- =========================
@@ -127,7 +124,7 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `password`, `direccion`
 (4, 'Carlos López', 'carlos.lopez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Calle Nueva 67, Sevilla', '633456789', '2025-10-29 07:32:53', 0),
 (5, 'IagoFP', 'iagofranciscoperez@gmail.com', '$2y$10$SYpzm45LrQRuXNnbmaZvCeh0tOTY0p5oOrrki.D.nzOvM7kLZumu.', 'San Lorenzo de Oliveira Barrio de Souto 16', '642513802', '2025-10-29 14:09:12', 0),
 (6, 'Iago Francisco Perez', 'iagofranciscoperez123@gmail.com', '$2y$10$d5rhPKVLCCO5oVpXDbXSwu6oGrXiRZgKGd5BQ7SXYlQ8F17KFkKNe', 'San Lorenzo de Oliveira Barrio de Souto 16', '642513803', '2025-11-04 09:27:11', 0),
-(10, 'Usuario Prueba', 'usuariodePrueba@gmail.com', '$2y$10$EuCX8rvAdxvgSqU9PnwVROxo7Tle6fXNsPiDA8CUzcuyY3BPk6rk6', 'Mi casa', '621739201', '2025-11-05 15:12:22', 1);
+(11, 'Tomas', 'Tomas@gmail.com', '$2y$10$mLLfVA6Wh3unnN13h6Y7o.CGKjTbnNvF7Jtb0x5fj7DZXXd/nG.IS', 'Su casa', '642974215', '2025-11-06 08:37:44', 0);
 
 -- Insertar productos
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`, `proteinas`, `carbohidratos`, `grasas`, `talla`, `color`, `material`) VALUES
@@ -161,5 +158,14 @@ INSERT INTO `detalle_pedido` (`id_detalle`, `id_pedido`, `id_producto`, `cantida
 (4, 19, 15, 1, 39.99),
 (5, 19, 2, 1, 35.99),
 (6, 20, 4, 1, 38.99);
+
+-- Insertar reseñas
+INSERT INTO `resenas` (`id_reseña`, `id_usuario`, `valoracion`, `comentario`, `fecha_coment`) VALUES
+(2, 2, 5, 'NutroPro me ha ayudado a mejorar mi alimentación y mantenerme motivado. Rápida, intuitiva y completa.', '2025-11-06 10:48:14'),
+(3, 3, 5, 'Una app genial para cuidar mi nutrición. Todo está bien explicado y los resultados se notan rápido.', '2025-11-06 10:48:14'),
+(4, 11, 5, 'Buenisimo con estos productos puedo render perfectamente en el gimnasio, y sin perder el estilo!', '2025-11-06 10:48:14'),
+(5, 11, 5, 'Excelente experiencia con NutroPro. Sus suplementos son de gran calidad y se nota la diferencia. Además, la app facilita todo el proceso y ofrece muy buenas recomendaciones. ¡Muy satisfecho!', '2025-11-06 10:48:14'),
+(6, 4, 1, 'malisima calidad la de la proteina', '2025-11-06 10:48:14'),
+(8, 5, 5, 'Ultimo comentario', '2025-11-06 10:53:05');
 
 COMMIT;
