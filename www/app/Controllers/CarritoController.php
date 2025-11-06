@@ -119,7 +119,7 @@ class CarritoController extends BaseController
                 exit;
             }
             
-            if ($mailController->enviarCorreo($email)) {
+            if ($mailController->enviarCorreo($email, $idUsuario)) {
                 $idPedido = $pedidoController->nuevoPedido($idUsuario, $data['total']);
                 if ($idPedido !== false) {
                     $detallePedidoModel = new DetallePedidoModel();

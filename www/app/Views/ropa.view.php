@@ -32,13 +32,11 @@
 
 <!-- ====== Descripción de productos ====== -->
 <section class="container mt-5 mb-4 text-center">
-    <h1 class="fw-bold text-success mb-3">ROPA</h1>
+    <h1 class="fw-bold text-success mb-3">Ropa</h1>
     <p class="lead text-muted mx-auto" style="max-width: 800px;">
         Descubre la nueva línea de ropa deportiva NutroPro, diseñada para quienes buscan rendimiento, comodidad y estilo.
         Cada prenda combina tecnología textil avanzada con un diseño moderno y funcional, perfecto tanto para el gimnasio como para tu día a día.
-
         Nuestra colección está confeccionada con tejidos transpirables, elásticos y de secado rápido, que se adaptan a cada movimiento, ofreciendo máxima libertad y confort incluso en los entrenamientos más exigentes.
-
         NutroPro Wear: potencia tu entrenamiento, viste tu mejor versión.
     </p>
 </section>
@@ -48,7 +46,6 @@
 
     <!-- CATEGORÍA 1: Proteína & Creatina -->
     <section class="mb-5">
-        <h2 class="fw-bold mb-4 text-success text-center">Ropa Deportiva</h2>
         <div class="row g-4">
             <?php foreach ($ropas as $ropa) { ?>
                 <div class="col-6 col-sm-6 col-md-3">
