@@ -18,13 +18,19 @@ class ResenasController extends BaseController
             if ($modelo->insertResena($idUsuario, $_POST)) {
                 $_SESSION['msjE'] = 'Reseña enviada con éxito!.';
                 header ('Location: /micuenta/'.$idUsuario);
+                exit;
             } else {
                 $_SESSION['msjErr'] = 'No se ha podido enviar la reseña. Por favor, inténtalo de nuevo más tarde.';
                 header('Location: /micuenta/'.$idUsuario);
+                exit;
             }
         }else{
+            // Guardar errores e input en sesión para poder mostrarlos después de la redirección
+            $_SESSION['errores'] = $errores;
+            $_SESSION['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
             $_SESSION['msjErr'] = 'No se ha podido enviar la reseña. Por favor, corrige los errores e inténtalo de nuevo.';
             header('Location: /micuenta/'.$idUsuario);
+            exit;
         }
     }
 
@@ -32,8 +38,8 @@ class ResenasController extends BaseController
     {
         $errors = [];
 
-        if (empty($data['comentario']) || strlen($data['comentario']) < 10) {
-            $errors['comentario'] = 'El comentario debe tener al menos 10 caracteres.';
+        if (empty($data['comentario']) || strlen($data['comentario']) < 10 || strlen($data['comentario']) > 156) {
+            $errors['comentario'] = 'El comentario debe tener al menos 10 caracteres ni mas de 156 caracteres.';
         }
 
         if (empty($data['valoracion']) || !in_array($data['valoracion'], [1, 2, 3, 4, 5])) {

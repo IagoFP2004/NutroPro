@@ -118,7 +118,8 @@
 
         <div class="mb-3">
             <label for="comentario" class="form-label fw-semibold">Tu comentario</label>
-            <textarea class="form-control" id="comentario" name="comentario" rows="3" placeholder="Cuéntanos tu experiencia..." required></textarea>
+            <textarea class="form-control" id="comentario" name="comentario" rows="3" placeholder="Cuéntanos tu experiencia..." value='<?php echo $input['comentario'] ?? '' ?>' required></textarea>
+            <p class="text-danger"><?php echo $errores['comentario'] ?? '' ?></p>
         </div>
 
         <div class="text-end">
