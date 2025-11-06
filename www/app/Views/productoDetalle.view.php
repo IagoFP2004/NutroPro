@@ -153,75 +153,28 @@
     <!-- Productos más vendidos -->
     <section class="mt-5">
         <h4 class="fw-bold text-center text-success mb-4">
-            Los más vendidos
+            Productos relacionados
         </h4>
 
         <div class="row g-4 justify-content-center">
-            <!-- Producto 1 -->
+            <?php foreach ($productosVendidos as $prod){ ?>
+                <?php if ($prod['id_categoria'] == $producto['id_categoria']){ ?>
             <div class="col-6 col-md-3">
                 <a href="#" class="text-decoration-none text-dark">
                     <div class="card border-0 shadow-sm h-100">
-                        <img src="assets/img/ejemplo-producto2.png" class="card-img-top" alt="Proteína Whey 1kg">
+                        <img src="/assets/img/<?php echo $prod['imagen_url'] ?>" class="card-img-top" alt="<?php echo $prod['nombre'] ?>">
                         <div class="card-body text-center">
-                            <h6 class="fw-semibold mb-1">Proteína Whey 1kg</h6>
-                            <p class="text-success fw-bold mb-0">29,99 €</p>
-                            <button class="btn btn-success btn-sm mt-2">
-                                <i class="bi bi-cart-plus me-1"></i> Añadir
-                            </button>
+                            <h6 class="fw-semibold mb-1"><?php echo $prod['nombre'] ?></h6>
+                            <p class="text-success fw-bold mb-0"><?php echo $prod['precio'] ?> €</p>
+                            <a href="<?php echo $_ENV['BASE_URL'] ?>productos/<?php echo $prod['id_producto'] ?>" class="btn btn-success btn-sm mt-2">
+                                <i class="bi bi-search"></i> Ver producto
+                            </a>
                         </div>
                     </div>
                 </a>
             </div>
-
-            <!-- Producto 2 -->
-            <div class="col-6 col-md-3">
-                <a href="#" class="text-decoration-none text-dark">
-                    <div class="card border-0 shadow-sm h-100">
-                        <img src="assets/img/ejemplo-producto3.png" class="card-img-top" alt="Shaker NutroPro">
-                        <div class="card-body text-center">
-                            <h6 class="fw-semibold mb-1">Shaker NutroPro</h6>
-                            <p class="text-success fw-bold mb-0">6,99 €</p>
-                            <button class="btn btn-success btn-sm mt-2">
-                                <i class="bi bi-cart-plus me-1"></i> Añadir
-                            </button>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Producto 3 -->
-            <div class="col-6 col-md-3">
-                <a href="#" class="text-decoration-none text-dark">
-                    <div class="card border-0 shadow-sm h-100">
-                        <img src="assets/img/ejemplo-producto4.png" class="card-img-top" alt="Barrita energética">
-                        <div class="card-body text-center">
-                            <h6 class="fw-semibold mb-1">Barrita energética</h6>
-                            <p class="text-success fw-bold mb-0">2,49 €</p>
-                            <button class="btn btn-success btn-sm mt-2">
-                                <i class="bi bi-cart-plus me-1"></i> Añadir
-                            </button>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Producto 4 -->
-            <div class="col-6 col-md-3">
-                <a href="#" class="text-decoration-none text-dark">
-                    <div class="card border-0 shadow-sm h-100">
-                        <img src="assets/img/ejemplo-producto5.png" class="card-img-top"
-                             alt="Creatina Monohidratada 500g">
-                        <div class="card-body text-center">
-                            <h6 class="fw-semibold mb-1">Creatina Monohidratada 500g</h6>
-                            <p class="text-success fw-bold mb-0">15,99 €</p>
-                            <button class="btn btn-success btn-sm mt-2">
-                                <i class="bi bi-cart-plus me-1"></i> Añadir
-                            </button>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+            <?php } ?>
+            <?php } ?>
     </section>
 
 </main>

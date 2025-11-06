@@ -64,7 +64,10 @@ class   ProductoController extends BaseController
         );
 
         $modelo = new ProductoModel();
-        $data['producto'] = $modelo->getProductoById($id);
+        $producto = $modelo->getProductoById($id);
+        $data['producto'] = $producto;
+        // Forzamos la conversión a int del id_categoria
+        $data['productosVendidos'] = $modelo->getProductosRelacionados($id, (int)$producto['id_categoria']);
 
         $this->view->showViews(array('templates/header.view.php', 'productoDetalle.view.php','templates/footer.view.php'), $data);
     }

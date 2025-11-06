@@ -207,6 +207,20 @@ class ProductoModel extends BaseDbModel
         return $stmt->execute(['id' => $id]);
     }
 
+    public function getProductosRelacionados(int $idProducto, int $idCategoria): array
+    {
+        $sql = "SELECT * FROM productos 
+                WHERE id_categoria = :categoria 
+                AND id_producto != :id_producto";
+                
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':categoria', $idCategoria, \PDO::PARAM_INT);
+        $stmt->bindValue(':id_producto', $idProducto, \PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll();
+    }
+
     public function update(int $id, array $data): bool
     {
         $sql = "UPDATE `productos` SET
