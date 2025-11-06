@@ -50,7 +50,7 @@
         <?php if (!empty($proteinas)){ ?>
         <div class="row g-4">
             <?php foreach ($proteinas as $proteina) { ?>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
                         <img src="<?php echo $_ENV['IMG_BASE'].$proteina['imagen_url']; ?>" class="card-img-top" alt="Proteína Whey">
                         <div class="card-body d-flex flex-column">
@@ -89,7 +89,7 @@
         <?php if(!empty($ropas)) { ?>
         <div class="row g-4">
             <?php foreach ($ropas as $ropa) { ?>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
                         <img src="<?php echo $_ENV['IMG_BASE'].$ropa['imagen_url']; ?>" class="card-img-top" alt="Ropa de gimnasio">
                         <div class="card-body d-flex flex-column">
@@ -129,7 +129,7 @@
 
         <div class="row g-4">
             <?php foreach ($suplementos as $suplemento) { ?>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
                         <img src="<?php echo $_ENV['IMG_BASE'].$suplemento['imagen_url']; ?>" class="card-img-top" alt="Suplemento">
                         <div class="card-body d-flex flex-column">
@@ -168,7 +168,7 @@
         <?php if(!empty($accesorios)) { ?>
         <div class="row g-4">
             <?php foreach ($accesorios as $accesorio) { ?>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
                         <img src="<?php echo $_ENV['IMG_BASE'].$accesorio['imagen_url']; ?>" class="card-img-top" alt="Accesorio">
                         <div class="card-body d-flex flex-column">
@@ -206,7 +206,7 @@
         <?php if(!empty($snacks)) { ?>
         <div class="row g-4">
             <?php foreach ($snacks as $snack) { ?>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
                         <img src="<?php echo $_ENV['IMG_BASE'].$snack['imagen_url']; ?>" class="card-img-top" alt="Accesorio">
                         <div class="card-body d-flex flex-column">

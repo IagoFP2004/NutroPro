@@ -65,7 +65,7 @@
             <?php foreach ($productos as $producto): ?>
                 <?php if (!empty($producto['destacado']) && (int)$producto['destacado'] === 1): ?>
                     <?php $hayDestacados = true; ?>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div class="card h-100 border-0 shadow-sm">
                             <img
                                     src="<?php echo ($_ENV['IMG_BASE'] ?? '').($producto['imagen_url'] ?? ''); ?>"

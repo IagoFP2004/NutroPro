@@ -48,7 +48,7 @@
         <h2 class="fw-bold mb-4 mt-4 text-success text-center">Suplementos</h2>
         <div class="row g-4">
             <?php foreach ($suplementos as $suplemento) { ?>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
                         <img src="<?php echo $_ENV['IMG_BASE'].$suplemento['imagen_url']; ?>" class="card-img-top" alt="Suplemento">
                         <div class="card-body d-flex flex-column">
@@ -80,7 +80,7 @@
         <h2 class="fw-bold mb-4 mt-4 text-success text-center">Accesorios</h2>
         <div class="row g-4">
             <?php foreach ($accesorios as $accesorio) { ?>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
                         <img src="<?php echo $_ENV['IMG_BASE'].$accesorio['imagen_url']; ?>" class="card-img-top" alt="Accesorio">
                         <div class="card-body d-flex flex-column">
@@ -111,7 +111,7 @@
         <h2 class="fw-bold mb-4 mt-4 text-success text-center">SNACKS</h2>
         <div class="row g-4">
             <?php foreach ($snacks as $snack) { ?>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
                         <img src="<?php echo $_ENV['IMG_BASE'].$snack['imagen_url']; ?>" class="card-img-top" alt="Accesorio">
                         <div class="card-body d-flex flex-column">

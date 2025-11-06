@@ -51,7 +51,7 @@
         <h2 class="fw-bold mb-4 text-success text-center">Ropa Deportiva</h2>
         <div class="row g-4">
             <?php foreach ($ropas as $ropa) { ?>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
                         <img src="<?php echo $_ENV['IMG_BASE'].$ropa['imagen_url']; ?>" class="card-img-top" alt="Proteína Whey">
                         <div class="card-body d-flex flex-column">
