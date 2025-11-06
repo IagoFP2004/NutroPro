@@ -33,14 +33,13 @@ class CarritoModel extends BaseDbModel
                 'id_carrito' => $existe['id_carrito']
             ]);
         } else {
-            $sql = "INSERT INTO `carrito`(`id_usuario`, `id_producto`, `cantidad`, `fecha_agregado`, `imagen_url`) 
-            VALUES (:id_usuario, :id_producto, :cantidad, NOW(), :imagen_url)";
+            $sql = "INSERT INTO `carrito`(`id_usuario`, `id_producto`, `cantidad`, `fecha_agregado`) 
+            VALUES (:id_usuario, :id_producto, :cantidad, NOW())";
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute([
                 'id_usuario' => $idUsuario,
                 'id_producto' => $productos['id_producto'],
                 'cantidad' => $productos['cantidad'],
-                'imagen_url' => $productos['imagen_url'] ?? ''
             ]);
         }
     }
@@ -65,7 +64,7 @@ class CarritoModel extends BaseDbModel
 
     public function getProductosCarrito(int $idUsuario):array
     {
-        $sql = "SELECT c.*, p.nombre, p.descripcion, p.precio, p.stock 
+        $sql = "SELECT c.*, p.nombre, p.descripcion, p.precio, p.stock, p.imagen_url 
                 FROM carrito c 
                 INNER JOIN productos p ON c.id_producto = p.id_producto 
                 WHERE c.id_usuario = :id_usuario

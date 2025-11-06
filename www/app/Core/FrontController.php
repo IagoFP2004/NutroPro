@@ -6,6 +6,7 @@ use Com\Daw2\Controllers\CarritoController;
 use Com\Daw2\Controllers\DetallePedidoController;
 use Com\Daw2\Controllers\InicioController;
 use Com\Daw2\Controllers\ProductoController;
+use Com\Daw2\Controllers\PedidosController;
 use Com\Daw2\Controllers\UserController;
 use Com\Daw2\Controllers\ErroresController;
 use Steampixel\Route;

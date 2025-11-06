@@ -54,16 +54,8 @@ class CarritoController extends BaseController
 
         $carritoModel = new CarritoModel();
         $idUsuario = $_SESSION['usuario']['id_usuario'];
-        
-        $imagenUrl = $carritoModel->getImagenProducto($idProducto);
 
-        $productos = [
-            'id_producto' => $idProducto,
-            'cantidad' => $cantidad,
-            'imagen_url' => $imagenUrl ?? ''
-        ];
-
-            $resultado = $carritoModel->insertarCarrito($idUsuario, $productos);
+            $resultado = $carritoModel->insertarCarrito($idUsuario, $_POST);
 
             if ($resultado) {
                 $_SESSION['success'] = 'Producto agregado al carrito correctamente';

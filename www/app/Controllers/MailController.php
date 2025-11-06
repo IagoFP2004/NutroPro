@@ -35,7 +35,7 @@ class MailController extends BaseController {
             $productosCarrito = [];
             if (class_exists('\Com\Daw2\Models\CarritoModel')) {
                 $carritoModelo = new \Com\Daw2\Models\CarritoModel();
-                $productosCarrito = $carritoModelo->getProductosCarrito((int)$idUsuario) ?? [];
+                $productosCarrito = $carritoModelo->getProductosCarrito($_SESSION['usuario']['id_usuario']) ?? [];
             }
 
             // Preparar el contenido del correo
