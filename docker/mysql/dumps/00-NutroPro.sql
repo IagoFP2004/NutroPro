@@ -128,9 +128,9 @@ INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `password`, `direccion`
 
 -- Insertar productos
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock`, `id_categoria`, `destacado`, `imagen_url`, `proteinas`, `carbohidratos`, `grasas`, `talla`, `color`, `material`) VALUES
-(1, 'Whey Protein Isolate', 'Proteína de suero aislada de alta calidad, perfecta para aumentar masa muscular. 90% de proteína pura.', 45.99, 150, 1, 1, 'ChatGPT Image 9 oct 2025, 13_50_44.png', 90, 3, 2, NULL, NULL, NULL),
-(2, 'Whey Protein Concentrate', 'Proteína de suero concentrada con excelente sabor a chocolate. Ideal post-entrenamiento.', 35.99, 200, 1, 1, 'ChatGPT Image 9 oct 2025, 15_02_05.png', 80, 8, 5, NULL, NULL, NULL),
-(4, 'Proteína Vegana', 'Mezcla de proteínas vegetales (guisante, arroz, hemp). 100% vegano y sin lactosa.', 38.99, 120, 1, 1, 'ChatGPT Image 9 oct 2025, 15_49_15.png', 75, 12, 6, NULL, NULL, NULL),
+(1, 'Whey Protein', 'Proteína de suero de alta calidad, perfecta para aumentar masa muscular. 90% de proteína pura.', 19.99, 150, 1, 1, 'ChatGPT Image 9 oct 2025, 13_50_44.png', 90, 3, 2, NULL, NULL, NULL),
+(2, 'Whey Protein Concentrate', 'Nuestra proteina concentrada pura de la mas alta calidad para que te recuperes y rindas como nunca en cada entrenamiento', 25.99, 200, 1, 1, 'img_690cb7360705e0.97254258.png', 80, 8, 5, NULL, NULL, NULL),
+(4, 'Proteína Vegana', 'Mezcla de proteínas vegetales (guisante, arroz, hemp). 100% vegano y sin lactosa.', 25.99, 120, 1, 1, 'img_690cb8083261a3.03641882.png', 75, 12, 6, NULL, NULL, NULL),
 (6, 'Pre-Workout Extreme', 'Pre-entreno con cafeína, beta-alanina y citrulina para máxima energía y bombeo muscular.', 29.99, 180, 2, 1, 'ChatGPT Image 9 oct 2025, 16_43_32.png', 2, 15, 0, NULL, NULL, NULL),
 (7, 'BCAA 2:1:1', 'Aminoácidos ramificados para recuperación muscular. Sabor limón refrescante.', 24.99, 220, 2, 0, 'ChatGPT Image 9 oct 2025, 16_52_32.png', 8, 2, 0, NULL, NULL, NULL),
 (8, 'Multivitamínico Completo', 'Complejo vitamínico con 25 vitaminas y minerales esenciales. Una cápsula al día.', 15.99, 250, 2, 0, 'ChatGPT Image 13 oct 2025, 16_50_23.png', 0, 5, 0, NULL, NULL, NULL),
@@ -145,7 +145,13 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `precio`, `stoc
 (22, 'Botella de Agua 1L', 'Botella deportiva con marcador de hidratación. Aislada térmicamente, mantiene frío 24h.', 16.99, 200, 5, 0, 'ChatGPT Image 9 oct 2025, 16_52_32.png', 0, 0, 0, NULL, NULL, NULL),
 (23, 'Toalla Microfibra', 'Toalla ultra absorbente y de secado rápido. Perfecta para el gimnasio. 80x40cm.', 12.99, 180, 5, 0, 'ChatGPT Image 13 oct 2025, 16_50_23.png', 0, 0, 0, NULL, NULL, NULL),
 (24, 'Cinturón Lumbar', 'Cinturón de soporte lumbar para levantamiento pesado. Ajustable y ergonómico.', 29.99, 80, 5, 0, 'ChatGPT Image 13 oct 2025, 17_01_29.png', 0, 0, 0, NULL, NULL, NULL),
-(25, 'Creatina Monohidratada ', 'Creatina de la mas alta calidad', 15.00, 200, 1, 0, 'img_69023e1befe772.98130851.png', 5, 10, 5, NULL, NULL, NULL);
+(25, 'Creatina Monohidratada', 'Creatina de la mas alta calidad', 15.00, 200, 1, 0, 'img_69023e1befe772.98130851.png', 5, 10, 5, NULL, NULL, NULL),
+(28, 'Whey Protein Isolate', 'Nuestra proteína aislada de mas alta calidad, la mejor calidad por el mejor precio', 35.99, 200, 1, 0, 'img_690cb93ab7f069.16290636.png', 30, 20, 9, NULL, NULL, NULL),
+(29, 'Proteina de Caseina', 'La Caseina es un semejante de la Whey Protein pero de digestion mas rapida, obtener una alta cantidad de proteina nunca ha sido tan facil, y menos con tan alta calidad', 24.99, 250, 1, 0, 'img_690cbd2b5be454.96145412.png', 25, 10, 7, NULL, NULL, NULL),
+(30, 'Whey Protein Vainilla', 'Nuestra Whey protein ahora con mas sabor que nunca disfruta de nuestras proteinas ahora con el sabor mas avainillado', 25.99, 300, 1, 0, 'img_690cbe256cd533.18351841.png', 26, 14, 10, NULL, NULL, NULL),
+(31, 'Whey Protein Fresa', 'Nuestra Whey protein con el mejor sabor posible un sabor fresco y sobre todo bien cargado de proteina!, disfruta del sabor a fresa mas natural y alto en proteinas', 25.99, 350, 1, 0, 'img_690cbf1a5e6086.00970190.png', 24, 16, 10, NULL, NULL, NULL),
+(32, 'Creatina Monohidratada sabor Helado', 'Creatina monohidratada sabor helado con un toque fresco y potente la mejor manera de aumentar tu productividad de la manera mas refrescante', 15.00, 250, 1, 0, 'img_690cc398dd2e24.15597425.png', 5, 16, 5, NULL, NULL, NULL),
+(33, 'Creatina Monohidratada sabor Fresa', 'Creatina monohidratada sabor fresa con un toque fresco y potente la mejor manera de aumentar tu productividad de la manera mas dulce y afrutada', 17.99, 300, 1, 0, 'img_690cc45d731e23.90917573.png', 5, 10, 5, NULL, NULL, NULL);
 
 -- Insertar pedidos
 INSERT INTO `pedidos` (`id_pedido`, `id_usuario`, `fecha_pedido`, `estado`, `total`) VALUES

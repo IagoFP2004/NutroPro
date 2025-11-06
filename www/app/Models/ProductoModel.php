@@ -82,7 +82,7 @@ class ProductoModel extends BaseDbModel
 
     public function getProductosProteinasCreatina(): array
     {
-        $sql = "SELECT * FROM productos WHERE id_categoria = 1 AND nombre LIKE '%protein%' ";
+        $sql = "SELECT * FROM productos WHERE id_categoria = 1  ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
