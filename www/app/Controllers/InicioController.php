@@ -11,12 +11,6 @@ use Com\Daw2\Models\ResenasModel;
 class InicioController extends BaseController
 {
     public function index() {
-        $data = array(
-            'titulo' => 'Pagina inicial',
-            'breadcrumb' => ['Inicio'],
-            'seccion' => '/inicio'
-        );
-
         $productoModel = new ProductoModel();
         $data['productos'] = $productoModel->getProductos();
 

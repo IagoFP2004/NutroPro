@@ -10,12 +10,6 @@ class   ProductoController extends BaseController
 {
     public function showProductsView(): void
     {
-        $data = array(
-            'titulo' => 'Productos',
-            'breadcrumb' => ['Inicio/productos'],
-            'seccion' => '/productos'
-        );
-
         $modelo = new ProductoModel();
 
         $filtros = [
@@ -57,12 +51,6 @@ class   ProductoController extends BaseController
 
     public function showDetailsView(int $id): void
     {
-        $data = array(
-            'titulo' => 'Productos Detalles',
-            'breadcrumb' => ['Inicio/productos/Detalle'],
-            'seccion' => '/productos/detalles'
-        );
-
         $modelo = new ProductoModel();
         $producto = $modelo->getProductoById($id);
         $data['producto'] = $producto;
@@ -74,12 +62,6 @@ class   ProductoController extends BaseController
 
     public function showAltaProductsView(): void
     {
-        $data = array(
-            'titulo' => 'Productos Alta',
-            'breadcrumb' => ['Inicio/productos/altas'],
-            'seccion' => '/productos/altas',
-            'modo' => 'crear'
-        );
         $categoriaModel = new CategoriaModel();
         $data['categorias'] = $categoriaModel->getAllCategorias();
         $this->view->showViews(array('templates/header.view.php', 'productosAlta.view.php','templates/footer.view.php'), $data);
@@ -87,13 +69,6 @@ class   ProductoController extends BaseController
 
     public function showEditView(int $id): void
     {
-        $data = array(
-            'titulo' => 'Editar Producto',
-            'breadcrumb' => ['Inicio/productos/editar'],
-            'seccion' => '/productos/editar',
-            'modo' => 'editar'
-        );
-        
         $productoModel = new ProductoModel();
         $producto = $productoModel->getProductoById($id);
         
@@ -181,13 +156,6 @@ class   ProductoController extends BaseController
 
     public function insertProducts(): void
     {
-        $data = array(
-            'titulo'     => 'Productos Alta',
-            'breadcrumb' => ['Inicio/productos/altas'],
-            'seccion'    => '/productos/altas',
-            'modo'       => 'crear'
-        );
-
         $categoriaModel = new CategoriaModel();
         $errors = $this->checkData($_POST, $_FILES, true);
 
@@ -250,13 +218,6 @@ class   ProductoController extends BaseController
 
     public function updateProducts(int $id): void
     {
-        $data = array(
-            'titulo' => 'Editar Producto',
-            'breadcrumb' => ['Inicio/productos/editar'],
-            'seccion' => '/productos/editar',
-            'modo' => 'editar'
-        );
-
         $categoriaModel = new CategoriaModel();
         $productoModel = new ProductoModel();
         
