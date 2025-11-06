@@ -103,6 +103,64 @@
         </div>
     </section>
 
+    <section class="mb-5">
+        <h2 class="mb-4 fw-bold text-center">Reseñas de nuestros clientes</h2>
+
+        <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <?php if(!empty($resenas)){
+                    $chunks = array_chunk($resenas, 3);
+                    foreach($chunks as $index => $chunk ){?>
+                    <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                        <div class="container">
+                            <div class="row g-4 justify-content-center">
+                                <?php foreach($chunk as $resena ){ ?>
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="card" style="border: 2px solid #198754; height: 220px ;">
+                                        <div class="card-body d-flex flex-column" style="height: 100%;">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5 class="card-title mb-0"><?php echo $resena['nombre'] ?></h5>
+                                                <img class="bg-black rounded-circle" src="<?php echo $_ENV['IMG_BASE']?>logo.png" alt="Logo" style="height: 35px; width: auto;">
+                                            </div>
+                                            <p class="card-text my-3" style="flex: 1 1 auto;"><?php echo htmlspecialchars($resena['comentario']) ?></p>
+                                            <div class="d-flex justify-content-start">
+                                                <?php 
+                                                for($i = 0; $i < 5; $i++){
+                                                    if($i < (int)$resena['valoracion']) {
+                                                        echo '<i class="bi bi-star-fill text-warning me-1"></i>';
+                                                    } else {
+                                                        echo '<i class="bi bi-star text-warning me-1"></i>';
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php }?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php }?>
+                <?php } else { ?>
+                    <div class="carousel-item active">
+                        <div class="text-center py-4">
+                            <p class="text-muted">No hay reseñas disponibles.</p>
+                        </div>
+                    </div>
+                <?php }?>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+    </div>
+
+    </section>
+
     <!-- Sección de beneficios -->
     <section class="py-5 bg-light">
         <div class="container">

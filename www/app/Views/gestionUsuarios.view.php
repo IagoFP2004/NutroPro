@@ -5,7 +5,7 @@
         </div>
         <p class="mb-5 mt-5">Listado de todos los usuarios registrados en el sistema. Los usuarios con rol de administrador están resaltados en verde.</p>
         <span class="bg-success fs-6 px-2 py-2 text-white rounded mb-3 d-inline-block">
-            Total de usuarios: <?php echo count($usuarios); ?>
+            Total de usuarios: <?php echo count($usersNum); ?>
         </span>
 
         <div id="contenedor" class="table-responsive mb-5">

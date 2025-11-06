@@ -4,7 +4,7 @@
     <div class="d-flex align-items-center justify-content-center mb-3">
               <img src="<?php echo $_ENV['IMG_BASE']?>logo.png" alt="Logo" style="height: 40px; width: auto;">
               <a>NutroPro</a>
-          </div>
+     </div>
     <p class="mb-1">
       &copy; <?php echo date('Y'); ?> <strong>NutroPro</strong>. Todos los derechos reservados.
     </p>
