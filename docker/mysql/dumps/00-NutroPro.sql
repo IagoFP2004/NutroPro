@@ -170,7 +170,7 @@ INSERT INTO `resenas` (`id_reseña`, `id_usuario`, `valoracion`, `comentario`, `
 (2, 2, 5, 'NutroPro me ha ayudado a mejorar mi alimentación y mantenerme motivado. Rápida, intuitiva y completa.', '2025-11-06 10:48:14'),
 (3, 3, 5, 'Una app genial para cuidar mi nutrición. Todo está bien explicado y los resultados se notan rápido.', '2025-11-06 10:48:14'),
 (4, 11, 5, 'Buenisimo con estos productos puedo render perfectamente en el gimnasio, y sin perder el estilo!', '2025-11-06 10:48:14'),
-(5, 11, 5, 'Excelente experiencia con NutroPro. Sus suplementos son de gran calidad y se nota la diferencia. Además, la app facilita todo el proceso y ofrece muy buenas recomendaciones. ¡Muy satisfecho!', '2025-11-06 10:48:14'),
+(5, 11, 5, 'Excelente experiencia con NutroPro. Sus suplementos son de gran calidad y se nota la diferencia. Además, la app facilita todo el proceso ¡Muy satisfecho!', '2025-11-06 10:48:14'),
 (6, 4, 1, 'malisima calidad la de la proteina', '2025-11-06 10:48:14'),
 (8, 5, 5, 'Ultimo comentario', '2025-11-06 10:53:05');
 

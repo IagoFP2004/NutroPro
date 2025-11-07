@@ -85,7 +85,7 @@
                     <div class="col-12">
                         <div class="alert alert-primary">
                             <i class="bi bi-info-circle me-2"></i>
-                            El cliente no tiene pedidos asociados
+                             No  hay pedidos asociados
                         </div>
                     </div>
                 <?php }else {?>
