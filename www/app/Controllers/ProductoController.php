@@ -346,9 +346,6 @@ class   ProductoController extends BaseController
         }
     }
 
-
-
-
     public function checkData(array $data, array $files = [], bool $imagenRequerida = true): array
     {
         $errors = [];

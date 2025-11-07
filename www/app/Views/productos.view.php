@@ -91,7 +91,7 @@
             <?php foreach ($ropas as $ropa) { ?>
                 <div class="col-6 col-sm-6 col-md-3">
                     <div class="card border-0 shadow-sm product-card h-100">
-                        <img src="<?php echo $_ENV['IMG_BASE'].$ropa['imagen_url']; ?>" class="card-img-top" alt="Ropa de gimnasio">
+                        <img id="<?php echo $ropa['id_producto'] ?>" src="<?php echo $_ENV['IMG_BASE'].$ropa['imagen_url']; ?>" class="card-img-top" alt="Ropa de gimnasio">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title"><?php echo $ropa['nombre']; ?></h5>
                             <p class="text-success fw-bold mb-3"><?php echo $ropa['precio']; ?>€</p>
@@ -244,5 +244,6 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src='/assets/js/filtros.js'></script>
+<script src='/assets/js/cambiarImagenRopa.js'></script>
 </body>
 </html>
