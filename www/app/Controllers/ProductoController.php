@@ -362,7 +362,7 @@ class   ProductoController extends BaseController
         // descripcion
         if (empty($data['descripcion'])) {
             $errors['descripcion'] = 'La descripción es requerida';
-        } elseif (strlen($data['descripcion']) < 3 || strlen($data['descripcion']) > 255) {
+        } elseif (strlen($data['descripcion']) < 3 || strlen($data['descripcion']) > 300) {
             $errors['descripcion'] = 'La descripción debe tener entre 3 y 255 caracteres';
         }
 

@@ -24,7 +24,7 @@
         <div class="row text-center">
             <div class="col-md-4 mb-3">
                 <div class="card border-0 shadow-sm">
-                    <img src="assets/img/ChatGPT Image 9 oct 2025, 13_50_44.png" class="card-img-top" alt="Suplementos">
+                    <img src="assets/img/img_690dac07959206.70283599.png" class="card-img-top" alt="Suplementos">
                     <div class="card-body">
                         <h5 class="card-title">Proteina y creatina</h5>
                         <p class="card-text">Proteínas, creatina y todo lo que necesitas para mejorar tu rendimiento.</p>
