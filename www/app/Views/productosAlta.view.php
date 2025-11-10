@@ -137,7 +137,7 @@
                             const categoria = parseInt(categoriaSelect.value);
                             
                             // Mostrar/ocultar nutrientes (categorías 1, 2, 3)
-                            if ([1, 2, 3].includes(categoria)) {
+                            if ([1,3].includes(categoria)) {
                                 divNutrientes.style.display = 'flex';
                                 divRopa.style.display = 'none';
                                 // Limpiar campos de ropa

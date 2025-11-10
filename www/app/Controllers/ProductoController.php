@@ -385,7 +385,7 @@ class   ProductoController extends BaseController
             $errors['categoria'] = 'La categoría es requerida';
         }
 
-        $categoriasNutricionales = [1, 2, 3]; // Proteínas, suplementos, snacks
+        $categoriasNutricionales = [1, 3]; // Proteínas y snacks (no suplementos)
         $categoriaRopa = 4; // Ropa
 
         if (in_array((int)$data['categoria'], $categoriasNutricionales, true)) {

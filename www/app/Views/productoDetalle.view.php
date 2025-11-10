@@ -92,7 +92,7 @@
     <!--  INFORMACIÓN NUTRICIONAL O DATOS DEL PRODUCTO -->
     <?php if ($producto['id_categoria'] != 5): ?>
         <section class="mt-5">
-            <?php if (in_array($producto['id_categoria'], [1, 2, 3])): ?>
+            <?php if (in_array($producto['id_categoria'], [1,3])): ?>
                 <!-- Mostrar información nutricional solo para suplementos/alimentos -->
                 <h4 class="fw-bold text-center text-success mb-4">
                     Información Nutricional (por 100g)
