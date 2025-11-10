@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximu-scale=1.0 "/>
     <title>NutroPro</title>
     <link rel="icon" type="image" href="<?php echo $_ENV['IMG_BASE'] ?>logo.png">
   <!-- Bootstrap CSS -->
@@ -28,14 +28,16 @@
           <!-- Iconos + hamburguesa a la derecha -->
         <div class="d-flex align-items-center ms-auto">
           <!-- Carrito -->
+          <?php if (isset($_SESSION['usuario'])){ ?>
           <a class="nav-link text-white position-relative me-2" href="/carrito" aria-label="Carrito">
             <i class="bi bi-cart3 fs-5"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
               <?php echo isset($_SESSION['carrito_count']) ? $_SESSION['carrito_count'] : 0; ?>
             </span>
           </a>
+          <?php } ?>
           <!-- Usuario -->
-          <a class="nav-link text-white me-2" href="/login" title="Iniciar sesión">
+          <a class="nav-link text-white me-2" href="<?php echo isset($_SESSION['usuario']) ? '/logout' : '/login'; ?>" title="Iniciar sesión">
               <?php if (isset($_SESSION['usuario'])) { ?>
                   <i class="bi bi-box-arrow-right"></i>
               <?php }else{?>
