@@ -43,7 +43,7 @@
               <?php }?>
           </a>
           <!-- Hamburguesa -->
-          <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          <button class="navbar-toggler border-0 shadow-none" type="button" id="menuToggle"
                   aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -114,18 +114,3 @@
     </div>
   </nav>
 </header>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-  // Cerrar menú automáticamente en móvil
-  document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      const navbarCollapse = document.getElementById('navbarNav');
-      if (navbarCollapse.classList.contains('show')) {
-        new bootstrap.Collapse(navbarCollapse).toggle();
-      }
-    });
-  });
-</script>

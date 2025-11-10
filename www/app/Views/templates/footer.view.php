@@ -18,4 +18,36 @@
 </footer>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navbarNav = document.getElementById('navbarNav');
+    const navLinks = document.querySelectorAll('#navbarNav .nav-link');
+    
+    if (menuToggle && navbarNav) {
+      // Toggle del menú
+      menuToggle.addEventListener('click', function() {
+        const isExpanded = navbarNav.classList.contains('show');
+        
+        if (isExpanded) {
+          navbarNav.classList.remove('show');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          navbarNav.classList.add('show');
+          menuToggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+      
+      // Cerrar menú al hacer clic en enlaces
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          if (navbarNav.classList.contains('show')) {
+            navbarNav.classList.remove('show');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
+  });
+</script>
 </html>
