@@ -16,8 +16,8 @@
     </div>
 <?php } ?>
 
-<main class="flex-grow-1 d-flex align-items-center py-5 bg-light vh-100">
-    <div class="container py-4">
+<main class="flex-grow-1 py-3 py-md-5 bg-light">
+    <div class="container py-2 py-md-4">
         <div class="row g-5">
 
             <!-- 🛒 Carrito -->
