@@ -17,13 +17,13 @@
 
     <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
         <!-- Encabezado del pedido -->
-        <div class="bg-success text-white py-4 px-5">
-            <div class="d-flex justify-content-between align-items-center">
+        <div class="bg-success text-white py-4 px-3 px-md-5">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
                 <div>
-                    <h2 class="fw-bold mb-1">
+                    <h2 class="fw-bold mb-1 fs-4 fs-md-2">
                         <i class="bi bi-receipt me-2"></i>Pedido #NP-<?php echo $pedido['id_pedido'] ?>
                     </h2>
-                    <p class="mb-1 opacity-75">
+                    <p class="mb-1 opacity-75 small">
                         <i class="bi bi-calendar-event me-1"></i>
                         Realizado el <?php echo date('d/m/Y H:i', strtotime($pedido['fecha_pedido'])) ?>
                     </p>
@@ -31,12 +31,12 @@
                     // Calcular fecha de entrega estimada (5 días después del pedido)
                     $fechaEntrega = date('d/m/Y', strtotime($pedido['fecha_pedido'] . ' +5 days'));
                     ?>
-                    <p class="mb-0 opacity-75">
+                    <p class="mb-0 opacity-75 small">
                         <i class="bi bi-truck me-1"></i>
                         Entrega estimada: <?php echo $fechaEntrega ?>
                     </p>
                 </div>
-                <div class="text-end">
+                <div class="align-self-start align-self-md-center">
                     <?php 
                     $badgeClass = 'bg-warning';
                     switch($pedido['estado']) {
@@ -51,7 +51,7 @@
                             break;
                     }
                     ?>
-                    <span class="badge <?php echo $badgeClass ?> fs-5 px-4 py-2 text-capitalize">
+                    <span class="badge <?php echo $badgeClass ?> fs-6 fs-md-5 px-3 px-md-4 py-2 text-capitalize">
                         <?php echo $pedido['estado'] ?>
                     </span>
                 </div>
@@ -67,7 +67,8 @@
             </h4>
 
             <?php if (!empty($detallepedido)): ?>
-                <div class="table-responsive">
+                <!-- Vista de tabla para escritorio -->
+                <div class="table-responsive d-none d-md-block">
                     <table class="table align-middle">
                         <thead class="table-light">
                             <tr>
@@ -124,6 +125,60 @@
                             </tr>
                         </tfoot>
                     </table>
+                </div>
+
+                <!-- Vista de cards para móvil -->
+                <div class="d-md-none">
+                    <?php 
+                    $subtotal = 0;
+                    foreach ($detallepedido as $item){
+                        $itemTotal = $item['cantidad'] * $item['precio_unitario'];
+                        $subtotal += $itemTotal;
+                    ?>
+                        <div class="card mb-3 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex mb-3">
+                                    <div class="me-3" style="flex: 0 0 auto;">
+                                        <img src="<?php echo $_ENV['IMG_BASE'].$item['imagen_url']?>" class="img-fluid rounded" alt="<?php echo htmlspecialchars($item['nombre_producto']) ?>" style="width:80px; height:80px; object-fit:cover;">
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="fw-bold mb-2"><?php echo htmlspecialchars($item['nombre_producto']) ?></h6>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span class="text-muted small">Cantidad:</span>
+                                            <span class="badge bg-light text-dark border"><?php echo $item['cantidad'] ?> uds</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span class="text-muted small">Precio unitario:</span>
+                                            <span class="text-dark"><?php echo number_format($item['precio_unitario'], 2) ?> €</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold">Subtotal:</span>
+                                            <span class="fw-bold text-success"><?php echo number_format($itemTotal, 2) ?> €</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    
+                    <!-- Resumen del pedido en móvil -->
+                    <div class="card border-success shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Subtotal:</span>
+                                <span class="fw-semibold"><?php echo number_format($subtotal, 2) ?> €</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Gastos de envío:</span>
+                                <span class="fw-semibold">4.50 €</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bold fs-5">Total:</span>
+                                <span class="fw-bold fs-5 text-success"><?php echo number_format($pedido['total'], 2) ?> €</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             <?php else: ?>
                 <div class="alert alert-warning">

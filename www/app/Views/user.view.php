@@ -57,30 +57,58 @@
             <hr class="my-5">
 
             <h4 class="text-success mb-4"><i class="bi bi-bag-check me-2"></i> Últimos pedidos</h4>
-            <div class="table-responsive">
+            <div class="pedidos-container">
                 <?php if (!empty($pedidos)) { ?>
-                <table class="table align-middle">
-                    <thead>
-                    <tr>
-                        <th># Pedido</th>
-                        <th>Fecha</th>
-                        <th>Estado</th>
-                        <th>Total</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <!-- Vista de tabla para escritorio -->
+                <div class="table-responsive d-none d-md-block">
+                    <table class="table align-middle">
+                        <thead>
+                        <tr>
+                            <th># Pedido</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($pedidos as $pedido) { ?>
+                        <tr>
+                            <td>NP-<?php echo $pedido['id_pedido'] ?></td>
+                            <td><?php echo $pedido['fecha_pedido'] ?></td>
+                            <td><span class="badge text-bg-<?php echo  ($pedido['estado'] == 'cancelado') ? 'danger' : (($pedido['estado'] == 'pendiente') ? 'warning' : (($pedido['estado'] == 'entregado') ? 'success' : 'secondary'));?>"><?php echo $pedido['estado'] ?></span></td>
+                            <td><strong><?php echo $pedido['total'] ?> €</strong></td>
+                            <td><a href="/detalle-pedido/<?php echo $pedido['id_pedido'] ?>" class="btn btn-outline-success btn-sm">Ver</a></td>
+                        </tr>
+                        <?php }?>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Vista de cards para móvil -->
+                <div class="d-md-none">
                     <?php foreach ($pedidos as $pedido) { ?>
-                    <tr>
-                        <td>NP-<?php echo $pedido['id_pedido'] ?></td>
-                        <td><?php echo $pedido['fecha_pedido'] ?>></td>
-                        <td><span class="badge text-bg-<?php echo  ($pedido['estado'] == 'cancelado') ? 'danger' : (($pedido['estado'] == 'pendiente') ? 'warning' : (($pedido['estado'] == 'entregado') ? 'success' : 'secondary'));?>"><?php echo $pedido['estado'] ?></span></td>
-                        <td><strong><?php echo $pedido['total'] ?> €</strong></td>
-                        <td><a href="/detalle-pedido/<?php echo $pedido['id_pedido'] ?>" class="btn btn-outline-success btn-sm">Ver</a></td>
-                    </tr>
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h6 class="card-title mb-1 text-success fw-bold">Pedido #NP-<?php echo $pedido['id_pedido'] ?></h6>
+                                    <p class="text-muted small mb-0"><i class="bi bi-calendar3 me-1"></i><?php echo $pedido['fecha_pedido'] ?></p>
+                                </div>
+                                <span class="badge text-bg-<?php echo  ($pedido['estado'] == 'cancelado') ? 'danger' : (($pedido['estado'] == 'pendiente') ? 'warning' : (($pedido['estado'] == 'entregado') ? 'success' : 'secondary'));?>"><?php echo $pedido['estado'] ?></span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p class="mb-0 fw-bold text-dark fs-5"><?php echo $pedido['total'] ?> €</p>
+                                </div>
+                                <a href="/detalle-pedido/<?php echo $pedido['id_pedido'] ?>" class="btn btn-success btn-sm">
+                                    <i class="bi bi-eye me-1"></i>Ver detalle
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <?php }?>
-                    </tbody>
-                </table>
+                </div>
                 <?php }else if(isset($_SESSION['usuario'])&& $_SESSION['usuario']['permisos'] == 'rwd'){?>
                     <div class="col-12">
                         <div class="alert alert-primary">

@@ -10,8 +10,8 @@
 </head>
 <body>
 <section class="bg-light text-center py-5">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Transforma tu cuerpo con NutroPro</h1>
+        <div class="container px-3">
+            <h1 class="display-5 display-md-4 fw-bold">Transforma tu cuerpo con NutroPro</h1>
             <p class="lead mb-4">Suplementos, ropa deportiva y todo lo que necesitas para mejorar tu salud y rendimiento.</p>
             <a href="/productos" class="btn btn-success btn-lg">Explora nuestros productos</a>
         </div>

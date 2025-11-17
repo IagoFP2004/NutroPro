@@ -99,25 +99,25 @@
                 </h4>
 
                 <div class="row justify-content-center text-center g-3">
-                    <div class="col-4">
+                    <div class="col-12 col-sm-4">
                         <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
                             <i class="bi bi-egg-fried text-success fs-3 mb-2"></i>
-                            <h5 class="fw-bold mb-1 fs-6 fs-md-5">Proteínas</h5>
-                            <p class="text-muted mb-0 fs-6 fs-md-5"><?php echo $producto['proteinas'] ?? '0' ?> g</p>
+                            <h5 class="fw-bold mb-1">Proteínas</h5>
+                            <p class="text-muted mb-0 fs-5"><?php echo $producto['proteinas'] ?? '0' ?> g</p>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12 col-sm-4">
                         <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
                             <i class="bi bi-cookie text-success fs-3 mb-2"></i>
-                            <h5 class="fw-bold mb-1 fs-6 fs-md-5">Carbohidratos</h5>
-                            <p class="text-muted mb-0 fs-6 fs-md-5"><?php echo $producto['carbohidratos'] ?? '0' ?> g</p>
+                            <h5 class="fw-bold mb-1">Carbohidratos</h5>
+                            <p class="text-muted mb-0 fs-5"><?php echo $producto['carbohidratos'] ?? '0' ?> g</p>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-12 col-sm-4">
                         <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
                             <i class="bi bi-droplet text-success fs-3 mb-2"></i>
-                            <h5 class="fw-bold mb-1 fs-6 fs-md-5">Grasas</h5>
-                            <p class="text-muted mb-0 fs-6 fs-md-5"><?php echo $producto['grasas'] ?? '0' ?> g</p>
+                            <h5 class="fw-bold mb-1">Grasas</h5>
+                            <p class="text-muted mb-0 fs-5"><?php echo $producto['grasas'] ?? '0' ?> g</p>
                         </div>
                     </div>
                 </div>
@@ -128,25 +128,25 @@
                     Detalles del producto
                 </h4>
 
-                <div class="row justify-content-center text-center g-4">
-                    <div class="col-6 col-md-3">
-                        <div class="bg-light p-4 rounded shadow-sm">
+                <div class="row justify-content-center text-center g-3">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
                             <i class="bi bi-rulers text-success fs-3 mb-2"></i>
-                            <h5 class="fw-bold mb-0">Talla</h5>
+                            <h5 class="fw-bold mb-1">Talla</h5>
                             <p class="text-muted fs-5 mb-0"><?php echo $producto['talla'] ?? 'Única' ?></p>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3">
-                        <div class="bg-light p-4 rounded shadow-sm">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
                             <i class="bi bi-palette text-success fs-3 mb-2"></i>
-                            <h5 class="fw-bold mb-0">Color</h5>
+                            <h5 class="fw-bold mb-1">Color</h5>
                             <p class="text-muted fs-5 mb-0"><?php echo $producto['color'] ?? 'Variedad' ?></p>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3">
-                        <div class="bg-light p-4 rounded shadow-sm">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div class="bg-light p-3 p-md-4 rounded shadow-sm h-100">
                             <i class="bi bi-box-seam text-success fs-3 mb-2"></i>
-                            <h5 class="fw-bold mb-0">Material</h5>
+                            <h5 class="fw-bold mb-1">Material</h5>
                             <p class="text-muted fs-5 mb-0"><?php echo $producto['material'] ?? 'N/A' ?></p>
                         </div>
                     </div>

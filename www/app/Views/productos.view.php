@@ -12,13 +12,13 @@
 </head>
 <body>
 <!-- ====== Botón añadir producto ====== -->
-<div class="container mt-4 me-5 d-flex justify-content-end">
-    <button class="btn btn-success me-3" id="filtros">
-        <i class="bi bi-filter"></i> Filtros
+<div class="container mt-4 d-flex justify-content-end flex-wrap gap-2 px-3 px-md-0">
+    <button class="btn btn-success" id="filtros">
+        <i class="bi bi-filter me-1"></i>Filtros
     </button>
     <?php if (isset($_SESSION['usuario']) && $_SESSION['usuario']['permisos'] == 'rwd') { ?>
         <a href="/productos/nuevo" class="btn btn-success">
-            <i class="bi bi-plus-circle me-1"></i> Añadir producto
+            <i class="bi bi-plus-circle me-1"></i>Añadir producto
         </a>
     <?php } ?>
 </div>

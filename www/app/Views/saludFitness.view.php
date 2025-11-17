@@ -31,7 +31,7 @@
 <?php } ?>
 
 <!-- ====== Descripción de productos ====== -->
-<section class="container mt-5 mb-4 text-center">
+<section class="container mt-5 mb-4 text-center px-3">
     <h1 class="fw-bold text-success mb-3">Salud & Fitness</h1>
     <p class="lead text-muted mx-auto" style="max-width: 800px;">
         En NutroPro creemos que la verdadera fuerza comienza con un cuerpo sano y una mente equilibrada.

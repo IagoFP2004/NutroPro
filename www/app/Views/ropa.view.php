@@ -31,7 +31,7 @@
 <?php } ?>
 
 <!-- ====== Descripción de productos ====== -->
-<section class="container mt-5 mb-4 text-center">
+<section class="container mt-5 mb-4 text-center px-3">
     <h1 class="fw-bold text-success mb-3">Ropa</h1>
     <p class="lead text-muted mx-auto" style="max-width: 800px;">
         Descubre la nueva línea de ropa deportiva NutroPro, diseñada para quienes buscan rendimiento, comodidad y estilo.
