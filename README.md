@@ -117,6 +117,28 @@ docker-compose stop     # Detener el ambiente de desarrollo
 docker-compose down     # Detener y eliminar el ambiente de desarrollo.
 ```
 
+## Tests Unitarios
+
+El proyecto incluye una suite completa de tests unitarios usando PHPUnit. Los tests están ubicados en la carpeta `www/tests/` y cubren:
+
+- **UserController**: Validación de permisos, paginación y lógica de controladores
+- **ValidationUtils**: Validaciones de email, teléfono, contraseñas, sanitización de input y formateo
+
+### Ejecutar Tests
+
+```zsh
+# Ejecutar todos los tests
+./vendor/bin/phpunit --configuration www/phpunit.xml
+
+# Ejecutar con formato legible
+./vendor/bin/phpunit --configuration www/phpunit.xml --testdox
+
+# Ejecutar solo tests específicos
+./vendor/bin/phpunit --configuration www/phpunit.xml --filter UserControllerTest
+./vendor/bin/phpunit --configuration www/phpunit.xml --filter ValidationUtilsTest
+```
+Los tests son completamente independientes de la base de datos y pueden ejecutarse en cualquier entorno sin requerir Docker o configuración externa.
+
 ## Estructura de Archivos
 
 * `/docker/` contiene los archivos de configuración de Docker.
