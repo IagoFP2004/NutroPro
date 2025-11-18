@@ -101,15 +101,15 @@
                             <p class="text-danger"><?php echo $errores['numeroTarjeta'] ?? '' ?></p>
                         </div>
 
-                        <div class="row">
-                            <div class="col-6 mb-3">
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
                                 <label for="fechaExp" class="form-label">Fecha de expiración</label>
                                 <input type="text" class="form-control" id="fechaExp" name="fechaExp" placeholder="MM/AA" value="<?php echo $input['fechaExp'] ?? '' ?>" required>
                                 <p class="text-danger"><?php echo $errores['fechaExp'] ?? '' ?></p>
                             </div>
-                            <div class="col-6 mb-3">
+                            <div class="col-12 col-sm-6">
                                 <label for="cvv" class="form-label">CVV</label>
-                                <input type="text" class="form-control" id="cvv" name="cvv" maxlength="3" value="<?php echo $input['cvv'] ?? '' ?>" required>
+                                <input type="text" class="form-control" id="cvv" name="cvv" maxlength="3" placeholder="123" value="<?php echo $input['cvv'] ?? '' ?>" required>
                                 <p class="text-danger"><?php echo $errores['cvv'] ?? '' ?></p>
                             </div>
                         </div>

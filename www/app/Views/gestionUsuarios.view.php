@@ -113,16 +113,16 @@
                 </button>
             </div>
         </div>
-        <section class="bg-light rounded p-4 mb-3">
-            <h5 class="text-success mb-3 d-flex justify-content-center"><i class="bi bi-graph-up-arrow"></i> Resumen de usuarios</h5>
+        <section class="bg-light rounded p-3 p-md-4 mb-3">
+            <h5 class="text-success mb-3 mb-md-4 text-center"><i class="bi bi-graph-up-arrow me-2"></i>Resumen de usuarios</h5>
             <div class="row text-center g-3 justify-content-center">
-                <div class="col-6 col-md-3">
+                <div class="col-12 col-sm-4">
                 <div class="bg-white border rounded p-3 shadow-sm">
                     <div class="fs-4 fw-bold text-success"><?= count($usersNum) ?></div>
                     <div class="small text-muted">Total registrados</div>
                 </div>
                 </div>
-                <div class="col-6 col-md-3">
+                <div class="col-12 col-sm-4">
                 <div class="bg-white border rounded p-3 shadow-sm">
                     <div class="fs-4 fw-bold text-primary">
                     <?php 
@@ -138,7 +138,7 @@
                     <div class="small text-muted">Administradores</div>
                 </div>
                 </div>
-                <div class="col-6 col-md-3">
+                <div class="col-12 col-sm-4">
                 <div class="bg-white border rounded p-3 shadow-sm">
                     <div class="fs-4 fw-bold text-warning">
                         <?php 
