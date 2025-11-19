@@ -1,8 +1,35 @@
 {
+    "name": "nutropro/nutropro",
+    "description": "Sistema de gestión de productos nutricionales NutroPro",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Iago Francisco",
+            "email": "iagofranciscoperez@gmail.com"
+        }
+    ],
     "require": {
         "phpmailer/phpmailer": "^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^12.4"
-    }
+    },
+    "autoload": {
+        "psr-4": {
+            "Com\\Daw2\\": "www/app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Com\\Daw2\\Tests\\": "www/tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "prefer-stable": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

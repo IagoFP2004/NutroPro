@@ -9,4 +9,6 @@ return array(
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
+    'Com\\Daw2\\Tests\\' => array($baseDir . '/www/tests'),
+    'Com\\Daw2\\' => array($baseDir . '/www/app'),
 );

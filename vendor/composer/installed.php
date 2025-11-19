@@ -1,24 +1,15 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
+        'name' => 'nutropro/nutropro',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'cf706620bb123a66d953887904617730194b97db',
-        'type' => 'library',
+        'reference' => '74aec28271ecb2076af4ead495798da0ddf682a8',
+        'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        '__root__' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'cf706620bb123a66d953887904617730194b97db',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'myclabs/deep-copy' => array(
             'pretty_version' => '1.13.4',
             'version' => '1.13.4.0',
@@ -36,6 +27,15 @@
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'nutropro/nutropro' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '74aec28271ecb2076af4ead495798da0ddf682a8',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'phar-io/manifest' => array(
             'pretty_version' => '2.0.4',

@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-use \Com\Daw2\Models\ProductoModel;
-use \PHPUnit\Framework\TestCase;
+namespace Com\Daw2\Tests;
+
+use Com\Daw2\Models\ProductoModel;
+use PHPUnit\Framework\TestCase;
 
 class ProductoModelTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace www\tests;
+namespace Com\Daw2\Tests;
 
 use Com\Daw2\Controllers\UserController;
 use PHPUnit\Framework\TestCase;
