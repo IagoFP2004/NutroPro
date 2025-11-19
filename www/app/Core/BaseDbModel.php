@@ -12,4 +12,10 @@ abstract class BaseDbModel
     {
         $this->pdo = DBManager::getInstance()->getConnection();
     }
+
+    // Method to access PDO for testing
+    public function getPdo(): \PDO
+    {
+        return $this->pdo;
+    }
 }

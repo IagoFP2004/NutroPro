@@ -39,6 +39,11 @@ class DBManager
             $emulated = (bool)$_ENV['db.emulated'] ?? false;
 
             $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+            // Para pruebas, si el host incluye puerto (formato host:puerto)
+            if (strpos($host, ':') !== false) {
+                list($hostPart, $portPart) = explode(':', $host, 2);
+                $dsn = "mysql:host=$hostPart;port=$portPart;dbname=$db;charset=$charset";
+            }
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

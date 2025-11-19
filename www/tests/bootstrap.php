@@ -5,7 +5,15 @@ declare(strict_types=1);
 // Cargar el autoloader de Composer
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Configurar variables de entorno para testing
+// Cargar variables de entorno para testing
+$envFile = '.env';
+if (isset($_ENV['APP_ENV']) && $_ENV['APP_ENV'] === 'test') {
+    $envFile = '.env.test';
+}
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..', $envFile);
+$dotenv->load();
+
+// Configurar variables de entorno adicionales para testing
 $_ENV['numero.pagina'] = 10;
 
 // Configurar sesión para testing
