@@ -148,7 +148,7 @@ Los tests son completamente independientes de la base de datos y pueden ejecutar
 
 ### Web
 
-* http://localhost/
+* http://localhost:8080/
 
 ### Base de datos
 
@@ -162,3 +162,4 @@ Las credenciales por defecto para la conexión son:
 |      Usuario       |  Clave  | Base de datos |
 |:------------------:|:-------:|:-------------:|
 | admin@nutropro.com | abc123. |   usuarios    |
+| usuario@prueba.com | abc123. |   usuarios    |
