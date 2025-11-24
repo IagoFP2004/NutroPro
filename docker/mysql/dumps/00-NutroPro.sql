@@ -119,6 +119,7 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`, `descripcion`) VALUES
 -- Insertar usuarios
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `password`, `direccion`, `telefono`, `fecha_registro`, `id_rol`) VALUES
 (1, 'Admin Usuario', 'admin@nutropro.com', '$2y$10$Fb8zTfCpd2PevmiMcN2SuOkkTpg3j9AonfQ./.hppH1a0T6.WtjYC', 'Calle Principal 123, Madrid', '600123456', '2025-10-29 07:32:53', 1),
+(12,'Usuario Prueba','usuario@prueba.com', '$2y$10$AiHcCwnuN53CzkQrSKRXz.F.Dg5kgNMRGjbzYvaIcGaUm4lqWbbm2', 'Calle Principal 124, Madrid', '748329162', '2025-11-24 09:38:13', 0),
 (2, 'Juan Pérez', 'juan.perez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Avenida Libertad 45, Barcelona', '611234567', '2025-10-29 07:32:53', 0),
 (3, 'María García', 'maria.garcia@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Plaza Mayor 8, Valencia', '622345678', '2025-10-29 07:32:53', 0),
 (4, 'Carlos López', 'carlos.lopez@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Calle Nueva 67, Sevilla', '633456789', '2025-10-29 07:32:53', 0),
@@ -188,7 +189,7 @@ INSERT INTO `resenas` (`id_reseña`, `id_usuario`, `valoracion`, `comentario`, `
 (2, 2, 5, 'NutroPro me ha ayudado a mejorar mi alimentación y mantenerme motivado. Rápida, intuitiva y completa.', '2025-11-06 10:48:14'),
 (3, 3, 5, 'Una app genial para cuidar mi nutrición. Todo está bien explicado y los resultados se notan rápido.', '2025-11-06 10:48:14'),
 (4, 11, 5, 'Buenisimo con estos productos puedo render perfectamente en el gimnasio, y sin perder el estilo!', '2025-11-06 10:48:14'),
-(5, 11, 5, 'Excelente experiencia con NutroPro. Sus suplementos son de gran calidad y se nota la diferencia. Además, la app facilita todo el proceso ¡Muy satisfecho!', '2025-11-06 10:48:14'),
+(5, 11, 5, 'Excelente experiencia. Sus suplementos son de gran calidad. Además, la app facilita todo el proceso ¡Muy satisfecho!', '2025-11-06 10:48:14'),
 (6, 4, 1, 'malisima calidad la de la proteina', '2025-11-06 10:48:14'),
 (8, 5, 5, 'Ultimo comentario', '2025-11-06 10:53:05');
 

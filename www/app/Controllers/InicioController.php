@@ -10,6 +10,10 @@ use Com\Daw2\Models\ResenasModel;
 
 class InicioController extends BaseController
 {
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function index() {
         $productoModel = new ProductoModel();
         $data['productos'] = $productoModel->getProductos();

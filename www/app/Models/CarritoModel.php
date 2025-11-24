@@ -4,9 +4,16 @@ namespace Com\Daw2\Models;
 
 use Com\Daw2\Core\BaseDbModel;
 
+
+/**
+ *
+ */
 class CarritoModel extends BaseDbModel
 {
 
+    /**
+     * @return int
+     */
     public function getAll():int
     {
         $sql = "SELECT COUNT(*) FROM carrito";
@@ -15,6 +22,11 @@ class CarritoModel extends BaseDbModel
         return $stmt->fetchColumn();
     }
 
+    /**
+     * @param int $idUsuario
+     * @param array $productos
+     * @return bool
+     */
     public function insertarCarrito(int $idUsuario, array $productos):bool
     {
         $sqlCheck = "SELECT id_carrito, cantidad FROM carrito WHERE id_usuario = :id_usuario AND id_producto = :id_producto";
@@ -43,7 +55,11 @@ class CarritoModel extends BaseDbModel
             ]);
         }
     }
-    
+
+    /**
+     * @param int $idProducto
+     * @return string|null
+     */
     public function getImagenProducto(int $idProducto): ?string
     {
         $sql = "SELECT imagen_url FROM productos WHERE id_producto = :id_producto";
@@ -53,6 +69,10 @@ class CarritoModel extends BaseDbModel
         return $resultado ? $resultado['imagen_url'] : null;
     }
 
+    /**
+     * @param int $idUsuario
+     * @return int
+     */
     public function contarProductosCarrito(int $idUsuario): int
     {
         $sql = "SELECT SUM(cantidad) as total FROM carrito WHERE id_usuario = :id_usuario";
@@ -62,6 +82,10 @@ class CarritoModel extends BaseDbModel
         return $resultado && $resultado['total'] ? (int)$resultado['total'] : 0;
     }
 
+    /**
+     * @param int $idUsuario
+     * @return array
+     */
     public function getProductosCarrito(int $idUsuario):array
     {
         $sql = "SELECT c.*, p.nombre, p.descripcion, p.precio, p.stock, p.imagen_url 
@@ -74,6 +98,10 @@ class CarritoModel extends BaseDbModel
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * @param int $idProducto
+     * @return bool
+     */
     public function deleteItemCarrito(int $idProducto):bool
     {
         $sql = "DELETE FROM carrito WHERE id_producto = :id_producto";
@@ -81,6 +109,10 @@ class CarritoModel extends BaseDbModel
         return $stmt->execute(['id_producto' => $idProducto]);
     }
 
+    /**
+     * @param int $idUsuario
+     * @return bool
+     */
     public function deleteAllItemsUser(int $idUsuario):bool
     {
         $sql = "DELETE FROM carrito WHERE id_usuario = :id_usuario";

@@ -9,6 +9,9 @@ use Com\Daw2\Models\PedidoModel;
 
 class CarritoController extends BaseController
 {
+    /**
+     * @return void
+     */
     public function showCarrito():void
     {
         if (!isset($_SESSION['usuario']) || !isset($_SESSION['usuario']['id_usuario'])) {
@@ -45,6 +48,9 @@ class CarritoController extends BaseController
         }
     }
 
+    /**
+     * @return void
+     */
     public function addCarrito():void
     {
         // Obtener datos del POST
@@ -68,6 +74,10 @@ class CarritoController extends BaseController
         exit;
     }
 
+    /**
+     * @param int $idProducto
+     * @return void
+     */
     public function deleteItemCarrito(int $idProducto):void
     {
         $modelo = new CarritoModel();
@@ -83,6 +93,10 @@ class CarritoController extends BaseController
         }
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function pay():void
     {
         $modelo = new CarritoModel();
@@ -148,6 +162,10 @@ class CarritoController extends BaseController
         }
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
     public function checkPayCard(array $data):array
     {
         $errores = [];
@@ -179,6 +197,10 @@ class CarritoController extends BaseController
         return $errores;
     }
 
+    /**
+     * @param int $idUsuario
+     * @return bool
+     */
     private function deleteAllItemsUser(int $idUsuario):bool
     {
         $modelo = new CarritoModel();

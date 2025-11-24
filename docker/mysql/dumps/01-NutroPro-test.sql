@@ -17,8 +17,8 @@ START TRANSACTION;
 -- =========================
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
-                                          `id_usuario` INT NOT NULL AUTO_INCREMENT,
-                                          `nombre`     VARCHAR(100) NOT NULL,
+    `id_usuario` INT NOT NULL AUTO_INCREMENT,
+    `nombre`     VARCHAR(100) NOT NULL,
     `email`      VARCHAR(100) NOT NULL,
     `password`   VARCHAR(255) NOT NULL,
     `direccion`  VARCHAR(255) DEFAULT NULL,
@@ -30,15 +30,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `categorias` (
-                                            `id_categoria` INT NOT NULL AUTO_INCREMENT,
-                                            `nombre`       VARCHAR(100) NOT NULL,
+    `id_categoria` INT NOT NULL AUTO_INCREMENT,
+    `nombre` VARCHAR(100) NOT NULL,
     `descripcion`  TEXT,
     PRIMARY KEY (`id_categoria`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `productos` (
-                                           `id_producto`  INT NOT NULL AUTO_INCREMENT,
-                                           `nombre`       VARCHAR(150) NOT NULL,
+    `id_producto`  INT NOT NULL AUTO_INCREMENT,
+    `nombre` VARCHAR(150) NOT NULL,
     `descripcion`  TEXT,
     `precio`       DECIMAL(10,2) NOT NULL,
     `stock`        INT DEFAULT '0',
@@ -60,11 +60,11 @@ CREATE TABLE IF NOT EXISTS `productos` (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `pedidos` (
-                                         `id_pedido`    INT NOT NULL AUTO_INCREMENT,
-                                         `id_usuario`   INT DEFAULT NULL,
-                                         `fecha_pedido` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-                                         `estado`       VARCHAR(50) NOT NULL DEFAULT 'pendiente',
-    `total`        DECIMAL(10,2) NOT NULL,
+    `id_pedido`    INT NOT NULL AUTO_INCREMENT,
+    `id_usuario`   INT DEFAULT NULL,
+    `fecha_pedido` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    `estado` VARCHAR(50) NOT NULL DEFAULT 'pendiente',
+    `total` DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (`id_pedido`),
     KEY `idx_pedidos_usuario` (`id_usuario`),
     CONSTRAINT `fk_pedidos_usuario_test` FOREIGN KEY (`id_usuario`)
@@ -72,11 +72,11 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `detalle_pedido` (
-                                                `id_detalle`       INT NOT NULL AUTO_INCREMENT,
-                                                `id_pedido`        INT DEFAULT NULL,
-                                                `id_producto`      INT DEFAULT NULL,
-                                                `cantidad`         INT NOT NULL,
-                                                `precio_unitario`  DECIMAL(10,2) NOT NULL,
+    `id_detalle` INT NOT NULL AUTO_INCREMENT,
+    `id_pedido` INT DEFAULT NULL,
+    `id_producto` INT DEFAULT NULL,
+    `cantidad` INT NOT NULL,
+    `precio_unitario` DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (`id_detalle`),
     KEY `idx_detalle_pedido` (`id_pedido`),
     KEY `idx_detalle_producto` (`id_producto`),
@@ -87,12 +87,12 @@ CREATE TABLE IF NOT EXISTS `detalle_pedido` (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `carrito` (
-                                         `id_carrito`   INT NOT NULL AUTO_INCREMENT,
-                                         `id_usuario`   INT DEFAULT NULL,
-                                         `id_producto`  INT DEFAULT NULL,
-                                         `cantidad`     INT NOT NULL DEFAULT '1',
-                                         `fecha_agregado` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-                                         PRIMARY KEY (`id_carrito`),
+    `id_carrito` INT NOT NULL AUTO_INCREMENT,
+    `id_usuario` INT DEFAULT NULL,
+    `id_producto` INT DEFAULT NULL,
+    `cantidad` INT NOT NULL DEFAULT '1',
+    `fecha_agregado` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id_carrito`),
     KEY `idx_carrito_usuario` (`id_usuario`),
     KEY `idx_carrito_producto` (`id_producto`),
     CONSTRAINT `fk_carrito_usuario_test` FOREIGN KEY (`id_usuario`)
@@ -102,10 +102,10 @@ CREATE TABLE IF NOT EXISTS `carrito` (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `resenas` (
-                                         `id_reseña`    INT NOT NULL AUTO_INCREMENT,
-                                         `id_usuario`   INT NOT NULL,
-                                         `valoracion`   INT NOT NULL,
-                                         `comentario`   VARCHAR(255) NOT NULL,
+    `id_reseña` INT NOT NULL AUTO_INCREMENT,
+    `id_usuario` INT NOT NULL,
+    `valoracion` INT NOT NULL,
+    `comentario` VARCHAR(255) NOT NULL,
     `fecha_coment` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id_reseña`),
     KEY `idx_resenas_usuario` (`id_usuario`),
