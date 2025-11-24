@@ -1,8 +1,4 @@
 #version: '3'
-volumes:
-  mysql-data:
-    name: ${PROJECT_NAME}-data
-
 networks:
   network-id:
     name: ${PROJECT_NAME}-network
@@ -12,7 +8,7 @@ services:
     build:
       context: ./docker/mysql
       args:
-        mysql_version: ${MYSQL_VERSION}    
+        mysql_version: ${MYSQL_VERSION}
     container_name: ${PROJECT_NAME}-mysql
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -20,15 +16,23 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - mysql-data:/var/lib/mysql
       - ./docker/mysql/dumps:/docker-entrypoint-initdb.d
     ports:
       - "${MYSQL_PORT}:3306"
     restart: "no"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     networks:
       - network-id
 
   php:
+    depends_on:
+      mysql:
+        condition: service_healthy
     build:
       context: ./docker/php
       args:
@@ -48,7 +52,8 @@ services:
 
   phpmyadmin:
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     image: phpmyadmin/phpmyadmin
     restart: "no"
     ports:
