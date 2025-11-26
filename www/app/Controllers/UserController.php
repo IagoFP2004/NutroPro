@@ -103,6 +103,10 @@ class UserController extends BaseController
 
         if (empty($data['nombre'])) {
             $errores['nombre'] = 'El nombre es requerido';
+        }else if (strlen($data['nombre']) < 3) {
+            $errores['nombre'] = 'El nombre debe tener al menos 3 caracteres';
+        }else if (!preg_match('/^[\p{L}\s\'-]+$/u', $data['nombre'])) {
+            $errores['nombre'] = 'El nombre es incorrecto';
         }
 
         if (empty($data['email'])) {
