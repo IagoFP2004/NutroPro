@@ -186,6 +186,8 @@ class CarritoController extends BaseController
 
         if (empty($data['fechaExp'])) {
             $errores['fechaExp'] = 'Fecha de expiracion es obligatorio';
+        }else if (!preg_match('/^(0[1-9]|1[0-2])\/\d{2}$/', $data['fechaExp'])) {
+            $errores['fechaExp'] = 'La fecha de expiracion debe ser una fecha';
         }
 
         if (empty($data['cvv'])) {

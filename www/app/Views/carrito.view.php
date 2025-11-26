@@ -20,7 +20,7 @@
     <div class="container py-2 py-md-4">
         <div class="row g-5">
 
-            <!-- 🛒 Carrito -->
+            <!-- Carrito -->
             <div class="col-lg-8">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1 class="h2 fw-bold text-success mb-0">
@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <!-- 🧾 Resumen y formulario de pago -->
+            <!-- Resumen y formulario de pago -->
             <div class="col-lg-4">
                 <div class="card border-0 shadow-lg p-4">
                     <h4 class="fw-bold text-success mb-4">
@@ -97,7 +97,7 @@
                         <div class="mb-3">
                             <i class="bi bi-credit-card"></i>
                             <label for="numeroTarjeta" class="form-label">Número de tarjeta</label>
-                            <input type="text" class="form-control" id="numeroTarjeta" name="numeroTarjeta" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" value="<?php echo $input['numeroTarjeta'] ?? '' ?>" required>
+                            <input type="text" class="form-control" id="numeroTarjeta" name="numeroTarjeta" maxlength="19" placeholder="XXXXXXXXXXXXXXXX" value="<?php echo $input['numeroTarjeta'] ?? '' ?>" required>
                             <p class="text-danger"><?php echo $errores['numeroTarjeta'] ?? '' ?></p>
                         </div>
 
