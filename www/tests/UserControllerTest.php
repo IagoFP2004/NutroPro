@@ -27,6 +27,7 @@ class UserControllerTest extends TestCase
         $this->assertEquals('rwd', $result);
     }
 
+
     public function testGetPermisosReturnsReadOnlyForRegularUser(): void
     {
         $result = $this->userController->getPermisos(0);
