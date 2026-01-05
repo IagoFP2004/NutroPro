@@ -128,14 +128,13 @@ El proyecto incluye una suite completa de tests unitarios usando PHPUnit. Los te
 
 ```zsh
 # Ejecutar todos los tests
-./vendor/bin/phpunit --configuration www/phpunit.xml
+php vendor/bin/phpunit --configuration www/phpunit.xml
 
 # Ejecutar con formato legible
-./vendor/bin/phpunit --configuration www/phpunit.xml --testdox
+php vendor/bin/phpunit --configuration www/phpunit.xml --testdox
 
 # Ejecutar solo tests específicos
-./vendor/bin/phpunit --configuration www/phpunit.xml --filter UserControllerTest
-./vendor/bin/phpunit --configuration www/phpunit.xml --filter ValidationUtilsTest
+php vendor/bin/phpunit --configuration www/phpunit.xml --filter UserControllerTest
 ```
 Los tests son completamente independientes de la base de datos y pueden ejecutarse en cualquier entorno sin requerir Docker o configuración externa.
 

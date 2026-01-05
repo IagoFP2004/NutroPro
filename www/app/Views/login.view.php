@@ -24,7 +24,6 @@
             <div class="mb-3">
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
-                <p class="text-danger"><?php echo $errores['password'] ?? ''?></p>
             </div>
 
             <?php if (!empty($msjErr)): ?>

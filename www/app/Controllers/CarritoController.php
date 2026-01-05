@@ -124,19 +124,16 @@ class CarritoController extends BaseController
                 header('Location: /carrito');
                 exit;
             }
-            
-            if ($mailController->enviarCorreo($email)) {
-                $idPedido = $pedidoController->nuevoPedido($idUsuario, $data['total']);
-                if ($idPedido !== false) {
-                    $detallePedidoModel = new DetallePedidoModel();
-                    $detallePedidoModel->insertDetallePedido($idPedido, $idUsuario);
-                    $this->deleteAllItemsUser($idUsuario);
-                    $_SESSION['carrito_count'] = 0;
-                    $_SESSION['msjE'] = 'Compra realizada con éxito. Recibirás un correo de confirmación.';
-                } else {
-                    $_SESSION['msjErr'] = 'Error al crear el pedido';
-                }
-                
+
+            $idPedido = $pedidoController->nuevoPedido($idUsuario, $data['total']);
+
+            if ($idPedido) {
+                $mailController->enviarCorreo($_SESSION['usuario']['email'], $idPedido);
+                $detallePedidoModel = new DetallePedidoModel();
+                $detallePedidoModel->insertDetallePedido($idPedido, $idUsuario);
+                $this->deleteAllItemsUser($idUsuario);
+                $_SESSION['carrito_count'] = 0;
+                $_SESSION['msjE'] = 'Compra realizada con éxito. Recibirás un correo de confirmación.';
                 header('Location: /carrito');
                 exit;
             } else {
@@ -186,6 +183,8 @@ class CarritoController extends BaseController
 
         if (empty($data['fechaExp'])) {
             $errores['fechaExp'] = 'Fecha de expiracion es obligatorio';
+        }else if (!preg_match('/^(0[1-9]|1[0-2])\/\d{2}$/', $data['fechaExp'])) {
+            $errores['fechaExp'] = 'La fecha de expiracion debe ser una fecha';
         }
 
         if (empty($data['cvv'])) {

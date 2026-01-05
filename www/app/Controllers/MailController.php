@@ -3,11 +3,18 @@
 namespace Com\Daw2\Controllers;
 
 use Com\Daw2\Core\BaseController;
+use Com\Daw2\Models\DetallePedidoModel;
+use Com\Daw2\Models\PedidoModel;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 class MailController extends BaseController {
-    public function enviarCorreo(string $para): bool {
+    public function enviarCorreo(string $para , $idPedido): bool {
+        $pedidoController = new PedidosController();
+        $pedidos = $pedidoController->getPedidosUser($_SESSION['usuario']['id_usuario']);
+
+
+        $pedido = end($pedidos);   // último pedido del array
         try {
             $mail = new PHPMailer(true);
             
@@ -30,42 +37,37 @@ class MailController extends BaseController {
                 $_ENV['MAIL_FROM_NAME'] ?? 'NutroPro'
             );
             $mail->addAddress($para);
-            
-            // Obtener los productos del carrito del usuario (evitar variable indefinida)
-            $productosCarrito = [];
-            if (class_exists('\Com\Daw2\Models\CarritoModel')) {
-                $carritoModelo = new \Com\Daw2\Models\CarritoModel();
-                $productosCarrito = $carritoModelo->getProductosCarrito($_SESSION['usuario']['id_usuario']) ?? [];
-            }
 
             // Preparar el contenido del correo
             $mail->isHTML(true);
-            $mail->Subject = 'Tu pedido en NutroPro está en marcha!';
-            
-            // Construir la lista de productos
-            $listaProductos = '';
-            $total = 0;
-            foreach ($productosCarrito as $producto) {
-                $subtotal = $producto['precio'] * $producto['cantidad'];
-                $total += $subtotal;
-                $listaProductos .= '<li style="margin-bottom: 10px;">' . 
-                    htmlspecialchars($producto['nombre']) . 
-                    ' - Cantidad: ' . $producto['cantidad'] . 
-                    ' - Precio: ' . number_format($subtotal, 2) . '€</li>';
-            }
+            $mail->Subject = 'Tu pedido en NutroPro está en marcha!, Numero Pedido:'.$idPedido;
+
             
             // Construir el cuerpo del correo con diseño responsive
             $mail->Body = '
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                <h1 style="color: #198754; text-align: center;">¡Gracias por su compra en NutroPro!</h1>
-                <p style="color: #666;">Su pedido está siendo procesado y pronto será enviado.</p>
-                <p style="color: #666; font-size: 14px;">Si tienes alguna pregunta sobre tu pedido, no dudes en contactarnos.</p>
-            </div>';
+                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="center">
+                                    <table role="presentation" width="600" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td style="font-family: Arial, sans-serif; text-align: center;">
+                                                <h1 style="color: #198754; margin: 0 0 16px 0;">¡Gracias por su compra en NutroPro!</h1>
+                                                <p style="color: #666; margin: 0 0 8px 0;">Su pedido está siendo procesado y pronto será enviado.</p>
+                                                <p>Productos del pedido:</p>
+                                                
+                                                <p style="color: #666; font-size: 14px; margin: 0;">
+                                                    Si tienes alguna pregunta sobre tu pedido, no dudes en contactarnos.
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>';
 
             // Versión texto plano del correo (para clientes que no soporten HTML)
             $mail->AltBody = "Gracias por su compra en NutroPro!\n\n" .
                             "Su pedido está siendo procesado y pronto será enviado.\n\n" .
-                            "Total del pedido: " . number_format($total, 2) . "€";
             
             // Enviar el correo
             $mail->send();

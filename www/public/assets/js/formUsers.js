@@ -92,11 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         //Boton para cerrar el formulario
-         boton.innerHTML = '<i class="bi bi-x-lg me-1"></i> Cerrar Filtros';
+         boton.innerHTML = '<i class="bi bi-x-lg me-1"></i> Cerrar Formulario';
             boton.onclick = () => {
                 formPanel.remove();
-                boton.innerHTML = '<i class="bi bi-filter me-1"></i> Filtros';
-                boton.onclick = null;
                 location.reload();
             };
     }) 

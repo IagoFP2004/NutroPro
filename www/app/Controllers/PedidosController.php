@@ -21,14 +21,17 @@ class PedidosController extends BaseController
         return $modelo->getLastInsertId();
     }
 
-    public function getPedidosUser(int $id_usuario):void
+    public function getPedidosUser(int $id_usuario):array | false
     {
         $modelo = new PedidoModel();
         $pedidos = $modelo->getPedidosByIdUsuario($id_usuario);
 
-        if($pedidos !== false){
-            $SESSION["msjErr"] = 'No se pudo crear el detalle de pedido';
+        if ($pedidos === false) {
+            $_SESSION["msjErr"] = 'No se pudieron obtener los pedidos';
+            return false;
         }
+
+        return $pedidos;
     }
 
     public function cambiarEstado(int $idPedido):void
