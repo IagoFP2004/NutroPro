@@ -1,5 +1,5 @@
 ARG php_version
-FROM php:${php_version}
+FROM php:8.0-apache
 
 # prepare install
 RUN apt-get update --fix-missing
