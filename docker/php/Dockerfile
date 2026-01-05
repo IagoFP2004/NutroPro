@@ -65,8 +65,7 @@ RUN sed -i 's/-Indexes/+Indexes/' /etc/apache2/conf-available/docker-php.conf
 
 COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-#Modificar variables php.ini
-ADD ./custom-php.ini /usr/local/etc/php/conf.d/custom-php.ini
+#Modificar variables php.
 
 
 RUN a2enmod rewrite
